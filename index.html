@@ -6,17 +6,23 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta
 
-<meta name="theme-color" content="#050505">
+  name="viewport"
+
+  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+
+>
+
+<meta name="theme-color" content="#050606">
 
 <title>MACHINE</title>
 
 <link rel="manifest" href="./manifest.json">
 
-<link rel="apple-touch-icon" href="./icon.PNG">
+<link rel="apple-touch-icon" href="./icon.png">
 
-<link rel="icon" href="./icon.PNG">
+<link rel="icon" type="image/png" href="./icon.png">
 
 <style>
 
@@ -38,9 +44,15 @@
 
 }
 
-*{box-sizing:border-box}
+*{
 
-html,body{
+  box-sizing:border-box;
+
+}
+
+html,
+
+body{
 
   margin:0;
 
@@ -52,6 +64,8 @@ html,body{
 
   font-family:"Courier New",monospace;
 
+  -webkit-text-size-adjust:100%;
+
 }
 
 body{
@@ -59,6 +73,26 @@ body{
   overflow-x:hidden;
 
 }
+
+button,
+
+input{
+
+  font:inherit;
+
+}
+
+button{
+
+  cursor:pointer;
+
+}
+
+/* =========================
+
+   MACHINE
+
+========================= */
 
 .machine{
 
@@ -68,19 +102,49 @@ body{
 
   background:
 
-    radial-gradient(circle at 60% 25%,rgba(80,100,100,.12),transparent 32%),
+    radial-gradient(
 
-    linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+      circle at 60% 25%,
 
-    linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px),
+      rgba(80,100,100,.12),
+
+      transparent 32%
+
+    ),
+
+    linear-gradient(
+
+      rgba(255,255,255,.018) 1px,
+
+      transparent 1px
+
+    ),
+
+    linear-gradient(
+
+      90deg,
+
+      rgba(255,255,255,.018) 1px,
+
+      transparent 1px
+
+    ),
 
     #050606;
 
-  background-size:auto,32px 32px,32px 32px;
+  background-size:
+
+    auto,
+
+    32px 32px,
+
+    32px 32px;
 
 }
 
-.machine:after{
+/* Scanlines */
+
+.machine::after{
 
   content:"";
 
@@ -92,23 +156,29 @@ body{
 
   z-index:50;
 
-  background:repeating-linear-gradient(
+  background:
 
-    0deg,
+    repeating-linear-gradient(
 
-    rgba(255,255,255,.015),
+      0deg,
 
-    rgba(255,255,255,.015) 1px,
+      rgba(255,255,255,.015),
 
-    transparent 1px,
+      rgba(255,255,255,.015) 1px,
 
-    transparent 4px
+      transparent 1px,
 
-  );
+      transparent 4px
+
+    );
 
 }
 
-/* TOP */
+/* =========================
+
+   HEADER
+
+========================= */
 
 .top{
 
@@ -116,7 +186,9 @@ body{
 
     calc(env(safe-area-inset-top) + 18px)
 
-    18px 14px;
+    18px
+
+    14px;
 
   display:flex;
 
@@ -170,13 +242,19 @@ body{
 
   background:var(--blue);
 
-  box-shadow:0 0 10px var(--blue);
+  box-shadow:
+
+    0 0 10px var(--blue);
 
   margin-right:6px;
 
 }
 
-/* CLOCK */
+/* =========================
+
+   CLOCK
+
+========================= */
 
 .clock{
 
@@ -202,7 +280,11 @@ body{
 
 }
 
-/* VIEW */
+/* =========================
+
+   SURVEILLANCE VIEW
+
+========================= */
 
 .viewport{
 
@@ -218,9 +300,25 @@ body{
 
   background:
 
-    linear-gradient(120deg,rgba(255,255,255,.025),transparent 40%),
+    linear-gradient(
 
-    radial-gradient(circle at center,rgba(100,130,130,.08),transparent 55%),
+      120deg,
+
+      rgba(255,255,255,.025),
+
+      transparent 40%
+
+    ),
+
+    radial-gradient(
+
+      circle at center,
+
+      rgba(100,130,130,.08),
+
+      transparent 55%
+
+    ),
 
     #080a0a;
 
@@ -236,7 +334,9 @@ body{
 
   background:
 
-    linear-gradient(90deg,
+    linear-gradient(
+
+      90deg,
 
       transparent 0 8%,
 
@@ -258,15 +358,19 @@ body{
 
     ),
 
-    linear-gradient(0deg,#020303,transparent);
+    linear-gradient(
+
+      0deg,
+
+      #020303,
+
+      transparent
+
+    );
 
 }
 
-camlabel{
-
-  display:block;
-
-}
+/* Camera info */
 
 .camlabel{
 
@@ -288,19 +392,49 @@ camlabel{
 
 }
 
+.coordinates{
+
+  position:absolute;
+
+  right:14px;
+
+  top:14px;
+
+  text-align:right;
+
+  color:var(--grey);
+
+  font-size:8px;
+
+  line-height:1.6;
+
+}
+
+/* =========================
+
+   TRACKING BOXES
+
+========================= */
+
 .reticle{
 
   position:absolute;
 
-  border:1px solid rgba(225,235,235,.72);
+  border:
 
-  animation:float 5s ease-in-out infinite;
+    1px solid
+
+    rgba(225,235,235,.72);
+
+  animation:
+
+    float 5s ease-in-out infinite;
 
 }
 
-.reticle:before,
+.reticle::before,
 
-.reticle:after{
+.reticle::after{
 
   content:"";
 
@@ -312,7 +446,7 @@ camlabel{
 
 }
 
-.reticle:before{
+.reticle::before{
 
   left:-2px;
 
@@ -324,7 +458,7 @@ camlabel{
 
 }
 
-.reticle:after{
+.reticle::after{
 
   right:-2px;
 
@@ -420,11 +554,27 @@ camlabel{
 
 @keyframes float{
 
-  0%,100%{transform:translateY(0)}
+  0%,
 
-  50%{transform:translateY(-4px)}
+  100%{
+
+    transform:translateY(0);
+
+  }
+
+  50%{
+
+    transform:translateY(-4px);
+
+  }
 
 }
+
+/* =========================
+
+   SCANNER
+
+========================= */
 
 .scan{
 
@@ -436,41 +586,43 @@ camlabel{
 
   height:1px;
 
-  background:rgba(120,190,215,.5);
+  background:
 
-  box-shadow:0 0 8px rgba(120,190,215,.5);
+    rgba(120,190,215,.5);
 
-  animation:scan 5s linear infinite;
+  box-shadow:
+
+    0 0 8px
+
+    rgba(120,190,215,.5);
+
+  animation:
+
+    scan 5s linear infinite;
 
 }
 
 @keyframes scan{
 
-  from{top:0}
+  from{
 
-  to{top:100%}
+    top:0;
 
-}
+  }
 
-.coordinates{
+  to{
 
-  position:absolute;
+    top:100%;
 
-  right:14px;
-
-  top:14px;
-
-  text-align:right;
-
-  color:var(--grey);
-
-  font-size:8px;
-
-  line-height:1.6;
+  }
 
 }
 
-/* ANALYSIS */
+/* =========================
+
+   ANALYSIS
+
+========================= */
 
 .analysis{
 
@@ -484,9 +636,13 @@ camlabel{
 
   padding:10px;
 
-  background:rgba(0,0,0,.72);
+  background:
 
-  border-left:2px solid var(--white);
+    rgba(0,0,0,.72);
+
+  border-left:
+
+    2px solid var(--white);
 
   font-size:9px;
 
@@ -494,11 +650,23 @@ camlabel{
 
 }
 
-.analysis .blue{color:var(--blue)}
+.analysis .blue{
 
-.analysis .red{color:var(--red)}
+  color:var(--blue);
 
-/* FEED */
+}
+
+.analysis .red{
+
+  color:var(--red);
+
+}
+
+/* =========================
+
+   SYSTEM FEED
+
+========================= */
 
 .feed{
 
@@ -506,9 +674,13 @@ camlabel{
 
   overflow:hidden;
 
-  padding:12px 17px;
+  padding:
 
-  border-bottom:1px solid var(--line);
+    12px 17px;
+
+  border-bottom:
+
+    1px solid var(--line);
 
   font-size:9px;
 
@@ -530,19 +702,37 @@ camlabel{
 
 }
 
-.feedline.blue strong{color:var(--blue)}
+.feedline.blue strong{
 
-.feedline.red strong{color:var(--red)}
+  color:var(--blue);
 
-.feedline.green strong{color:var(--green)}
+}
 
-/* COMMAND */
+.feedline.red strong{
+
+  color:var(--red);
+
+}
+
+.feedline.green strong{
+
+  color:var(--green);
+
+}
+
+/* =========================
+
+   COMMAND
+
+========================= */
 
 .commandArea{
 
   padding:14px;
 
-  border-bottom:1px solid var(--line);
+  border-bottom:
+
+    1px solid var(--line);
 
 }
 
@@ -564,11 +754,15 @@ camlabel{
 
   flex:none;
 
-  border:1px solid var(--blue);
+  border:
+
+    1px solid var(--blue);
 
   border-radius:50%;
 
-  background:rgba(80,160,200,.07);
+  background:
+
+    rgba(80,160,200,.07);
 
   color:var(--blue);
 
@@ -576,15 +770,27 @@ camlabel{
 
 }
 
+.mic.listening{
+
+  box-shadow:
+
+    0 0 18px
+
+    rgba(112,184,214,.7);
+
+}
+
 .inputWrap{
 
   flex:1;
 
-  border:1px solid var(--line);
-
   display:flex;
 
   min-width:0;
+
+  border:
+
+    1px solid var(--line);
 
 }
 
@@ -610,31 +816,57 @@ camlabel{
 
 }
 
+#command::placeholder{
+
+  color:#646b6d;
+
+}
+
 .exec{
 
   border:0;
 
-  border-left:1px solid var(--line);
+  border-left:
+
+    1px solid var(--line);
 
   background:transparent;
 
   color:var(--white);
 
-  padding:0 14px;
+  padding:
+
+    0 14px;
 
   font-family:inherit;
 
 }
 
-/* MODULES */
+/* =========================
+
+   MODULES
+
+========================= */
 
 .modules{
 
   display:grid;
 
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:
 
-  padding:10px 8px calc(env(safe-area-inset-bottom) + 12px);
+    repeat(4,1fr);
+
+  padding:
+
+    10px 8px
+
+    calc(
+
+      env(safe-area-inset-bottom)
+
+      + 12px
+
+    );
 
 }
 
@@ -647,6 +879,8 @@ camlabel{
   font-size:8px;
 
   padding:9px 2px;
+
+  user-select:none;
 
 }
 
@@ -666,7 +900,11 @@ camlabel{
 
 }
 
-/* MODAL */
+/* =========================
+
+   OVERLAYS
+
+========================= */
 
 .overlay{
 
@@ -676,17 +914,33 @@ camlabel{
 
   z-index:100;
 
-  background:rgba(0,0,0,.94);
+  background:
+
+    rgba(0,0,0,.96);
 
   display:none;
 
+  overflow-y:auto;
+
   padding:
 
-    calc(env(safe-area-inset-top) + 25px)
+    calc(
+
+      env(safe-area-inset-top)
+
+      + 25px
+
+    )
 
     18px
 
-    calc(env(safe-area-inset-bottom) + 20px);
+    calc(
+
+      env(safe-area-inset-bottom)
+
+      + 20px
+
+    );
 
 }
 
@@ -700,9 +954,15 @@ camlabel{
 
   display:flex;
 
-  justify-content:space-between;
+  justify-content:
 
-  border-bottom:1px solid var(--line);
+    space-between;
+
+  align-items:center;
+
+  border-bottom:
+
+    1px solid var(--line);
 
   padding-bottom:13px;
 
@@ -726,17 +986,27 @@ camlabel{
 
   color:white;
 
-  font-size:20px;
+  font-size:24px;
 
 }
+
+/* =========================
+
+   DATABASE ITEMS
+
+========================= */
 
 .item{
 
   padding:12px;
 
-  border-left:2px solid var(--blue);
+  border-left:
 
-  background:rgba(255,255,255,.025);
+    2px solid var(--blue);
+
+  background:
+
+    rgba(255,255,255,.025);
 
   margin-bottom:8px;
 
@@ -768,7 +1038,9 @@ camlabel{
 
   padding:12px;
 
-  border:1px solid var(--line);
+  border:
+
+    1px solid var(--line);
 
   background:#050606;
 
@@ -776,13 +1048,17 @@ camlabel{
 
   font-family:inherit;
 
+  border-radius:0;
+
 }
 
 .form button{
 
   padding:12px;
 
-  border:1px solid var(--blue);
+  border:
+
+    1px solid var(--blue);
 
   color:var(--blue);
 
@@ -802,6 +1078,34 @@ camlabel{
 
 }
 
+/* =========================
+
+   MOBILE
+
+========================= */
+
+@media(max-width:500px){
+
+  .system{
+
+    font-size:12px;
+
+  }
+
+  .clock{
+
+    font-size:10px;
+
+  }
+
+  .viewport{
+
+    min-height:350px;
+
+  }
+
+}
+
 </style>
 
 </head>
@@ -810,33 +1114,69 @@ camlabel{
 
 <div class="machine">
 
+<!-- =====================
+
+     HEADER
+
+===================== -->
+
 <header class="top">
 
   <div class="system">
 
     MACHINE
 
-    <small>OBSERVATION SYSTEM // LOCAL NODE</small>
+    <small>
+
+      OBSERVATION SYSTEM // LOCAL NODE
+
+    </small>
 
   </div>
 
   <div class="online">
 
-    <span class="dot"></span>ONLINE
+    <span class="dot"></span>
+
+    ONLINE
 
   </div>
 
 </header>
 
+<!-- =====================
+
+     TIME
+
+===================== -->
+
 <div class="clock">
 
-  <span id="day">DAY 0001</span>
+  <span id="day">
 
-  <span id="clock">00:00:00</span>
+    DAY 0001
 
-  <span id="date">00.00.0000</span>
+  </span>
+
+  <span id="clock">
+
+    00:00:00
+
+  </span>
+
+  <span id="date">
+
+    00.00.0000
+
+  </span>
 
 </div>
+
+<!-- =====================
+
+     MACHINE VIEW
+
+===================== -->
 
 <section class="viewport">
 
@@ -846,39 +1186,61 @@ camlabel{
 
   <div class="camlabel">
 
-    LIVE ANALYSIS<br>
+    LIVE ANALYSIS
 
-    <span>LOCAL INTERFACE / 01</span>
+    <br>
+
+    <span>
+
+      LOCAL INTERFACE / 01
+
+    </span>
 
   </div>
 
   <div class="coordinates">
 
-    SYS 01<br>
+    SYS 01
 
-    NODE ACTIVE<br>
+    <br>
+
+    NODE ACTIVE
+
+    <br>
 
     ANALYSIS 100%
 
   </div>
 
+  <!-- TARGET 1 -->
+
   <div class="reticle r1">
 
     <div class="tag">
 
-      ID_0371<br>
+      ID_0371
 
-      <b>STATUS: OBSERVED</b>
+      <br>
+
+      <b>
+
+        STATUS: OBSERVED
+
+      </b>
 
     </div>
 
   </div>
 
+  <!-- TARGET 2 -->
+
   <div class="reticle r2">
 
     <div class="tag">
 
-      ID_9931<br>
+      ID_9931
+
+      <br>
 
       ALERT
 
@@ -886,11 +1248,15 @@ camlabel{
 
   </div>
 
+  <!-- TARGET 3 -->
+
   <div class="reticle r3">
 
     <div class="tag">
 
-      EVENT_04<br>
+      EVENT_04
+
+      <br>
 
       ACTIVE
 
@@ -898,11 +1264,19 @@ camlabel{
 
   </div>
 
+  <!-- ANALYSIS -->
+
   <div class="analysis">
 
-    <span class="blue">SYSTEM //</span>
+    <span class="blue">
 
-    ENVIRONMENTAL ANALYSIS ACTIVE<br>
+      SYSTEM //
+
+    </span>
+
+    ENVIRONMENTAL ANALYSIS ACTIVE
+
+    <br>
 
     <span id="analysisText">
 
@@ -914,13 +1288,41 @@ camlabel{
 
 </section>
 
-<section id="feed" class="feed"></section>
+<!-- =====================
+
+     SYSTEM LOG
+
+===================== -->
+
+<section
+
+  id="feed"
+
+  class="feed">
+
+</section>
+
+<!-- =====================
+
+     COMMAND INTERFACE
+
+===================== -->
 
 <section class="commandArea">
 
   <div class="voice">
 
-    <button class="mic" onclick="voiceCommand()">◉</button>
+    <button
+
+      id="micButton"
+
+      class="mic"
+
+      onclick="voiceCommand()">
+
+      ◉
+
+    </button>
 
     <div class="inputWrap">
 
@@ -934,7 +1336,11 @@ camlabel{
 
       >
 
-      <button class="exec" onclick="executeCommand()">
+      <button
+
+        class="exec"
+
+        onclick="executeCommand()">
 
         EXEC
 
@@ -946,35 +1352,69 @@ camlabel{
 
 </section>
 
+<!-- =====================
+
+     MODULES
+
+===================== -->
+
 <nav class="modules">
 
   <div class="module active">
 
-    <div class="icon">⌖</div>
+    <div class="icon">
+
+      ⌖
+
+    </div>
 
     SYSTEM
 
   </div>
 
-  <div class="module" onclick="openAgenda()">
+  <div
 
-    <div class="icon">□</div>
+    class="module"
+
+    onclick="openAgenda()">
+
+    <div class="icon">
+
+      □
+
+    </div>
 
     AGENDA
 
   </div>
 
-  <div class="module" onclick="openTasks()">
+  <div
 
-    <div class="icon">☷</div>
+    class="module"
+
+    onclick="openTasks()">
+
+    <div class="icon">
+
+      ☷
+
+    </div>
 
     TASKS
 
   </div>
 
-  <div class="module" onclick="openMemory()">
+  <div
 
-    <div class="icon">◇</div>
+    class="module"
+
+    onclick="openMemory()">
+
+    <div class="icon">
+
+      ◇
+
+    </div>
 
     MEMORY
 
@@ -984,15 +1424,35 @@ camlabel{
 
 </div>
 
-<!-- AGENDA -->
+<!-- =====================
 
-<div id="agendaOverlay" class="overlay">
+     AGENDA
+
+===================== -->
+
+<div
+
+  id="agendaOverlay"
+
+  class="overlay">
 
   <div class="overlayHeader">
 
-    <div class="overlayTitle">AGENDA // EVENTS</div>
+    <div class="overlayTitle">
 
-    <button class="close" onclick="closeOverlay()">×</button>
+      AGENDA // EVENTS
+
+    </div>
+
+    <button
+
+      class="close"
+
+      onclick="closeOverlay()">
+
+      ×
+
+    </button>
 
   </div>
 
@@ -1000,9 +1460,21 @@ camlabel{
 
   <div class="form">
 
-    <input type="datetime-local" id="eventDate">
+    <input
 
-    <input id="eventName" placeholder="EVENT DESCRIPTION">
+      type="datetime-local"
+
+      id="eventDate"
+
+    >
+
+    <input
+
+      id="eventName"
+
+      placeholder="EVENT DESCRIPTION"
+
+    >
 
     <button onclick="addEvent()">
 
@@ -1014,15 +1486,35 @@ camlabel{
 
 </div>
 
-<!-- TASKS -->
+<!-- =====================
 
-<div id="tasksOverlay" class="overlay">
+     TASKS
+
+===================== -->
+
+<div
+
+  id="tasksOverlay"
+
+  class="overlay">
 
   <div class="overlayHeader">
 
-    <div class="overlayTitle">TASK DATABASE</div>
+    <div class="overlayTitle">
 
-    <button class="close" onclick="closeOverlay()">×</button>
+      TASK DATABASE
+
+    </div>
+
+    <button
+
+      class="close"
+
+      onclick="closeOverlay()">
+
+      ×
+
+    </button>
 
   </div>
 
@@ -1030,7 +1522,13 @@ camlabel{
 
   <div class="form">
 
-    <input id="taskName" placeholder="NEW TASK">
+    <input
+
+      id="taskName"
+
+      placeholder="NEW TASK"
+
+    >
 
     <button onclick="addTask()">
 
@@ -1042,15 +1540,35 @@ camlabel{
 
 </div>
 
-<!-- MEMORY -->
+<!-- =====================
 
-<div id="memoryOverlay" class="overlay">
+     MEMORY
+
+===================== -->
+
+<div
+
+  id="memoryOverlay"
+
+  class="overlay">
 
   <div class="overlayHeader">
 
-    <div class="overlayTitle">LOCAL MEMORY</div>
+    <div class="overlayTitle">
 
-    <button class="close" onclick="closeOverlay()">×</button>
+      LOCAL MEMORY
+
+    </div>
+
+    <button
+
+      class="close"
+
+      onclick="closeOverlay()">
+
+      ×
+
+    </button>
 
   </div>
 
@@ -1058,7 +1576,13 @@ camlabel{
 
   <div class="form">
 
-    <input id="memoryName" placeholder="INFORMATION TO REMEMBER">
+    <input
+
+      id="memoryName"
+
+      placeholder="INFORMATION TO REMEMBER"
+
+    >
 
     <button onclick="addMemory()">
 
@@ -1072,207 +1596,425 @@ camlabel{
 
 <script>
 
-/* =========================
+/* ========================================
 
-DATABASE
+   DATABASE
 
-========================= */
+======================================== */
 
 let events =
 
-JSON.parse(localStorage.getItem("machine_events") || "[]");
+JSON.parse(
+
+  localStorage.getItem("machine_events")
+
+  || "[]"
+
+);
 
 let tasks =
 
-JSON.parse(localStorage.getItem("machine_tasks") || "[]");
+JSON.parse(
+
+  localStorage.getItem("machine_tasks")
+
+  || "[]"
+
+);
 
 let memories =
 
-JSON.parse(localStorage.getItem("machine_memory") || "[]");
+JSON.parse(
+
+  localStorage.getItem("machine_memory")
+
+  || "[]"
+
+);
 
 function save(){
 
-  localStorage.setItem("machine_events",JSON.stringify(events));
+  localStorage.setItem(
 
-  localStorage.setItem("machine_tasks",JSON.stringify(tasks));
+    "machine_events",
 
-  localStorage.setItem("machine_memory",JSON.stringify(memories));
+    JSON.stringify(events)
+
+  );
+
+  localStorage.setItem(
+
+    "machine_tasks",
+
+    JSON.stringify(tasks)
+
+  );
+
+  localStorage.setItem(
+
+    "machine_memory",
+
+    JSON.stringify(memories)
+
+  );
 
 }
 
-/* =========================
+/* ========================================
 
-CLOCK
+   CLOCK
 
-========================= */
+======================================== */
 
-const systemBirth = new Date();
+const systemBirth =
+
+  new Date("2026-09-25T00:00:00");
 
 function updateClock(){
 
-  const now = new Date();
+  const now =
 
-  document.getElementById("clock").textContent =
+    new Date();
+
+  document
+
+    .getElementById("clock")
+
+    .textContent =
 
     now.toLocaleTimeString("fr-BE");
 
-  document.getElementById("date").textContent =
+  document
+
+    .getElementById("date")
+
+    .textContent =
 
     now.toLocaleDateString("fr-BE");
 
   const diff =
 
-    Math.floor((now-systemBirth)/86400000)+1;
+    Math.max(
 
-  document.getElementById("day").textContent =
+      1,
 
-    "DAY "+String(diff).padStart(4,"0");
+      Math.floor(
+
+        (now - systemBirth)
+
+        / 86400000
+
+      ) + 1
+
+    );
+
+  document
+
+    .getElementById("day")
+
+    .textContent =
+
+    "DAY "
+
+    + String(diff).padStart(4,"0");
 
 }
 
 updateClock();
 
-setInterval(updateClock,1000);
+setInterval(
 
-/* =========================
+  updateClock,
 
-SYSTEM FEED
+  1000
 
-========================= */
+);
+
+/* ========================================
+
+   SYSTEM FEED
+
+======================================== */
 
 function feed(text,type=""){
 
-  const box=document.getElementById("feed");
+  const box =
 
-  const line=document.createElement("div");
+    document.getElementById("feed");
 
-  line.className="feedline "+type;
+  const line =
 
-  const time=
+    document.createElement("div");
 
-    new Date().toLocaleTimeString("fr-BE");
+  line.className =
 
-  line.innerHTML=
+    "feedline " + type;
 
-    "["+time+"] &gt; <strong>"+
+  const time =
 
-    escapeHTML(text)+
+    new Date()
 
-    "</strong>";
+    .toLocaleTimeString("fr-BE");
+
+  line.innerHTML =
+
+    "["
+
+    + time
+
+    + "] &gt; <strong>"
+
+    + escapeHTML(text)
+
+    + "</strong>";
 
   box.appendChild(line);
 
-  while(box.children.length>7){
+  while(
 
-    box.removeChild(box.firstChild);
+    box.children.length > 7
+
+  ){
+
+    box.removeChild(
+
+      box.firstChild
+
+    );
 
   }
 
-  box.scrollTop=box.scrollHeight;
+  box.scrollTop =
+
+    box.scrollHeight;
 
 }
 
+/* ========================================
+
+   BOOT SEQUENCE
+
+======================================== */
+
 function boot(){
 
-  const lines=[
+  const lines = [
 
-    ["BOOT SEQUENCE INITIALIZED",""],
+    [
 
-    ["LOCAL DATABASE CONNECTED",""],
+      "BOOT SEQUENCE INITIALIZED",
 
-    ["EVENT MODULE ONLINE","blue"],
+      ""
 
-    ["VOICE INTERFACE STANDBY",""],
+    ],
 
-    ["MEMORY NODE ACTIVE","green"],
+    [
 
-    ["SYSTEM OPERATIONAL","blue"]
+      "LOCAL DATABASE CONNECTED",
+
+      ""
+
+    ],
+
+    [
+
+      "EVENT MODULE ONLINE",
+
+      "blue"
+
+    ],
+
+    [
+
+      "VOICE INTERFACE STANDBY",
+
+      ""
+
+    ],
+
+    [
+
+      "MEMORY NODE ACTIVE",
+
+      "green"
+
+    ],
+
+    [
+
+      "GIO CORE ACTIVE",
+
+      "green"
+
+    ],
+
+    [
+
+      "SYSTEM OPERATIONAL",
+
+      "blue"
+
+    ]
 
   ];
 
-  lines.forEach((x,i)=>{
+  lines.forEach(
 
-    setTimeout(()=>feed(x[0],x[1]),i*230);
+    (x,i)=>{
 
-  });
+      setTimeout(
+
+        ()=>{
+
+          feed(
+
+            x[0],
+
+            x[1]
+
+          );
+
+        },
+
+        i * 230
+
+      );
+
+    }
+
+  );
 
 }
 
 boot();
 
-/* =========================
+/* ========================================
 
-COMMAND ENGINE
+   COMMAND INPUT
 
-========================= */
+======================================== */
 
 document
 
 .getElementById("command")
 
-.addEventListener("keydown",e=>{
+.addEventListener(
 
-  if(e.key==="Enter") executeCommand();
+  "keydown",
 
-});
+  event=>{
+
+    if(
+
+      event.key === "Enter"
+
+    ){
+
+      executeCommand();
+
+    }
+
+  }
+
+);
 
 function executeCommand(){
 
-  const input=document.getElementById("command");
+  const input =
 
-  const raw=input.value.trim();
+    document.getElementById("command");
 
-  if(!raw)return;
+  const raw =
 
-  feed('COMMAND RECEIVED: "'+raw+'"',"blue");
+    input.value.trim();
 
-  document.getElementById("analysisText").textContent =
+  if(!raw){
+
+    return;
+
+  }
+
+  feed(
+
+    'COMMAND RECEIVED: "'
+
+    + raw
+
+    + '"',
+
+    "blue"
+
+  );
+
+  document
+
+    .getElementById("analysisText")
+
+    .textContent =
 
     "PARSING COMMAND...";
 
-  input.value="";
+  input.value = "";
 
-  setTimeout(()=>analyse(raw),350);
+  setTimeout(
+
+    ()=>{
+
+      analyse(raw);
+
+    },
+
+    350
+
+  );
 
 }
 
+/* ========================================
+
+   LOCAL COMMAND ENGINE
+
+======================================== */
+
 function analyse(raw){
 
-  const text=raw.toLowerCase();
+  const text =
 
-  if(text.includes("agenda")){
+    raw.toLowerCase();
 
-    document.getElementById("analysisText").textContent =
-
-      events.length+" EVENT(S) IDENTIFIED";
-
-    feed(
-
-      "AGENDA DATABASE: "+events.length+" EVENT(S)",
-
-      "green"
-
-    );
-
-    return;
-
-  }
+  /* AGENDA */
 
   if(
 
-    text.includes("tâche") ||
+    text.includes("agenda")
 
-    text.includes("tache")
+    ||
+
+    text.includes("événement")
+
+    ||
+
+    text.includes("evenement")
 
   ){
 
-    document.getElementById("analysisText").textContent =
+    document
 
-      tasks.length+" ACTIVE TASK(S)";
+      .getElementById("analysisText")
+
+      .textContent =
+
+      events.length
+
+      + " EVENT(S) IDENTIFIED";
 
     feed(
 
-      "TASK DATABASE: "+tasks.length+" ACTIVE",
+      "AGENDA DATABASE: "
+
+      + events.length
+
+      + " EVENT(S)",
 
       "green"
 
@@ -1281,6 +2023,50 @@ function analyse(raw){
     return;
 
   }
+
+  /* TASKS */
+
+  if(
+
+    text.includes("tâche")
+
+    ||
+
+    text.includes("tache")
+
+    ||
+
+    text.includes("task")
+
+  ){
+
+    document
+
+      .getElementById("analysisText")
+
+      .textContent =
+
+      tasks.length
+
+      + " ACTIVE TASK(S)";
+
+    feed(
+
+      "TASK DATABASE: "
+
+      + tasks.length
+
+      + " ACTIVE",
+
+      "green"
+
+    );
+
+    return;
+
+  }
+
+  /* TIME */
 
   if(
 
@@ -1288,27 +2074,107 @@ function analyse(raw){
 
   ){
 
-    const time=
+    const time =
 
-      new Date().toLocaleTimeString("fr-BE");
+      new Date()
 
-    document.getElementById("analysisText").textContent =
+      .toLocaleTimeString("fr-BE");
 
-      "LOCAL TIME "+time;
+    document
 
-    feed("LOCAL TIME: "+time,"blue");
+      .getElementById("analysisText")
+
+      .textContent =
+
+      "LOCAL TIME "
+
+      + time;
+
+    feed(
+
+      "LOCAL TIME: "
+
+      + time,
+
+      "blue"
+
+    );
 
     return;
 
   }
 
+  /* DATE */
+
   if(
 
-    text.startsWith("souviens-toi") ||
+    text.includes("date")
 
-    text.startsWith("souviens toi") ||
+    ||
 
-    text.startsWith("mémorise") ||
+    text.includes("quel jour")
+
+  ){
+
+    const date =
+
+      new Date()
+
+      .toLocaleDateString(
+
+        "fr-BE",
+
+        {
+
+          weekday:"long",
+
+          day:"numeric",
+
+          month:"long",
+
+          year:"numeric"
+
+        }
+
+      );
+
+    document
+
+      .getElementById("analysisText")
+
+      .textContent =
+
+      date.toUpperCase();
+
+    feed(
+
+      "DATE: "
+
+      + date,
+
+      "blue"
+
+    );
+
+    return;
+
+  }
+
+  /* MEMORY */
+
+  if(
+
+    text.startsWith("souviens-toi")
+
+    ||
+
+    text.startsWith("souviens toi")
+
+    ||
+
+    text.startsWith("mémorise")
+
+    ||
 
     text.startsWith("memorise")
 
@@ -1316,31 +2182,87 @@ function analyse(raw){
 
     memories.push({
 
-      id:Date.now(),
+      id:
 
-      text:raw
+        Date.now(),
+
+      text:
+
+        raw
 
     });
 
     save();
 
-    document.getElementById("analysisText").textContent =
+    document
+
+      .getElementById("analysisText")
+
+      .textContent =
 
       "INFORMATION STORED";
 
-    feed("MEMORY DATABASE UPDATED","green");
+    feed(
+
+      "MEMORY DATABASE UPDATED",
+
+      "green"
+
+    );
 
     return;
 
   }
 
-  document.getElementById("analysisText").textContent =
+  /* GREETING */
+
+  if(
+
+    text.includes("bonjour")
+
+    ||
+
+    text.includes("salut gio")
+
+    ||
+
+    text === "gio"
+
+  ){
+
+    document
+
+      .getElementById("analysisText")
+
+      .textContent =
+
+      "GIO CORE RESPONDING";
+
+    feed(
+
+      "Bonjour. MACHINE opérationnelle.",
+
+      "green"
+
+    );
+
+    return;
+
+  }
+
+  /* UNKNOWN */
+
+  document
+
+    .getElementById("analysisText")
+
+    .textContent =
 
     "COMMAND LOGGED";
 
   feed(
 
-    "COMMAND STORED // INTELLIGENCE MODULE NOT CONNECTED",
+    "COMMAND STORED // EXTERNAL INTELLIGENCE NOT CONNECTED",
 
     ""
 
@@ -1348,17 +2270,19 @@ function analyse(raw){
 
 }
 
-/* =========================
+/* ========================================
 
-VOICE
+   VOICE
 
-========================= */
+======================================== */
 
 function voiceCommand(){
 
   const Recognition =
 
-    window.SpeechRecognition ||
+    window.SpeechRecognition
+
+    ||
 
     window.webkitSpeechRecognition;
 
@@ -1372,55 +2296,165 @@ function voiceCommand(){
 
     );
 
+    document
+
+      .getElementById("analysisText")
+
+      .textContent =
+
+      "VOICE MODULE UNAVAILABLE";
+
     return;
 
   }
 
-  const recognition=new Recognition();
+  const recognition =
 
-  recognition.lang="fr-BE";
+    new Recognition();
 
-  feed("VOICE INPUT ACTIVE","blue");
+  recognition.lang =
 
-  document.getElementById("analysisText").textContent =
+    "fr-BE";
+
+  recognition.interimResults =
+
+    false;
+
+  recognition.maxAlternatives =
+
+    1;
+
+  const mic =
+
+    document.getElementById(
+
+      "micButton"
+
+    );
+
+  mic.classList.add(
+
+    "listening"
+
+  );
+
+  feed(
+
+    "VOICE INPUT ACTIVE",
+
+    "blue"
+
+  );
+
+  document
+
+    .getElementById("analysisText")
+
+    .textContent =
 
     "LISTENING...";
 
   recognition.start();
 
-  recognition.onresult=e=>{
+  recognition.onresult =
 
-    const text=
+    event=>{
 
-      e.results[0][0].transcript;
+      const text =
 
-    document.getElementById("command").value=text;
+        event.results[0][0]
 
-    executeCommand();
+        .transcript;
 
-  };
+      document
 
-  recognition.onerror=()=>{
+        .getElementById("command")
 
-    feed("VOICE INPUT ERROR","red");
+        .value =
 
-  };
+        text;
+
+      mic.classList.remove(
+
+        "listening"
+
+      );
+
+      executeCommand();
+
+    };
+
+  recognition.onerror =
+
+    ()=>{
+
+      mic.classList.remove(
+
+        "listening"
+
+      );
+
+      feed(
+
+        "VOICE INPUT ERROR",
+
+        "red"
+
+      );
+
+      document
+
+        .getElementById("analysisText")
+
+        .textContent =
+
+        "VOICE ERROR";
+
+    };
+
+  recognition.onend =
+
+    ()=>{
+
+      mic.classList.remove(
+
+        "listening"
+
+      );
+
+    };
 
 }
 
-/* =========================
+/* ========================================
 
-OVERLAYS
+   OVERLAYS
 
-========================= */
+======================================== */
 
 function closeOverlay(){
 
   document
 
-    .querySelectorAll(".overlay")
+    .querySelectorAll(
 
-    .forEach(x=>x.classList.remove("show"));
+      ".overlay"
+
+    )
+
+    .forEach(
+
+      overlay=>{
+
+        overlay
+
+          .classList
+
+          .remove("show");
+
+      }
+
+    );
 
 }
 
@@ -1430,9 +2464,15 @@ function openAgenda(){
 
   document
 
-    .getElementById("agendaOverlay")
+    .getElementById(
 
-    .classList.add("show");
+      "agendaOverlay"
+
+    )
+
+    .classList
+
+    .add("show");
 
 }
 
@@ -1442,9 +2482,15 @@ function openTasks(){
 
   document
 
-    .getElementById("tasksOverlay")
+    .getElementById(
 
-    .classList.add("show");
+      "tasksOverlay"
+
+    )
+
+    .classList
+
+    .add("show");
 
 }
 
@@ -1454,43 +2500,91 @@ function openMemory(){
 
   document
 
-    .getElementById("memoryOverlay")
+    .getElementById(
 
-    .classList.add("show");
+      "memoryOverlay"
+
+    )
+
+    .classList
+
+    .add("show");
 
 }
 
-/* =========================
+/* ========================================
 
-AGENDA
+   AGENDA
 
-========================= */
+======================================== */
 
 function addEvent(){
 
-  const date=
+  const date =
 
-    document.getElementById("eventDate").value;
+    document
 
-  const name=
+      .getElementById(
 
-    document.getElementById("eventName").value.trim();
+        "eventDate"
 
-  if(!date || !name)return;
+      )
+
+      .value;
+
+  const name =
+
+    document
+
+      .getElementById(
+
+        "eventName"
+
+      )
+
+      .value
+
+      .trim();
+
+  if(
+
+    !date
+
+    ||
+
+    !name
+
+  ){
+
+    return;
+
+  }
 
   events.push({
 
-    id:Date.now(),
+    id:
 
-    date,
+      Date.now(),
 
-    name
+    date:
+
+      date,
+
+    name:
+
+      name
 
   });
 
   events.sort(
 
-    (a,b)=>new Date(a.date)-new Date(b.date)
+    (a,b)=>
+
+      new Date(a.date)
+
+      -
+
+      new Date(b.date)
 
   );
 
@@ -1498,89 +2592,199 @@ function addEvent(){
 
   renderAgenda();
 
-  document.getElementById("eventName").value="";
+  document
 
-  feed("NEW EVENT STORED","green");
+    .getElementById(
+
+      "eventName"
+
+    )
+
+    .value = "";
+
+  feed(
+
+    "NEW EVENT STORED",
+
+    "green"
+
+  );
 
 }
 
+/* Render agenda */
+
 function renderAgenda(){
 
-  const box=
+  const box =
 
-    document.getElementById("agendaList");
+    document.getElementById(
 
-  box.innerHTML="";
+      "agendaList"
 
-  if(!events.length){
+    );
 
-    box.innerHTML=
+  box.innerHTML = "";
 
-      '<div class="empty">NO EVENT DATA</div>';
+  if(
+
+    !events.length
+
+  ){
+
+    box.innerHTML =
+
+      '<div class="empty">'
+
+      +
+
+      'NO EVENT DATA'
+
+      +
+
+      '</div>';
 
     return;
 
   }
 
-  events.forEach(e=>{
+  events.forEach(
 
-    const div=document.createElement("div");
+    event=>{
 
-    div.className="item";
+      const div =
 
-    div.innerHTML=
+        document.createElement(
 
-      "<small>"+
+          "div"
 
-      new Date(e.date).toLocaleString("fr-BE")+
+        );
 
-      "</small>"+
+      div.className =
 
-      escapeHTML(e.name);
+        "item";
 
-    div.onclick=()=>{
+      div.innerHTML =
 
-      if(confirm("Supprimer cet événement ?")){
+        "<small>"
 
-        events=
+        +
 
-          events.filter(x=>x.id!==e.id);
+        new Date(
 
-        save();
+          event.date
 
-        renderAgenda();
+        )
 
-      }
+        .toLocaleString(
 
-    };
+          "fr-BE"
 
-    box.appendChild(div);
+        )
 
-  });
+        +
+
+        "</small>"
+
+        +
+
+        escapeHTML(
+
+          event.name
+
+        );
+
+      div.onclick =
+
+        ()=>{
+
+          if(
+
+            confirm(
+
+              "Supprimer cet événement ?"
+
+            )
+
+          ){
+
+            events =
+
+              events.filter(
+
+                item=>
+
+                  item.id
+
+                  !==
+
+                  event.id
+
+              );
+
+            save();
+
+            renderAgenda();
+
+            feed(
+
+              "EVENT REMOVED",
+
+              "red"
+
+            );
+
+          }
+
+        };
+
+      box.appendChild(
+
+        div
+
+      );
+
+    }
+
+  );
 
 }
 
-/* =========================
+/* ========================================
 
-TASKS
+   TASKS
 
-========================= */
+======================================== */
 
 function addTask(){
 
-  const input=
+  const input =
 
-    document.getElementById("taskName");
+    document.getElementById(
 
-  const name=input.value.trim();
+      "taskName"
 
-  if(!name)return;
+    );
+
+  const name =
+
+    input.value.trim();
+
+  if(!name){
+
+    return;
+
+  }
 
   tasks.push({
 
-    id:Date.now(),
+    id:
 
-    name
+      Date.now(),
+
+    name:
+
+      name
 
   });
 
@@ -1588,79 +2792,151 @@ function addTask(){
 
   renderTasks();
 
-  input.value="";
+  input.value = "";
 
-  feed("TASK CREATED","green");
+  feed(
+
+    "TASK CREATED",
+
+    "green"
+
+  );
 
 }
 
 function renderTasks(){
 
-  const box=
+  const box =
 
-    document.getElementById("taskList");
+    document.getElementById(
 
-  box.innerHTML="";
+      "taskList"
 
-  if(!tasks.length){
+    );
 
-    box.innerHTML=
+  box.innerHTML = "";
 
-      '<div class="empty">NO ACTIVE TASKS</div>';
+  if(
+
+    !tasks.length
+
+  ){
+
+    box.innerHTML =
+
+      '<div class="empty">'
+
+      +
+
+      'NO ACTIVE TASKS'
+
+      +
+
+      '</div>';
 
     return;
 
   }
 
-  tasks.forEach(t=>{
+  tasks.forEach(
 
-    const div=document.createElement("div");
+    task=>{
 
-    div.className="item";
+      const div =
 
-    div.textContent=t.name;
+        document.createElement(
 
-    div.onclick=()=>{
+          "div"
 
-      tasks=
+        );
 
-        tasks.filter(x=>x.id!==t.id);
+      div.className =
 
-      save();
+        "item";
 
-      renderTasks();
+      div.textContent =
 
-      feed("TASK COMPLETED","green");
+        task.name;
 
-    };
+      div.onclick =
 
-    box.appendChild(div);
+        ()=>{
 
-  });
+          tasks =
+
+            tasks.filter(
+
+              item=>
+
+                item.id
+
+                !==
+
+                task.id
+
+            );
+
+          save();
+
+          renderTasks();
+
+          feed(
+
+            "TASK COMPLETED",
+
+            "green"
+
+          );
+
+        };
+
+      box.appendChild(
+
+        div
+
+      );
+
+    }
+
+  );
 
 }
 
-/* =========================
+/* ========================================
 
-MEMORY
+   MEMORY
 
-========================= */
+======================================== */
 
 function addMemory(){
 
-  const input=
+  const input =
 
-    document.getElementById("memoryName");
+    document.getElementById(
 
-  const text=input.value.trim();
+      "memoryName"
 
-  if(!text)return;
+    );
+
+  const text =
+
+    input.value.trim();
+
+  if(!text){
+
+    return;
+
+  }
 
   memories.push({
 
-    id:Date.now(),
+    id:
 
-    text
+      Date.now(),
+
+    text:
+
+      text
 
   });
 
@@ -1668,71 +2944,147 @@ function addMemory(){
 
   renderMemory();
 
-  input.value="";
+  input.value = "";
 
-  feed("MEMORY STORED","green");
+  feed(
+
+    "MEMORY STORED",
+
+    "green"
+
+  );
 
 }
 
 function renderMemory(){
 
-  const box=
+  const box =
 
-    document.getElementById("memoryList");
+    document.getElementById(
 
-  box.innerHTML="";
+      "memoryList"
 
-  if(!memories.length){
+    );
 
-    box.innerHTML=
+  box.innerHTML = "";
 
-      '<div class="empty">MEMORY DATABASE EMPTY</div>';
+  if(
+
+    !memories.length
+
+  ){
+
+    box.innerHTML =
+
+      '<div class="empty">'
+
+      +
+
+      'MEMORY DATABASE EMPTY'
+
+      +
+
+      '</div>';
 
     return;
 
   }
 
-  memories.forEach(m=>{
+  memories.forEach(
 
-    const div=document.createElement("div");
+    memory=>{
 
-    div.className="item";
+      const div =
 
-    div.textContent=m.text;
+        document.createElement(
 
-    div.onclick=()=>{
+          "div"
 
-      if(confirm("Supprimer cette information ?")){
+        );
 
-        memories=
+      div.className =
 
-          memories.filter(x=>x.id!==m.id);
+        "item";
 
-        save();
+      div.textContent =
 
-        renderMemory();
+        memory.text;
 
-      }
+      div.onclick =
 
-    };
+        ()=>{
 
-    box.appendChild(div);
+          if(
 
-  });
+            confirm(
+
+              "Supprimer cette information ?"
+
+            )
+
+          ){
+
+            memories =
+
+              memories.filter(
+
+                item=>
+
+                  item.id
+
+                  !==
+
+                  memory.id
+
+              );
+
+            save();
+
+            renderMemory();
+
+            feed(
+
+              "MEMORY REMOVED",
+
+              "red"
+
+            );
+
+          }
+
+        };
+
+      box.appendChild(
+
+        div
+
+      );
+
+    }
+
+  );
 
 }
 
-/* =========================
+/* ========================================
 
-SECURITY
+   SECURITY
 
-========================= */
+======================================== */
 
 function escapeHTML(text){
 
-  const div=document.createElement("div");
+  const div =
 
-  div.textContent=text;
+    document.createElement(
+
+      "div"
+
+    );
+
+  div.textContent =
+
+    text;
 
   return div.innerHTML;
 
