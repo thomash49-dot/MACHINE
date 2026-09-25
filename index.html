@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+
+      content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+
+<meta name="theme-color" content="#050706">
+
+<title>GIO // MACHINE</title>
+
+<style>
+
+:root{
+
+  --bg:#050706;
+
+  --panel:#09100c;
+
+  --line:#183c27;
+
+  --green:#57ff8a;
+
+  --green2:#20a852;
+
+  --text:#baffca;
+
+  --muted:#598a67;
+
+  --danger:#ff4c4c;
+
+}
+
+*{
+
+  box-sizing:border-box;
+
+}
+
+body{
+
+  margin:0;
+
+  background:
+
+    linear-gradient(rgba(20,255,90,.025) 1px,transparent 1px),
+
+    linear-gradient(90deg,rgba(20,255,90,.025) 1px,transparent 1px),
+
+    var(--bg);
+
+  background-size:35px 35px;
+
+  color:var(--text);
+
+  font-family:
+
+    "SFMono-Regular",
+
+    Consolas,
+
+    monospace;
+
+  min-height:100vh;
+
+}
+
+/* HEADER */
+
+header{
+
+  padding:18px;
+
+  border-bottom:1px solid var(--line);
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  background:#050806;
+
+}
+
+.logo{
+
+  font-size:18px;
+
+  letter-spacing:3px;
+
+  color:var(--green);
+
+}
+
+.status{
+
+  font-size:11px;
+
+  color:var(--green);
+
+}
+
+/* MAIN */
+
+main{
+
+  max-width:1200px;
+
+  margin:auto;
+
+  padding:16px;
+
+}
+
+/* CLOCK */
+
+.clock{
+
+  text-align:center;
+
+  padding:25px;
+
+}
+
+#time{
+
+  font-size:42px;
+
+  letter-spacing:5px;
+
+  color:white;
+
+}
+
+#date{
+
+  margin-top:6px;
+
+  color:var(--muted);
+
+}
+
+/* GRID */
+
+.grid{
+
+  display:grid;
+
+  grid-template-columns:repeat(2,1fr);
+
+  gap:14px;
+
+}
+
+.panel{
+
+  border:1px solid var(--line);
+
+  background:rgba(5,15,9,.8);
+
+  min-height:200px;
+
+}
+
+.panelTitle{
+
+  padding:10px 12px;
+
+  border-bottom:1px solid var(--line);
+
+  color:var(--green);
+
+  letter-spacing:2px;
+
+  font-size:12px;
+
+}
+
+.content{
+
+  padding:12px;
+
+}
+
+/* TERMINAL */
+
+#terminal{
+
+  height:220px;
+
+  overflow:auto;
+
+  font-size:12px;
+
+  line-height:1.7;
+
+}
+
+.system{
+
+  color:var(--muted);
+
+}
+
+.gio{
+
+  color:var(--green);
+
+}
+
+.user{
+
+  color:white;
+
+}
+
+/* COMMAND */
+
+.command{
+
+  margin-top:15px;
+
+  border:1px solid var(--line);
+
+  display:flex;
+
+  background:#020403;
+
+}
+
+.command input{
+
+  flex:1;
+
+  border:0;
+
+  outline:0;
+
+  background:transparent;
+
+  color:white;
+
+  padding:15px;
+
+  font-family:inherit;
+
+}
+
+button{
+
+  border:0;
+
+  border-left:1px solid var(--line);
+
+  background:#07150c;
+
+  color:var(--green);
+
+  padding:12px 16px;
+
+  cursor:pointer;
+
+}
+
+button:hover{
+
+  background:#0d2717;
+
+}
+
+/* ITEMS */
+
+.item{
+
+  border-left:2px solid var(--green2);
+
+  padding:8px 10px;
+
+  margin-bottom:8px;
+
+  background:#07100a;
+
+}
+
+.itemTime{
+
+  color:var(--green);
+
+  font-size:11px;
+
+}
+
+.itemText{
+
+  color:white;
+
+  margin-top:4px;
+
+}
+
+/* ADD FORMS */
+
+.form{
+
+  display:flex;
+
+  gap:6px;
+
+  margin-top:10px;
+
+}
+
+.form input{
+
+  width:100%;
+
+  background:#030604;
+
+  border:1px solid var(--line);
+
+  color:white;
+
+  padding:8px;
+
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+  .grid{
+
+    grid-template-columns:1fr;
+
+  }
+
+  #time{
+
+    font-size:32px;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+
+GIO // MACHINE
+
+</div>
+
+<div class="status">
+
+● SYSTEM ONLINE
+
+</div>
+
+</header>
+
+<main>
+
+<section class="clock">
+
+<div id="time">
+
+00:00:00
+
+</div>
+
+<div id="date">
+
+INITIALIZING...
+
+</div>
+
+</section>
+
+<div class="grid">
+
+<!-- TERMINAL -->
+
+<section class="panel">
+
+<div class="panelTitle">
+
+ANALYSIS TERMINAL
+
+</div>
+
+<div class="content">
+
+<div id="terminal"></div>
+
+<div class="command">
+
+<input
+
+id="commandInput"
+
+placeholder="ENTRER UNE INSTRUCTION..."
+
+>
+
+<button onclick="voiceCommand()">
+
+🎙
+
+</button>
+
+<button onclick="sendCommand()">
+
+EXEC
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- AGENDA -->
+
+<section class="panel">
+
+<div class="panelTitle">
+
+AGENDA
+
+</div>
+
+<div class="content">
+
+<div id="agenda"></div>
+
+<div class="form">
+
+<input
+
+type="datetime-local"
+
+id="eventDate">
+
+<input
+
+id="eventText"
+
+placeholder="Événement">
+
+<button onclick="addEvent()">
+
++
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- TASKS -->
+
+<section class="panel">
+
+<div class="panelTitle">
+
+TASKS
+
+</div>
+
+<div class="content">
+
+<div id="tasks"></div>
+
+<div class="form">
+
+<input
+
+id="taskInput"
+
+placeholder="Nouvelle tâche">
+
+<button onclick="addTask()">
+
++
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ALERTS -->
+
+<section class="panel">
+
+<div class="panelTitle">
+
+SYSTEM ALERTS
+
+</div>
+
+<div class="content">
+
+<div id="alerts">
+
+<div class="item">
+
+<div class="itemTime">
+
+SYSTEM
+
+</div>
+
+<div class="itemText">
+
+Aucune anomalie détectée.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+</main>
+
+<script>
+
+/* ===============================
+
+CLOCK
+
+================================ */
+
+function updateClock(){
+
+const now=new Date();
+
+document.getElementById("time").textContent=
+
+now.toLocaleTimeString("fr-BE");
+
+document.getElementById("date").textContent=
+
+now.toLocaleDateString(
+
+"fr-BE",
+
+{
+
+weekday:"long",
+
+day:"numeric",
+
+month:"long",
+
+year:"numeric"
+
+}
+
+).toUpperCase();
+
+}
+
+setInterval(updateClock,1000);
+
+updateClock();
+
+/* ===============================
+
+STORAGE
+
+================================ */
+
+let events=
+
+JSON.parse(localStorage.getItem("gio_events")||"[]");
+
+let tasks=
+
+JSON.parse(localStorage.getItem("gio_tasks")||"[]");
+
+function save(){
+
+localStorage.setItem(
+
+"gio_events",
+
+JSON.stringify(events)
+
+);
+
+localStorage.setItem(
+
+"gio_tasks",
+
+JSON.stringify(tasks)
+
+);
+
+}
+
+/* ===============================
+
+TERMINAL
+
+================================ */
+
+function terminal(text,type="system"){
+
+const el=document.getElementById("terminal");
+
+const line=document.createElement("div");
+
+line.className=type;
+
+line.textContent=text;
+
+el.appendChild(line);
+
+el.scrollTop=el.scrollHeight;
+
+}
+
+/* STARTUP */
+
+function startup(){
+
+const lines=[
+
+"SYSTEM INITIALIZING...",
+
+"LOCAL DATABASE........ OK",
+
+"AGENDA MODULE......... ONLINE",
+
+"TASK MODULE........... ONLINE",
+
+"VOICE INTERFACE....... STANDBY",
+
+"ANALYSIS ENGINE....... ONLINE",
+
+"GIO CORE.............. ACTIVE"
+
+];
+
+let i=0;
+
+const interval=setInterval(()=>{
+
+terminal(
+
+"> "+lines[i],
+
+"system"
+
+);
+
+i++;
+
+if(i>=lines.length){
+
+clearInterval(interval);
+
+setTimeout(()=>{
+
+terminal(
+
+"GIO: Bonjour. Système opérationnel.",
+
+"gio"
+
+);
+
+},400);
+
+}
+
+},250);
+
+}
+
+startup();
+
+/* ===============================
+
+COMMANDS
+
+================================ */
+
+function sendCommand(){
+
+const input=
+
+document.getElementById("commandInput");
+
+const command=
+
+input.value.trim();
+
+if(!command)return;
+
+terminal(
+
+"USER: "+command,
+
+"user"
+
+);
+
+input.value="";
+
+analyseCommand(command);
+
+}
+
+document
+
+.getElementById("commandInput")
+
+.addEventListener(
+
+"keydown",
+
+e=>{
+
+if(e.key==="Enter")
+
+sendCommand();
+
+});
+
+function analyseCommand(text){
+
+const t=text.toLowerCase();
+
+setTimeout(()=>{
+
+if(
+
+t.includes("bonjour") ||
+
+t.includes("salut")
+
+){
+
+terminal(
+
+"GIO: Bonjour. Je suis opérationnel.",
+
+"gio"
+
+);
+
+}
+
+else if(
+
+t.includes("heure")
+
+){
+
+terminal(
+
+"GIO: "+new Date()
+
+.toLocaleTimeString("fr-BE"),
+
+"gio"
+
+);
+
+}
+
+else if(
+
+t.includes("agenda")
+
+){
+
+if(events.length===0){
+
+terminal(
+
+"GIO: Aucun événement enregistré.",
+
+"gio"
+
+);
+
+}else{
+
+terminal(
+
+"GIO: "+events.length+
+
+" événement(s) identifié(s).",
+
+"gio"
+
+);
+
+}
+
+}
+
+else if(
+
+t.includes("tâche") ||
+
+t.includes("tache")
+
+){
+
+terminal(
+
+"GIO: "+tasks.length+
+
+" tâche(s) active(s).",
+
+"gio"
+
+);
+
+}
+
+else{
+
+terminal(
+
+"GIO: Instruction enregistrée. Le moteur d'analyse intelligent sera connecté dans une prochaine version.",
+
+"gio"
+
+);
+
+}
+
+},350);
+
+}
+
+/* ===============================
+
+AGENDA
+
+================================ */
+
+function addEvent(){
+
+const date=
+
+document.getElementById("eventDate").value;
+
+const text=
+
+document.getElementById("eventText").value.trim();
+
+if(!date || !text)
+
+return;
+
+events.push({
+
+id:Date.now(),
+
+date,
+
+text
+
+});
+
+events.sort(
+
+(a,b)=>
+
+new Date(a.date)-new Date(b.date)
+
+);
+
+save();
+
+renderEvents();
+
+terminal(
+
+"GIO: Événement enregistré.",
+
+"gio"
+
+);
+
+document.getElementById("eventText").value="";
+
+}
+
+function renderEvents(){
+
+const container=
+
+document.getElementById("agenda");
+
+container.innerHTML="";
+
+if(events.length===0){
+
+container.innerHTML=
+
+'<div class="system">AUCUN ÉVÉNEMENT</div>';
+
+return;
+
+}
+
+events.forEach(event=>{
+
+const item=
+
+document.createElement("div");
+
+item.className="item";
+
+const date=
+
+new Date(event.date);
+
+item.innerHTML=
+
+'<div class="itemTime">'+
+
+date.toLocaleString("fr-BE")+
+
+'</div>'+
+
+'<div class="itemText">'+
+
+escapeHTML(event.text)+
+
+'</div>';
+
+item.onclick=()=>{
+
+if(confirm("Supprimer cet événement ?")){
+
+events=
+
+events.filter(
+
+e=>e.id!==event.id
+
+);
+
+save();
+
+renderEvents();
+
+}
+
+};
+
+container.appendChild(item);
+
+});
+
+}
+
+/* ===============================
+
+TASKS
+
+================================ */
+
+function addTask(){
+
+const input=
+
+document.getElementById("taskInput");
+
+const text=
+
+input.value.trim();
+
+if(!text)return;
+
+tasks.push({
+
+id:Date.now(),
+
+text
+
+});
+
+save();
+
+renderTasks();
+
+input.value="";
+
+terminal(
+
+"GIO: Nouvelle tâche enregistrée.",
+
+"gio"
+
+);
+
+}
+
+function renderTasks(){
+
+const container=
+
+document.getElementById("tasks");
+
+container.innerHTML="";
+
+if(tasks.length===0){
+
+container.innerHTML=
+
+'<div class="system">AUCUNE TÂCHE</div>';
+
+return;
+
+}
+
+tasks.forEach(task=>{
+
+const item=
+
+document.createElement("div");
+
+item.className="item";
+
+item.innerHTML=
+
+'<div class="itemText">'+
+
+escapeHTML(task.text)+
+
+'</div>';
+
+item.onclick=()=>{
+
+tasks=
+
+tasks.filter(
+
+t=>t.id!==task.id
+
+);
+
+save();
+
+renderTasks();
+
+terminal(
+
+"GIO: Tâche terminée.",
+
+"gio"
+
+);
+
+};
+
+container.appendChild(item);
+
+});
+
+}
+
+/* ===============================
+
+VOICE
+
+================================ */
+
+function voiceCommand(){
+
+const SpeechRecognition=
+
+window.SpeechRecognition ||
+
+window.webkitSpeechRecognition;
+
+if(!SpeechRecognition){
+
+terminal(
+
+"GIO: Reconnaissance vocale indisponible sur ce navigateur.",
+
+"gio"
+
+);
+
+return;
+
+}
+
+const recognition=
+
+new SpeechRecognition();
+
+recognition.lang="fr-BE";
+
+recognition.start();
+
+terminal(
+
+"> VOICE INPUT ACTIVE",
+
+"system"
+
+);
+
+recognition.onresult=function(event){
+
+const text=
+
+event.results[0][0].transcript;
+
+document.getElementById(
+
+"commandInput"
+
+).value=text;
+
+sendCommand();
+
+};
+
+}
+
+/* ===============================
+
+SECURITY
+
+================================ */
+
+function escapeHTML(text){
+
+const div=
+
+document.createElement("div");
+
+div.textContent=text;
+
+return div.innerHTML;
+
+}
+
+/* INITIAL RENDER */
+
+renderEvents();
+
+renderTasks();
+
+</script>
+
+</body>
+
+</html>
