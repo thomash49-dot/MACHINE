@@ -4,7 +4,7 @@
 
   "short_name": "MACHINE",
 
-  "description": "MACHINE // Personal Intelligence System",
+  "description": "Interface personnelle MACHINE",
 
   "start_url": "./",
 
@@ -14,17 +14,17 @@
 
   "orientation": "portrait",
 
-  "background_color": "#020303",
+  "background_color": "#050606",
 
-  "theme_color": "#020303",
+  "theme_color": "#050606",
 
   "icons": [
 
     {
 
-      "src": "./icon.PNG",
+      "src": "./icon.png",
 
-      "sizes": "512x512",
+      "sizes": "1024x1024",
 
       "type": "image/png",
 
@@ -34,9 +34,9 @@
 
     {
 
-      "src": "./icon.PNG",
+      "src": "./icon.png",
 
-      "sizes": "512x512",
+      "sizes": "1024x1024",
 
       "type": "image/png",
 
