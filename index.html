@@ -28,6 +28,12 @@
 
 <style>
 
+/* =========================================================
+
+   MACHINE — FULL SCREEN PWA
+
+   ========================================================= */
+
 :root{
 
   --bg:#020404;
@@ -46,17 +52,49 @@
 
   --line:#253131;
 
+  --safeTop:env(safe-area-inset-top, 0px);
+
+  --safeBottom:env(safe-area-inset-bottom, 0px);
+
+  --headerH:72px;
+
+  --clockH:52px;
+
+  --navH:76px;
+
 }
 
 *{
 
   box-sizing:border-box;
 
+  -webkit-tap-highlight-color:transparent;
+
 }
 
-html,body{
+html{
+
+  width:100%;
+
+  height:100%;
+
+  overflow:hidden;
+
+  background:var(--bg);
+
+}
+
+body{
 
   margin:0;
+
+  width:100%;
+
+  height:100vh;
+
+  height:100dvh;
+
+  overflow:hidden;
 
   background:var(--bg);
 
@@ -64,33 +102,67 @@ html,body{
 
   font-family:"Courier New",monospace;
 
-  min-height:100%;
-
-}
-
-body{
-
-  padding-top:env(safe-area-inset-top);
-
-  padding-bottom:calc(100px + env(safe-area-inset-bottom));
-
   background-image:
 
-    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(
 
-    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+      rgba(255,255,255,.025) 1px,
+
+      transparent 1px
+
+    ),
+
+    linear-gradient(
+
+      90deg,
+
+      rgba(255,255,255,.025) 1px,
+
+      transparent 1px
+
+    );
 
   background-size:32px 32px;
 
+  display:grid;
+
+  grid-template-rows:
+
+    calc(var(--headerH) + var(--safeTop))
+
+    var(--clockH)
+
+    minmax(0,1fr)
+
+    calc(var(--navH) + var(--safeBottom));
+
 }
 
-/* HEADER */
+/* =========================================================
+
+   HEADER
+
+   ========================================================= */
 
 .header{
 
-  padding:28px 36px 24px;
+  padding:
+
+    calc(var(--safeTop) + 12px)
+
+    24px
+
+    10px;
 
   border-bottom:1px solid var(--line);
+
+  min-height:0;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:center;
 
 }
 
@@ -106,9 +178,9 @@ body{
 
 .logo{
 
-  letter-spacing:6px;
+  letter-spacing:5px;
 
-  font-size:19px;
+  font-size:15px;
 
 }
 
@@ -116,7 +188,9 @@ body{
 
   color:var(--cyan);
 
-  letter-spacing:2px;
+  letter-spacing:1px;
+
+  font-size:11px;
 
 }
 
@@ -124,51 +198,65 @@ body{
 
   display:inline-block;
 
-  width:14px;
+  width:8px;
 
-  height:14px;
+  height:8px;
 
   background:var(--cyan);
 
   border-radius:50%;
 
-  box-shadow:0 0 15px var(--cyan);
+  box-shadow:
 
-  margin-right:12px;
+    0 0 10px var(--cyan);
+
+  margin-right:7px;
 
 }
 
 .subtitle{
 
-  margin-top:14px;
+  margin-top:7px;
 
   color:var(--muted);
 
-  letter-spacing:5px;
+  letter-spacing:3px;
 
-  font-size:13px;
+  font-size:9px;
 
 }
 
-/* CLOCK */
+/* =========================================================
+
+   CLOCK
+
+   ========================================================= */
 
 .clockbar{
 
-  height:88px;
+  min-height:0;
 
   display:grid;
 
-  grid-template-columns:1fr 1fr 1fr;
+  grid-template-columns:
+
+    1fr
+
+    1.2fr
+
+    1fr;
 
   align-items:center;
 
   border-bottom:1px solid var(--line);
 
-  padding:0 36px;
+  padding:0 24px;
 
   color:#9aa1a1;
 
-  letter-spacing:2px;
+  letter-spacing:1px;
+
+  font-size:11px;
 
 }
 
@@ -178,7 +266,9 @@ body{
 
   color:white;
 
-  font-size:18px;
+  font-size:15px;
+
+  letter-spacing:2px;
 
 }
 
@@ -188,13 +278,23 @@ body{
 
 }
 
-/* PAGES */
+/* =========================================================
+
+   PAGE CONTAINER
+
+   ========================================================= */
 
 .page{
 
   display:none;
 
-  animation:fade .25s ease;
+  min-height:0;
+
+  height:100%;
+
+  overflow:hidden;
+
+  animation:fade .2s ease;
 
 }
 
@@ -206,23 +306,51 @@ body{
 
 @keyframes fade{
 
-  from{opacity:0}
+  from{opacity:0;}
 
-  to{opacity:1}
+  to{opacity:1;}
 
 }
 
-/* SYSTEM */
+/* =========================================================
+
+   SYSTEM PAGE
+
+   ========================================================= */
+
+#systemPage.active{
+
+  display:grid;
+
+  grid-template-rows:
+
+    auto
+
+    minmax(0,1fr)
+
+    auto
+
+    auto;
+
+  height:100%;
+
+  min-height:0;
+
+}
+
+/* SYSTEM TITLE */
 
 .systemHeader{
 
-  padding:32px 30px 10px;
+  padding:13px 22px 8px;
+
+  min-height:0;
 
 }
 
 .sectionTitle{
 
-  font-size:17px;
+  font-size:13px;
 
   letter-spacing:1px;
 
@@ -232,19 +360,29 @@ body{
 
   color:var(--muted);
 
-  margin-top:10px;
+  margin-top:5px;
+
+  font-size:10px;
+
+  letter-spacing:1px;
 
 }
+
+/* =========================================================
+
+   ANALYSIS
+
+   ========================================================= */
 
 .analysis{
 
   position:relative;
 
-  height:520px;
-
-  border-bottom:1px solid var(--line);
+  min-height:0;
 
   overflow:hidden;
+
+  border-bottom:1px solid var(--line);
 
 }
 
@@ -260,107 +398,121 @@ body{
 
   background:var(--cyan);
 
-  opacity:.65;
+  opacity:.55;
 
   animation:scan 7s linear infinite;
+
+  z-index:1;
 
 }
 
 @keyframes scan{
 
-  0%{top:10%}
+  0%{top:8%;}
 
-  50%{top:90%}
+  50%{top:92%;}
 
-  100%{top:10%}
+  100%{top:8%;}
 
 }
+
+/* =========================================================
+
+   DETECTION BOXES
+
+   ========================================================= */
 
 .box{
 
   position:absolute;
 
-  border:2px solid;
+  border:1px solid;
+
+  z-index:2;
 
 }
 
-.box:before,
+.box::before,
 
-.box:after{
+.box::after{
 
   content:"";
 
   position:absolute;
 
-  width:17px;
+  width:12px;
 
-  height:17px;
-
-  border-color:white;
+  height:12px;
 
 }
 
-.box:before{
+.box::before{
 
-  top:-4px;
+  top:-3px;
 
-  left:-4px;
+  left:-3px;
 
-  border-left:4px solid white;
+  border-left:3px solid white;
 
-  border-top:4px solid white;
+  border-top:3px solid white;
+
+}
+
+.box::after{
+
+  right:-3px;
+
+  bottom:-3px;
+
+  border-right:3px solid white;
+
+  border-bottom:3px solid white;
 
 }
 
-.box:after{
-
-  bottom:-4px;
-
-  right:-4px;
-
-  border-right:4px solid white;
-
-  border-bottom:4px solid white;
-
-}
+/* LEFT */
 
 .box1{
 
-  width:155px;
+  width:20%;
 
-  height:290px;
+  height:55%;
 
   left:16%;
 
-  top:120px;
+  top:20%;
 
   border-color:#aab0b0;
 
 }
 
+/* RED */
+
 .box2{
 
-  width:128px;
+  width:17%;
 
-  height:240px;
+  height:45%;
 
   right:22%;
 
-  top:25px;
+  top:6%;
 
   border-color:var(--red);
 
 }
 
+/* BLUE */
+
 .box3{
 
-  width:116px;
+  width:15%;
 
-  height:194px;
+  height:36%;
 
   right:8%;
 
-  bottom:65px;
+  top:47%;
 
   border-color:var(--cyan);
 
@@ -370,13 +522,17 @@ body{
 
   position:absolute;
 
-  top:calc(100% + 15px);
+  top:calc(100% + 7px);
 
   left:0;
 
-  font-size:13px;
+  font-size:9px;
+
+  line-height:1.25;
 
   color:#8c9494;
+
+  white-space:nowrap;
 
 }
 
@@ -392,23 +548,33 @@ body{
 
 }
 
-/* STATUS */
+/* =========================================================
+
+   STATUS
+
+   ========================================================= */
 
 .statusBox{
 
   position:absolute;
 
-  bottom:25px;
+  z-index:10;
 
-  left:28px;
+  bottom:9px;
 
-  right:28px;
+  left:20px;
 
-  border-left:4px solid white;
+  right:20px;
 
-  background:rgba(0,0,0,.72);
+  border-left:3px solid white;
 
-  padding:20px;
+  background:rgba(0,0,0,.86);
+
+  padding:9px 12px;
+
+  font-size:10px;
+
+  line-height:1.35;
 
 }
 
@@ -430,29 +596,49 @@ body{
 
 }
 
-/* LOG */
+/* =========================================================
+
+   LOG
+
+   ========================================================= */
 
 .log{
 
-  padding:27px 36px;
+  height:108px;
 
-  min-height:270px;
+  overflow-y:auto;
+
+  overflow-x:hidden;
+
+  padding:9px 22px;
 
   border-bottom:1px solid var(--line);
 
-  line-height:28px;
+  line-height:16px;
 
   color:#aeb5b5;
 
-  font-size:14px;
+  font-size:9px;
+
+  scrollbar-width:none;
 
 }
 
-/* COMMAND */
+.log::-webkit-scrollbar{
+
+  display:none;
+
+}
+
+/* =========================================================
+
+   COMMAND
+
+   ========================================================= */
 
 .commandArea{
 
-  padding:30px 28px;
+  padding:9px 18px 10px;
 
 }
 
@@ -460,7 +646,7 @@ body{
 
   display:flex;
 
-  gap:16px;
+  gap:10px;
 
   align-items:center;
 
@@ -468,13 +654,13 @@ body{
 
 .voice{
 
-  width:96px;
+  width:54px;
 
-  height:96px;
+  height:54px;
 
-  min-width:96px;
+  min-width:54px;
 
-  border:2px solid var(--cyan);
+  border:1px solid var(--cyan);
 
   border-radius:50%;
 
@@ -482,7 +668,17 @@ body{
 
   color:var(--cyan);
 
-  font-size:30px;
+  font-size:21px;
+
+  box-shadow:
+
+    inset 0 0 15px rgba(97,201,239,.04);
+
+}
+
+.voice:active{
+
+  background:rgba(97,201,239,.08);
 
 }
 
@@ -490,11 +686,13 @@ body{
 
   flex:1;
 
-  height:84px;
+  height:50px;
 
   display:flex;
 
-  border:2px solid #364040;
+  border:1px solid #364040;
+
+  min-width:0;
 
 }
 
@@ -512,17 +710,25 @@ body{
 
   color:white;
 
-  padding:0 25px;
+  padding:0 14px;
 
   font-family:inherit;
 
-  font-size:17px;
+  font-size:12px;
+
+}
+
+.commandInput input::placeholder{
+
+  color:#697171;
 
 }
 
 .commandInput button{
 
-  width:135px;
+  width:72px;
+
+  flex-shrink:0;
 
   background:#020404;
 
@@ -534,21 +740,47 @@ body{
 
   font-family:inherit;
 
-  font-size:21px;
+  font-size:14px;
 
 }
 
-/* OTHER MODULES */
+/* =========================================================
+
+   OTHER MODULES
+
+   ========================================================= */
+
+#agendaPage.active,
+
+#tasksPage.active,
+
+#memoryPage.active{
+
+  display:block;
+
+}
 
 .module{
 
-  padding:30px;
+  height:100%;
+
+  min-height:0;
+
+  padding:18px 20px 12px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  overflow:hidden;
 
 }
 
 .moduleHead{
 
-  margin-bottom:30px;
+  flex-shrink:0;
+
+  margin-bottom:13px;
 
 }
 
@@ -560,13 +792,141 @@ body{
 
   letter-spacing:4px;
 
+  font-size:17px;
+
 }
 
 .moduleHead p{
 
+  margin:6px 0 0;
+
   color:var(--muted);
 
+  font-size:10px;
+
+  letter-spacing:1px;
+
 }
+
+/* =========================================================
+
+   FORM
+
+   ========================================================= */
+
+.form{
+
+  flex-shrink:0;
+
+  border:1px solid #354242;
+
+  padding:11px;
+
+  margin-bottom:12px;
+
+}
+
+.form input,
+
+.form textarea{
+
+  width:100%;
+
+  margin-bottom:7px;
+
+  padding:9px 10px;
+
+  background:#020404;
+
+  border:1px solid #344141;
+
+  color:white;
+
+  outline:0;
+
+  font-family:inherit;
+
+  font-size:12px;
+
+}
+
+.form input{
+
+  height:37px;
+
+}
+
+.form textarea{
+
+  height:52px;
+
+  min-height:52px;
+
+  max-height:52px;
+
+  resize:none;
+
+}
+
+.addBtn{
+
+  width:100%;
+
+  height:38px;
+
+  background:#061313;
+
+  border:1px solid var(--cyan);
+
+  color:var(--cyan);
+
+  font-family:inherit;
+
+  letter-spacing:1px;
+
+  font-size:11px;
+
+}
+
+/* =========================================================
+
+   INTERNAL LISTS
+
+   ========================================================= */
+
+#eventList,
+
+#taskList,
+
+#memoryList{
+
+  flex:1;
+
+  min-height:0;
+
+  overflow-y:auto;
+
+  padding-right:3px;
+
+  scrollbar-width:none;
+
+}
+
+#eventList::-webkit-scrollbar,
+
+#taskList::-webkit-scrollbar,
+
+#memoryList::-webkit-scrollbar{
+
+  display:none;
+
+}
+
+/* =========================================================
+
+   CARDS
+
+   ========================================================= */
 
 .card{
 
@@ -574,17 +934,17 @@ body{
 
   background:rgba(3,8,8,.75);
 
-  padding:20px;
+  padding:12px;
 
-  margin-bottom:18px;
+  margin-bottom:9px;
 
 }
 
 .cardTitle{
 
-  font-size:17px;
+  font-size:13px;
 
-  margin-bottom:9px;
+  margin-bottom:6px;
 
 }
 
@@ -592,9 +952,9 @@ body{
 
   color:var(--cyan);
 
-  font-size:13px;
+  font-size:9px;
 
-  margin-bottom:10px;
+  margin-bottom:6px;
 
 }
 
@@ -602,7 +962,9 @@ body{
 
   color:#adb4b4;
 
-  line-height:1.5;
+  line-height:1.4;
+
+  font-size:11px;
 
   white-space:pre-wrap;
 
@@ -612,9 +974,9 @@ body{
 
   display:flex;
 
-  gap:10px;
+  gap:7px;
 
-  margin-top:16px;
+  margin-top:9px;
 
 }
 
@@ -626,9 +988,11 @@ body{
 
   color:#bfc6c6;
 
-  padding:10px 13px;
+  padding:7px 9px;
 
   font-family:inherit;
+
+  font-size:9px;
 
 }
 
@@ -652,97 +1016,33 @@ body{
 
 }
 
-/* FORM */
-
-.form{
-
-  border:1px solid #354242;
-
-  padding:20px;
-
-  margin-bottom:30px;
-
-}
-
-.form input,
-
-.form textarea{
-
-  width:100%;
-
-  margin-bottom:12px;
-
-  padding:15px;
-
-  background:#020404;
-
-  border:1px solid #344141;
-
-  color:white;
-
-  outline:0;
-
-  font-family:inherit;
-
-  font-size:16px;
-
-}
-
-.form textarea{
-
-  min-height:110px;
-
-  resize:vertical;
-
-}
-
-.addBtn{
-
-  width:100%;
-
-  padding:16px;
-
-  background:#061313;
-
-  border:1px solid var(--cyan);
-
-  color:var(--cyan);
-
-  font-family:inherit;
-
-  letter-spacing:2px;
-
-  font-size:15px;
-
-}
-
 .empty{
 
-  padding:30px 0;
+  padding:20px 0;
 
   color:#5e6969;
 
   letter-spacing:2px;
 
+  font-size:11px;
+
 }
 
-/* NAV */
+/* =========================================================
+
+   NAVIGATION
+
+   ========================================================= */
 
 .nav{
 
-  position:fixed;
+  position:relative;
 
-  left:0;
+  min-height:0;
 
-  right:0;
+  padding-bottom:var(--safeBottom);
 
-  bottom:0;
-
-  height:100px;
-
-  padding-bottom:env(safe-area-inset-bottom);
-
-  background:rgba(2,4,4,.96);
+  background:rgba(2,4,4,.98);
 
   border-top:1px solid #334040;
 
@@ -756,6 +1056,8 @@ body{
 
 .navBtn{
 
+  min-width:0;
+
   background:transparent;
 
   border:0;
@@ -764,7 +1066,9 @@ body{
 
   font-family:inherit;
 
-  font-size:11px;
+  font-size:9px;
+
+  padding:7px 2px 5px;
 
 }
 
@@ -772,11 +1076,11 @@ body{
 
   display:block;
 
-  font-size:26px;
+  font-size:20px;
 
   color:#d9dddd;
 
-  margin-bottom:9px;
+  margin-bottom:4px;
 
 }
 
@@ -790,39 +1094,325 @@ body{
 
   color:var(--cyan);
 
-  text-shadow:0 0 12px rgba(97,201,239,.5);
+  text-shadow:
+
+    0 0 12px rgba(97,201,239,.5);
 
 }
 
-/* RESPONSIVE */
+/* =========================================================
 
-@media(max-width:600px){
+   SMALL / SHORT IPHONES
 
-  .header{
+   ========================================================= */
 
-    padding-left:30px;
+@media(max-height:750px){
 
-    padding-right:30px;
+  :root{
+
+    --headerH:62px;
+
+    --clockH:44px;
+
+    --navH:67px;
 
   }
 
-  .clockbar{
+  .header{
 
-    padding:0 30px;
+    padding-left:19px;
+
+    padding-right:19px;
+
+  }
+
+  .logo{
 
     font-size:13px;
 
   }
 
-  .analysis{
+  .subtitle{
 
-    height:520px;
+    font-size:8px;
+
+    margin-top:4px;
+
+  }
+
+  .clockbar{
+
+    padding:0 19px;
+
+    font-size:9px;
+
+  }
+
+  .clockbar div:nth-child(2){
+
+    font-size:13px;
+
+  }
+
+  .systemHeader{
+
+    padding:8px 18px 5px;
+
+  }
+
+  .sectionTitle{
+
+    font-size:11px;
+
+  }
+
+  .sectionSub{
+
+    margin-top:3px;
+
+    font-size:8px;
+
+  }
+
+  .log{
+
+    height:83px;
+
+    padding:6px 18px;
+
+    line-height:13px;
+
+    font-size:8px;
+
+  }
+
+  .commandArea{
+
+    padding:6px 15px 7px;
+
+  }
+
+  .voice{
+
+    width:45px;
+
+    height:45px;
+
+    min-width:45px;
+
+    font-size:18px;
+
+  }
+
+  .commandInput{
+
+    height:43px;
+
+  }
+
+  .commandInput input{
+
+    font-size:10px;
 
   }
 
   .commandInput button{
 
-    width:100px;
+    width:62px;
+
+    font-size:12px;
+
+  }
+
+  .statusBox{
+
+    font-size:8px;
+
+    padding:6px 9px;
+
+  }
+
+  .boxLabel{
+
+    font-size:7px;
+
+  }
+
+  .module{
+
+    padding-top:12px;
+
+  }
+
+  .moduleHead{
+
+    margin-bottom:8px;
+
+  }
+
+  .moduleHead h2{
+
+    font-size:14px;
+
+  }
+
+  .form{
+
+    padding:8px;
+
+    margin-bottom:8px;
+
+  }
+
+  .form input{
+
+    height:31px;
+
+  }
+
+  .form textarea{
+
+    height:39px;
+
+    min-height:39px;
+
+    max-height:39px;
+
+  }
+
+  .form input,
+
+  .form textarea{
+
+    padding:6px 8px;
+
+    margin-bottom:5px;
+
+    font-size:10px;
+
+  }
+
+  .addBtn{
+
+    height:32px;
+
+    font-size:9px;
+
+  }
+
+}
+
+/* =========================================================
+
+   NARROW PHONES
+
+   ========================================================= */
+
+@media(max-width:390px){
+
+  .header{
+
+    padding-left:18px;
+
+    padding-right:18px;
+
+  }
+
+  .clockbar{
+
+    padding:0 18px;
+
+  }
+
+  .logo{
+
+    letter-spacing:4px;
+
+  }
+
+  .subtitle{
+
+    letter-spacing:2px;
+
+  }
+
+  .box1{
+
+    left:12%;
+
+    width:22%;
+
+  }
+
+  .box2{
+
+    right:22%;
+
+    width:19%;
+
+  }
+
+  .box3{
+
+    right:6%;
+
+    width:17%;
+
+  }
+
+}
+
+/* =========================================================
+
+   LANDSCAPE
+
+   ========================================================= */
+
+@media(orientation:landscape) and (max-height:500px){
+
+  :root{
+
+    --headerH:50px;
+
+    --clockH:38px;
+
+    --navH:55px;
+
+  }
+
+  .subtitle{
+
+    display:none;
+
+  }
+
+  .systemHeader{
+
+    padding:5px 18px 3px;
+
+  }
+
+  .log{
+
+    height:55px;
+
+    line-height:11px;
+
+  }
+
+  .voice{
+
+    width:37px;
+
+    height:37px;
+
+    min-width:37px;
+
+  }
+
+  .commandInput{
+
+    height:37px;
 
   }
 
@@ -834,11 +1424,21 @@ body{
 
 <body>
 
+<!-- =======================================================
+
+     HEADER
+
+     ======================================================= -->
+
 <header class="header">
 
   <div class="headerTop">
 
-    <div class="logo">MACHINE</div>
+    <div class="logo">
+
+      MACHINE
+
+    </div>
 
     <div class="online">
 
@@ -858,25 +1458,57 @@ body{
 
 </header>
 
+<!-- =======================================================
+
+     CLOCK
+
+     ======================================================= -->
+
 <div class="clockbar">
 
-  <div>DAY 0001</div>
+  <div>
 
-  <div id="clock">--:--:--</div>
+    DAY 0001
 
-  <div id="date">--/--/----</div>
+  </div>
+
+  <div id="clock">
+
+    --:--:--
+
+  </div>
+
+  <div id="date">
+
+    --/--/----
+
+  </div>
 
 </div>
 
-<!-- ================= SYSTEM ================= -->
+<!-- =======================================================
 
-<section id="systemPage" class="page active">
+     SYSTEM
+
+     ======================================================= -->
+
+<section id="systemPage"
+
+         class="page active">
 
   <div class="systemHeader">
 
-    <div class="sectionTitle">LIVE ANALYSIS</div>
+    <div class="sectionTitle">
 
-    <div class="sectionSub">LOCAL INTERFACE / 01</div>
+      LIVE ANALYSIS
+
+    </div>
+
+    <div class="sectionSub">
+
+      LOCAL INTERFACE / 01
+
+    </div>
 
   </div>
 
@@ -922,25 +1554,45 @@ body{
 
     <div class="statusBox">
 
-      <span class="cyan">SYSTEM //</span>
+      <span class="cyan">
+
+        SYSTEM //
+
+      </span>
 
       ENVIRONMENTAL ANALYSIS ACTIVE
 
-      <br><br>
+      <br>
 
-      <span id="systemStatus">NO ACTIVE COMMAND</span>
+      <span id="systemStatus">
+
+        NO ACTIVE COMMAND
+
+      </span>
 
     </div>
 
   </div>
 
-  <div class="log" id="systemLog"></div>
+  <div class="log"
+
+       id="systemLog">
+
+  </div>
 
   <div class="commandArea">
 
     <div class="commandRow">
 
-      <button class="voice" id="voiceBtn">◎</button>
+      <button
+
+        class="voice"
+
+        id="voiceBtn">
+
+        ◎
+
+      </button>
 
       <div class="commandInput">
 
@@ -952,7 +1604,11 @@ body{
 
           autocomplete="off">
 
-        <button id="execBtn">EXEC</button>
+        <button id="execBtn">
+
+          EXEC
+
+        </button>
 
       </div>
 
@@ -962,9 +1618,15 @@ body{
 
 </section>
 
-<!-- ================= AGENDA ================= -->
+<!-- =======================================================
 
-<section id="agendaPage" class="page">
+     AGENDA
+
+     ======================================================= -->
+
+<section id="agendaPage"
+
+         class="page">
 
   <div class="module">
 
@@ -972,7 +1634,11 @@ body{
 
       <h2>AGENDA</h2>
 
-      <p>EVENT DATABASE // LOCAL</p>
+      <p>
+
+        EVENT DATABASE // LOCAL
+
+      </p>
 
     </div>
 
@@ -1002,7 +1668,11 @@ body{
 
         placeholder="NOTE / INFORMATION"></textarea>
 
-      <button class="addBtn" onclick="addEvent()">
+      <button
+
+        class="addBtn"
+
+        onclick="addEvent()">
 
         + ADD EVENT
 
@@ -1016,9 +1686,15 @@ body{
 
 </section>
 
-<!-- ================= TASKS ================= -->
+<!-- =======================================================
 
-<section id="tasksPage" class="page">
+     TASKS
+
+     ======================================================= -->
+
+<section id="tasksPage"
+
+         class="page">
 
   <div class="module">
 
@@ -1026,7 +1702,11 @@ body{
 
       <h2>TASKS</h2>
 
-      <p>ACTIVE OPERATIONS</p>
+      <p>
+
+        ACTIVE OPERATIONS
+
+      </p>
 
     </div>
 
@@ -1044,7 +1724,11 @@ body{
 
         placeholder="INFORMATION OPTIONNELLE"></textarea>
 
-      <button class="addBtn" onclick="addTask()">
+      <button
+
+        class="addBtn"
+
+        onclick="addTask()">
 
         + ADD TASK
 
@@ -1058,9 +1742,15 @@ body{
 
 </section>
 
-<!-- ================= MEMORY ================= -->
+<!-- =======================================================
 
-<section id="memoryPage" class="page">
+     MEMORY
+
+     ======================================================= -->
+
+<section id="memoryPage"
+
+         class="page">
 
   <div class="module">
 
@@ -1068,7 +1758,11 @@ body{
 
       <h2>MEMORY</h2>
 
-      <p>LOCAL MEMORY NODE</p>
+      <p>
+
+        LOCAL MEMORY NODE
+
+      </p>
 
     </div>
 
@@ -1086,7 +1780,11 @@ body{
 
         placeholder="INFORMATION À CONSERVER"></textarea>
 
-      <button class="addBtn" onclick="addMemory()">
+      <button
+
+        class="addBtn"
+
+        onclick="addMemory()">
 
         + STORE MEMORY
 
@@ -1100,45 +1798,73 @@ body{
 
 </section>
 
-<!-- ================= NAVIGATION ================= -->
+<!-- =======================================================
+
+     NAVIGATION
+
+     ======================================================= -->
 
 <nav class="nav">
 
-  <button class="navBtn active"
+  <button
 
-          data-page="systemPage">
+    class="navBtn active"
 
-    <span class="navIcon">⌖</span>
+    data-page="systemPage">
+
+    <span class="navIcon">
+
+      ⌖
+
+    </span>
 
     SYSTEM
 
   </button>
 
-  <button class="navBtn"
+  <button
 
-          data-page="agendaPage">
+    class="navBtn"
 
-    <span class="navIcon">□</span>
+    data-page="agendaPage">
+
+    <span class="navIcon">
+
+      □
+
+    </span>
 
     AGENDA
 
   </button>
 
-  <button class="navBtn"
+  <button
 
-          data-page="tasksPage">
+    class="navBtn"
 
-    <span class="navIcon">☷</span>
+    data-page="tasksPage">
+
+    <span class="navIcon">
+
+      ☷
+
+    </span>
 
     TASKS
 
   </button>
 
-  <button class="navBtn"
+  <button
 
-          data-page="memoryPage">
+    class="navBtn"
 
-    <span class="navIcon">◇</span>
+    data-page="memoryPage">
+
+    <span class="navIcon">
+
+      ◇
+
+    </span>
 
     MEMORY
 
@@ -1148,25 +1874,31 @@ body{
 
 <script>
 
-/* ==========================================
+/* =========================================================
 
    CLOCK
 
-========================================== */
+   ========================================================= */
 
 function updateClock(){
 
-  const now=new Date();
+  const now = new Date();
 
-  document.getElementById("clock").textContent=
+  document.getElementById("clock").textContent =
 
-    now.toLocaleTimeString("fr-BE",{
+    now.toLocaleTimeString(
 
-      hour12:false
+      "fr-BE",
 
-    });
+      {
 
-  document.getElementById("date").textContent=
+        hour12:false
+
+      }
+
+    );
+
+  document.getElementById("date").textContent =
 
     now.toLocaleDateString("fr-BE");
 
@@ -1174,25 +1906,43 @@ function updateClock(){
 
 updateClock();
 
-setInterval(updateClock,1000);
+setInterval(
 
-/* ==========================================
+  updateClock,
+
+  1000
+
+);
+
+/* =========================================================
 
    STORAGE
 
-========================================== */
+   ========================================================= */
 
-let events=
+let events =
 
-JSON.parse(localStorage.getItem("machineEvents") || "[]");
+  JSON.parse(
 
-let tasks=
+    localStorage.getItem("machineEvents") || "[]"
 
-JSON.parse(localStorage.getItem("machineTasks") || "[]");
+  );
 
-let memories=
+let tasks =
 
-JSON.parse(localStorage.getItem("machineMemories") || "[]");
+  JSON.parse(
+
+    localStorage.getItem("machineTasks") || "[]"
+
+  );
+
+let memories =
+
+  JSON.parse(
+
+    localStorage.getItem("machineMemories") || "[]"
+
+  );
 
 function saveAll(){
 
@@ -1222,67 +1972,101 @@ function saveAll(){
 
 }
 
-/* ==========================================
+/* =========================================================
 
    NAVIGATION
 
-========================================== */
+   ========================================================= */
 
-document.querySelectorAll(".navBtn").forEach(btn=>{
+document
 
-  btn.addEventListener("click",()=>{
+  .querySelectorAll(".navBtn")
 
-    document.querySelectorAll(".page")
+  .forEach(btn=>{
 
-      .forEach(page=>page.classList.remove("active"));
+    btn.addEventListener(
 
-    document.querySelectorAll(".navBtn")
+      "click",
 
-      .forEach(b=>b.classList.remove("active"));
+      ()=>{
 
-    document
+        document
 
-      .getElementById(btn.dataset.page)
+          .querySelectorAll(".page")
 
-      .classList.add("active");
+          .forEach(page=>{
 
-    btn.classList.add("active");
+            page.classList.remove("active");
 
-    window.scrollTo({
+          });
 
-      top:0,
+        document
 
-      behavior:"smooth"
+          .querySelectorAll(".navBtn")
 
-    });
+          .forEach(button=>{
+
+            button.classList.remove("active");
+
+          });
+
+        document
+
+          .getElementById(btn.dataset.page)
+
+          .classList.add("active");
+
+        btn.classList.add("active");
+
+      }
+
+    );
 
   });
 
-});
-
-/* ==========================================
+/* =========================================================
 
    AGENDA
 
-========================================== */
+   ========================================================= */
 
 function addEvent(){
 
-  const title=
+  const title =
 
-    document.getElementById("eventTitle").value.trim();
+    document
 
-  const date=
+      .getElementById("eventTitle")
 
-    document.getElementById("eventDate").value;
+      .value
 
-  const time=
+      .trim();
 
-    document.getElementById("eventTime").value;
+  const date =
 
-  const note=
+    document
 
-    document.getElementById("eventNote").value.trim();
+      .getElementById("eventDate")
+
+      .value;
+
+  const time =
+
+    document
+
+      .getElementById("eventTime")
+
+      .value;
+
+  const note =
+
+    document
+
+      .getElementById("eventNote")
+
+      .value
+
+      .trim();
 
   if(!title){
 
@@ -1316,31 +2100,49 @@ function addEvent(){
 
   renderEvents();
 
-  addLog("EVENT REGISTERED");
+  addLog(
+
+    "EVENT REGISTERED",
+
+    "cyan"
+
+  );
 
 }
 
 function deleteEvent(id){
 
-  events=events.filter(e=>e.id!==id);
+  events =
+
+    events.filter(
+
+      event=>event.id!==id
+
+    );
 
   saveAll();
 
   renderEvents();
 
-  addLog("EVENT REMOVED");
+  addLog(
+
+    "EVENT REMOVED",
+
+    "red"
+
+  );
 
 }
 
 function renderEvents(){
 
-  const container=
+  const container =
 
     document.getElementById("eventList");
 
   if(events.length===0){
 
-    container.innerHTML=
+    container.innerHTML =
 
       '<div class="empty">NO EVENT DATA</div>';
 
@@ -1348,93 +2150,135 @@ function renderEvents(){
 
   }
 
-  const sorted=[...events].sort((a,b)=>{
+  const sorted =
 
-    const da=
+    [...events].sort(
 
-      new Date(`${a.date || "9999-12-31"}T${a.time || "23:59"}`);
+      (a,b)=>{
 
-    const db=
+        const da =
 
-      new Date(`${b.date || "9999-12-31"}T${b.time || "23:59"}`);
+          new Date(
 
-    return da-db;
+            `${a.date || "9999-12-31"}T${a.time || "23:59"}`
 
-  });
+          );
 
-  container.innerHTML=
+        const db =
 
-  sorted.map(e=>`
+          new Date(
 
-    <div class="card">
+            `${b.date || "9999-12-31"}T${b.time || "23:59"}`
 
-      <div class="cardTitle">
+          );
 
-        ${escapeHTML(e.title)}
-
-      </div>
-
-      <div class="cardMeta">
-
-        ${e.date || "DATE UNKNOWN"}
-
-        ${e.time ? " // "+e.time : ""}
-
-      </div>
-
-      ${
-
-        e.note
-
-        ?
-
-        `<div class="cardText">
-
-          ${escapeHTML(e.note)}
-
-        </div>`
-
-        :
-
-        ""
+        return da-db;
 
       }
 
-      <div class="actions">
+    );
 
-        <button
+  container.innerHTML =
 
-          class="smallBtn deleteBtn"
+    sorted.map(
 
-          onclick="deleteEvent(${e.id})">
+      event=>`
 
-          DELETE
+      <div class="card">
 
-        </button>
+        <div class="cardTitle">
+
+          ${escapeHTML(event.title)}
+
+        </div>
+
+        <div class="cardMeta">
+
+          ${event.date || "DATE UNKNOWN"}
+
+          ${
+
+            event.time
+
+              ? " // "+event.time
+
+              : ""
+
+          }
+
+        </div>
+
+        ${
+
+          event.note
+
+          ?
+
+          `
+
+          <div class="cardText">
+
+            ${escapeHTML(event.note)}
+
+          </div>
+
+          `
+
+          :
+
+          ""
+
+        }
+
+        <div class="actions">
+
+          <button
+
+            class="smallBtn deleteBtn"
+
+            onclick="deleteEvent(${event.id})">
+
+            DELETE
+
+          </button>
+
+        </div>
 
       </div>
 
-    </div>
+      `
 
-  `).join("");
+    ).join("");
 
 }
 
-/* ==========================================
+/* =========================================================
 
    TASKS
 
-========================================== */
+   ========================================================= */
 
 function addTask(){
 
-  const title=
+  const title =
 
-    document.getElementById("taskTitle").value.trim();
+    document
 
-  const note=
+      .getElementById("taskTitle")
 
-    document.getElementById("taskNote").value.trim();
+      .value
+
+      .trim();
+
+  const note =
+
+    document
+
+      .getElementById("taskNote")
+
+      .value
+
+      .trim();
 
   if(!title){
 
@@ -1462,15 +2306,25 @@ function addTask(){
 
   renderTasks();
 
-  addLog("TASK REGISTERED");
+  addLog(
+
+    "TASK REGISTERED",
+
+    "cyan"
+
+  );
 
 }
 
 function toggleTask(id){
 
-  const task=
+  const task =
 
-    tasks.find(t=>t.id===id);
+    tasks.find(
+
+      task=>task.id===id
+
+    );
 
   if(!task){
 
@@ -1478,7 +2332,9 @@ function toggleTask(id){
 
   }
 
-  task.done=!task.done;
+  task.done =
+
+    !task.done;
 
   saveAll();
 
@@ -1488,7 +2344,13 @@ function toggleTask(id){
 
 function deleteTask(id){
 
-  tasks=tasks.filter(t=>t.id!==id);
+  tasks =
+
+    tasks.filter(
+
+      task=>task.id!==id
+
+    );
 
   saveAll();
 
@@ -1498,13 +2360,13 @@ function deleteTask(id){
 
 function renderTasks(){
 
-  const container=
+  const container =
 
     document.getElementById("taskList");
 
   if(tasks.length===0){
 
-    container.innerHTML=
+    container.innerHTML =
 
       '<div class="empty">NO ACTIVE TASK</div>';
 
@@ -1512,81 +2374,109 @@ function renderTasks(){
 
   }
 
-  container.innerHTML=
+  container.innerHTML =
 
-  tasks.map(t=>`
+    tasks.map(
 
-    <div class="card ${t.done ? "done" : ""}">
+      task=>`
 
-      <div class="cardTitle">
+      <div class="card ${task.done ? "done" : ""}">
 
-        ${escapeHTML(t.title)}
+        <div class="cardTitle">
+
+          ${escapeHTML(task.title)}
+
+        </div>
+
+        ${
+
+          task.note
+
+          ?
+
+          `
+
+          <div class="cardText">
+
+            ${escapeHTML(task.note)}
+
+          </div>
+
+          `
+
+          :
+
+          ""
+
+        }
+
+        <div class="actions">
+
+          <button
+
+            class="smallBtn"
+
+            onclick="toggleTask(${task.id})">
+
+            ${
+
+              task.done
+
+                ? "REOPEN"
+
+                : "COMPLETE"
+
+            }
+
+          </button>
+
+          <button
+
+            class="smallBtn deleteBtn"
+
+            onclick="deleteTask(${task.id})">
+
+            DELETE
+
+          </button>
+
+        </div>
 
       </div>
 
-      ${
+      `
 
-        t.note
-
-        ?
-
-        `<div class="cardText">
-
-          ${escapeHTML(t.note)}
-
-        </div>`
-
-        :
-
-        ""
-
-      }
-
-      <div class="actions">
-
-        <button
-
-          class="smallBtn"
-
-          onclick="toggleTask(${t.id})">
-
-          ${t.done ? "REOPEN" : "COMPLETE"}
-
-        </button>
-
-        <button
-
-          class="smallBtn deleteBtn"
-
-          onclick="deleteTask(${t.id})">
-
-          DELETE
-
-        </button>
-
-      </div>
-
-    </div>
-
-  `).join("");
+    ).join("");
 
 }
 
-/* ==========================================
+/* =========================================================
 
    MEMORY
 
-========================================== */
+   ========================================================= */
 
 function addMemory(){
 
-  const title=
+  const title =
 
-    document.getElementById("memoryTitle").value.trim();
+    document
 
-  const text=
+      .getElementById("memoryTitle")
 
-    document.getElementById("memoryText").value.trim();
+      .value
+
+      .trim();
+
+  const text =
+
+    document
+
+      .getElementById("memoryText")
+
+      .value
+
+      .trim();
 
   if(!title || !text){
 
@@ -1612,15 +2502,25 @@ function addMemory(){
 
   renderMemories();
 
-  addLog("MEMORY STORED");
+  addLog(
+
+    "MEMORY STORED",
+
+    "green"
+
+  );
 
 }
 
 function deleteMemory(id){
 
-  memories=
+  memories =
 
-    memories.filter(m=>m.id!==id);
+    memories.filter(
+
+      memory=>memory.id!==id
+
+    );
 
   saveAll();
 
@@ -1630,13 +2530,13 @@ function deleteMemory(id){
 
 function renderMemories(){
 
-  const container=
+  const container =
 
     document.getElementById("memoryList");
 
   if(memories.length===0){
 
-    container.innerHTML=
+    container.innerHTML =
 
       '<div class="empty">MEMORY NODE EMPTY</div>';
 
@@ -1644,81 +2544,97 @@ function renderMemories(){
 
   }
 
-  container.innerHTML=
+  container.innerHTML =
 
-  memories.map(m=>`
+    memories.map(
 
-    <div class="card">
+      memory=>`
 
-      <div class="cardMeta">
+      <div class="card">
 
-        MEMORY NODE
+        <div class="cardMeta">
+
+          MEMORY NODE
+
+        </div>
+
+        <div class="cardTitle">
+
+          ${escapeHTML(memory.title)}
+
+        </div>
+
+        <div class="cardText">
+
+          ${escapeHTML(memory.text)}
+
+        </div>
+
+        <div class="actions">
+
+          <button
+
+            class="smallBtn deleteBtn"
+
+            onclick="deleteMemory(${memory.id})">
+
+            DELETE
+
+          </button>
+
+        </div>
 
       </div>
 
-      <div class="cardTitle">
+      `
 
-        ${escapeHTML(m.title)}
-
-      </div>
-
-      <div class="cardText">
-
-        ${escapeHTML(m.text)}
-
-      </div>
-
-      <div class="actions">
-
-        <button
-
-          class="smallBtn deleteBtn"
-
-          onclick="deleteMemory(${m.id})">
-
-          DELETE
-
-        </button>
-
-      </div>
-
-    </div>
-
-  `).join("");
+    ).join("");
 
 }
 
-/* ==========================================
+/* =========================================================
 
    SYSTEM LOG
 
-========================================== */
+   ========================================================= */
 
-const log=
+const log =
 
-document.getElementById("systemLog");
+  document.getElementById("systemLog");
 
 function timestamp(){
 
   return new Date()
 
-    .toLocaleTimeString("fr-BE",{
+    .toLocaleTimeString(
 
-      hour12:false
+      "fr-BE",
 
-    });
+      {
+
+        hour12:false
+
+      }
+
+    );
 
 }
 
-function addLog(message,color=""){
+function addLog(
 
-  const line=
+  message,
+
+  color=""
+
+){
+
+  const line =
 
     document.createElement("div");
 
-  line.innerHTML=
+  line.innerHTML =
 
-    `[${timestamp()}] > `+
+    `[${timestamp()}] > ` +
 
     `<span class="${color}">
 
@@ -1728,57 +2644,121 @@ function addLog(message,color=""){
 
   log.appendChild(line);
 
+  /* Always keep newest MACHINE log visible */
+
+  log.scrollTop =
+
+    log.scrollHeight;
+
 }
 
 function boot(){
 
   const bootLines=[
 
-    ["BOOT SEQUENCE INITIALIZED",""],
+    [
 
-    ["LOCAL DATABASE CONNECTED",""],
+      "BOOT SEQUENCE INITIALIZED",
 
-    ["EVENT MODULE ONLINE","cyan"],
+      ""
 
-    ["VOICE INTERFACE STANDBY",""],
+    ],
 
-    ["MEMORY NODE ACTIVE","green"],
+    [
 
-    ["GIO CORE ACTIVE","green"],
+      "LOCAL DATABASE CONNECTED",
 
-    ["SYSTEM OPERATIONAL","cyan"]
+      ""
+
+    ],
+
+    [
+
+      "EVENT MODULE ONLINE",
+
+      "cyan"
+
+    ],
+
+    [
+
+      "VOICE INTERFACE STANDBY",
+
+      ""
+
+    ],
+
+    [
+
+      "MEMORY NODE ACTIVE",
+
+      "green"
+
+    ],
+
+    [
+
+      "GIO CORE ACTIVE",
+
+      "green"
+
+    ],
+
+    [
+
+      "SYSTEM OPERATIONAL",
+
+      "cyan"
+
+    ]
 
   ];
 
-  bootLines.forEach((item,index)=>{
+  bootLines.forEach(
 
-    setTimeout(()=>{
+    (item,index)=>{
 
-      addLog(item[0],item[1]);
+      setTimeout(
 
-    },index*170);
+        ()=>{
 
-  });
+          addLog(
+
+            item[0],
+
+            item[1]
+
+          );
+
+        },
+
+        index*120
+
+      );
+
+    }
+
+  );
 
 }
 
-/* ==========================================
+/* =========================================================
 
    COMMAND SYSTEM
 
-========================================== */
+   ========================================================= */
 
-const command=
+const command =
 
-document.getElementById("command");
+  document.getElementById("command");
 
-const systemStatus=
+const systemStatus =
 
-document.getElementById("systemStatus");
+  document.getElementById("systemStatus");
 
 function executeCommand(){
 
-  const value=
+  const value =
 
     command.value.trim();
 
@@ -1788,241 +2768,369 @@ function executeCommand(){
 
   }
 
-  addLog("USER: "+value);
+  addLog(
 
-  systemStatus.textContent=
+    "USER: "+value
+
+  );
+
+  systemStatus.textContent =
 
     "PROCESSING COMMAND...";
 
-  const lower=value.toLowerCase();
+  const lower =
 
-  setTimeout(()=>{
+    value.toLowerCase();
 
-    let response="COMMAND RECEIVED.";
+  setTimeout(
 
-    if(
+    ()=>{
 
-      lower.includes("bonjour") ||
+      let response =
 
-      lower.includes("salut")
+        "COMMAND RECEIVED.";
 
-    ){
+      if(
 
-      response=
+        lower.includes("bonjour") ||
 
-        "Bonjour. MACHINE est opérationnelle.";
+        lower.includes("salut")
 
-    }
+      ){
 
-    else if(
+        response =
 
-      lower.includes("heure")
+          "Bonjour. MACHINE est opérationnelle.";
 
-    ){
+      }
 
-      response=
+      else if(
 
-        "Il est "+timestamp()+".";
+        lower.includes("heure")
 
-    }
+      ){
 
-    else if(
+        response =
 
-      lower.includes("agenda")
+          "Il est "+timestamp()+".";
 
-    ){
+      }
 
-      response=
+      else if(
 
-        events.length
+        lower.includes("agenda")
 
-        ? `${events.length} événement(s) enregistré(s).`
+      ){
 
-        : "Aucun événement enregistré.";
+        response =
 
-    }
+          events.length
 
-    else if(
+          ?
 
-      lower.includes("tâche") ||
+          `${events.length} événement(s) enregistré(s).`
 
-      lower.includes("tache")
+          :
 
-    ){
+          "Aucun événement enregistré.";
 
-      const remaining=
+      }
 
-        tasks.filter(t=>!t.done).length;
+      else if(
 
-      response=
+        lower.includes("tâche") ||
 
-        remaining
+        lower.includes("tache")
 
-        ? `${remaining} tâche(s) active(s).`
+      ){
 
-        : "Aucune tâche active.";
+        const remaining =
 
-    }
+          tasks.filter(
 
-    else if(
+            task=>!task.done
 
-      lower.includes("mémoire") ||
+          ).length;
 
-      lower.includes("memoire")
+        response =
 
-    ){
+          remaining
 
-      response=
+          ?
 
-        `${memories.length} entrée(s) mémoire enregistrée(s).`;
+          `${remaining} tâche(s) active(s).`
 
-    }
+          :
 
-    else if(
+          "Aucune tâche active.";
 
-      lower.includes("statut") ||
+      }
 
-      lower.includes("status")
+      else if(
 
-    ){
+        lower.includes("mémoire") ||
 
-      response=
+        lower.includes("memoire")
 
-        "Tous les systèmes locaux sont opérationnels.";
+      ){
 
-    }
+        response =
 
-    addLog("GIO: "+response,"green");
+          `${memories.length} entrée(s) mémoire enregistrée(s).`;
 
-    systemStatus.textContent=response;
+      }
 
-    command.value="";
+      else if(
 
-  },350);
+        lower.includes("statut") ||
+
+        lower.includes("status")
+
+      ){
+
+        response =
+
+          "Tous les systèmes locaux sont opérationnels.";
+
+      }
+
+      addLog(
+
+        "GIO: "+response,
+
+        "green"
+
+      );
+
+      systemStatus.textContent =
+
+        response;
+
+      command.value="";
+
+    },
+
+    350
+
+  );
 
 }
 
 document
 
-.getElementById("execBtn")
+  .getElementById("execBtn")
 
-.addEventListener("click",executeCommand);
+  .addEventListener(
 
-command.addEventListener("keydown",e=>{
+    "click",
 
-  if(e.key==="Enter"){
+    executeCommand
 
-    executeCommand();
+  );
+
+command.addEventListener(
+
+  "keydown",
+
+  event=>{
+
+    if(event.key==="Enter"){
+
+      event.preventDefault();
+
+      executeCommand();
+
+    }
 
   }
 
-});
+);
 
-/* ==========================================
+/* =========================================================
 
    VOICE
 
-========================================== */
+   ========================================================= */
 
-const voiceBtn=
+const voiceBtn =
 
-document.getElementById("voiceBtn");
+  document.getElementById("voiceBtn");
 
-voiceBtn.addEventListener("click",()=>{
+voiceBtn.addEventListener(
 
-  const Recognition=
+  "click",
 
-    window.SpeechRecognition ||
+  ()=>{
 
-    window.webkitSpeechRecognition;
+    const Recognition =
 
-  if(!Recognition){
+      window.SpeechRecognition ||
 
-    addLog(
+      window.webkitSpeechRecognition;
 
-      "VOICE RECOGNITION UNAVAILABLE",
+    if(!Recognition){
 
-      "red"
+      addLog(
 
-    );
+        "VOICE RECOGNITION UNAVAILABLE",
 
-    return;
+        "red"
+
+      );
+
+      systemStatus.textContent =
+
+        "VOICE INTERFACE UNAVAILABLE";
+
+      return;
+
+    }
+
+    const recognition =
+
+      new Recognition();
+
+    recognition.lang =
+
+      "fr-FR";
+
+    recognition.interimResults =
+
+      false;
+
+    recognition.continuous =
+
+      false;
+
+    systemStatus.textContent =
+
+      "VOICE INPUT ACTIVE...";
+
+    voiceBtn.textContent =
+
+      "◉";
+
+    recognition.start();
+
+    recognition.onresult =
+
+      event=>{
+
+        const transcript =
+
+          event.results[0][0].transcript;
+
+        command.value =
+
+          transcript;
+
+        voiceBtn.textContent =
+
+          "◎";
+
+        executeCommand();
+
+      };
+
+    recognition.onerror =
+
+      ()=>{
+
+        voiceBtn.textContent =
+
+          "◎";
+
+        systemStatus.textContent =
+
+          "VOICE INPUT ERROR";
+
+        addLog(
+
+          "VOICE INPUT ERROR",
+
+          "red"
+
+        );
+
+      };
+
+    recognition.onend =
+
+      ()=>{
+
+        voiceBtn.textContent =
+
+          "◎";
+
+      };
 
   }
 
-  const recognition=
+);
 
-    new Recognition();
-
-  recognition.lang="fr-FR";
-
-  recognition.interimResults=false;
-
-  recognition.continuous=false;
-
-  systemStatus.textContent=
-
-    "VOICE INPUT ACTIVE...";
-
-  voiceBtn.textContent="◉";
-
-  recognition.start();
-
-  recognition.onresult=e=>{
-
-    const transcript=
-
-      e.results[0][0].transcript;
-
-    command.value=transcript;
-
-    voiceBtn.textContent="◎";
-
-    executeCommand();
-
-  };
-
-  recognition.onerror=()=>{
-
-    voiceBtn.textContent="◎";
-
-    systemStatus.textContent=
-
-      "VOICE INPUT ERROR";
-
-  };
-
-  recognition.onend=()=>{
-
-    voiceBtn.textContent="◎";
-
-  };
-
-});
-
-/* ==========================================
+/* =========================================================
 
    SECURITY
 
-========================================== */
+   ========================================================= */
 
 function escapeHTML(text){
 
-  const div=
+  const div =
 
     document.createElement("div");
 
-  div.textContent=text;
+  div.textContent =
+
+    text;
 
   return div.innerHTML;
 
 }
 
-/* ==========================================
+/* =========================================================
+
+   IOS KEYBOARD / VISUAL VIEWPORT
+
+   ========================================================= */
+
+/*
+
+   Empêche autant que possible le clavier iPhone
+
+   de laisser une disposition incohérente après fermeture.
+
+*/
+
+if(window.visualViewport){
+
+  window.visualViewport
+
+    .addEventListener(
+
+      "resize",
+
+      ()=>{
+
+        document.documentElement.style.setProperty(
+
+          "--visualHeight",
+
+          window.visualViewport.height+"px"
+
+        );
+
+      }
+
+    );
+
+}
+
+/* =========================================================
 
    INITIALIZATION
 
-========================================== */
+   ========================================================= */
 
 renderEvents();
 
