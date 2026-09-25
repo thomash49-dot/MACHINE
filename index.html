@@ -6,115 +6,173 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 
-      content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="theme-color" content="#050505">
 
-<meta name="theme-color" content="#050706">
+<title>MACHINE</title>
 
-<title>GIO // MACHINE</title>
+<link rel="manifest" href="./manifest.json">
+
+<link rel="apple-touch-icon" href="./icon.PNG">
+
+<link rel="icon" href="./icon.PNG">
 
 <style>
 
 :root{
 
-  --bg:#050706;
+  --white:#e9eeee;
 
-  --panel:#09100c;
+  --grey:#7c8587;
 
-  --line:#183c27;
+  --dark:#050606;
 
-  --green:#57ff8a;
+  --line:rgba(220,235,235,.24);
 
-  --green2:#20a852;
+  --blue:#70b8d6;
 
-  --text:#baffca;
+  --red:#d95555;
 
-  --muted:#598a67;
-
-  --danger:#ff4c4c;
+  --green:#73b69a;
 
 }
 
-*{
+*{box-sizing:border-box}
 
-  box-sizing:border-box;
+html,body{
+
+  margin:0;
+
+  min-height:100%;
+
+  background:#020303;
+
+  color:var(--white);
+
+  font-family:"Courier New",monospace;
 
 }
 
 body{
 
-  margin:0;
-
-  background:
-
-    linear-gradient(rgba(20,255,90,.025) 1px,transparent 1px),
-
-    linear-gradient(90deg,rgba(20,255,90,.025) 1px,transparent 1px),
-
-    var(--bg);
-
-  background-size:35px 35px;
-
-  color:var(--text);
-
-  font-family:
-
-    "SFMono-Regular",
-
-    Consolas,
-
-    monospace;
-
-  min-height:100vh;
+  overflow-x:hidden;
 
 }
 
-/* HEADER */
+.machine{
 
-header{
+  min-height:100vh;
 
-  padding:18px;
+  position:relative;
 
-  border-bottom:1px solid var(--line);
+  background:
+
+    radial-gradient(circle at 60% 25%,rgba(80,100,100,.12),transparent 32%),
+
+    linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+
+    linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px),
+
+    #050606;
+
+  background-size:auto,32px 32px,32px 32px;
+
+}
+
+.machine:after{
+
+  content:"";
+
+  pointer-events:none;
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:50;
+
+  background:repeating-linear-gradient(
+
+    0deg,
+
+    rgba(255,255,255,.015),
+
+    rgba(255,255,255,.015) 1px,
+
+    transparent 1px,
+
+    transparent 4px
+
+  );
+
+}
+
+/* TOP */
+
+.top{
+
+  padding:
+
+    calc(env(safe-area-inset-top) + 18px)
+
+    18px 14px;
 
   display:flex;
 
   justify-content:space-between;
 
-  align-items:center;
+  align-items:flex-start;
 
-  background:#050806;
-
-}
-
-.logo{
-
-  font-size:18px;
-
-  letter-spacing:3px;
-
-  color:var(--green);
+  border-bottom:1px solid var(--line);
 
 }
 
-.status{
+.system{
 
-  font-size:11px;
+  font-size:13px;
 
-  color:var(--green);
+  letter-spacing:2px;
 
 }
 
-/* MAIN */
+.system small{
 
-main{
+  display:block;
 
-  max-width:1200px;
+  color:var(--grey);
 
-  margin:auto;
+  font-size:9px;
 
-  padding:16px;
+  margin-top:5px;
+
+}
+
+.online{
+
+  color:var(--blue);
+
+  font-size:10px;
+
+  letter-spacing:1px;
+
+}
+
+.dot{
+
+  display:inline-block;
+
+  width:7px;
+
+  height:7px;
+
+  border-radius:50%;
+
+  background:var(--blue);
+
+  box-shadow:0 0 10px var(--blue);
+
+  margin-right:6px;
 
 }
 
@@ -122,121 +180,421 @@ main{
 
 .clock{
 
-  text-align:center;
-
-  padding:25px;
-
-}
-
-#time{
-
-  font-size:42px;
-
-  letter-spacing:5px;
-
-  color:white;
-
-}
-
-#date{
-
-  margin-top:6px;
-
-  color:var(--muted);
-
-}
-
-/* GRID */
-
-.grid{
-
-  display:grid;
-
-  grid-template-columns:repeat(2,1fr);
-
-  gap:14px;
-
-}
-
-.panel{
-
-  border:1px solid var(--line);
-
-  background:rgba(5,15,9,.8);
-
-  min-height:200px;
-
-}
-
-.panelTitle{
-
-  padding:10px 12px;
+  padding:15px 18px;
 
   border-bottom:1px solid var(--line);
 
-  color:var(--green);
+  display:flex;
 
-  letter-spacing:2px;
+  justify-content:space-between;
 
-  font-size:12px;
+  gap:15px;
 
-}
+  font-size:11px;
 
-.content{
-
-  padding:12px;
+  color:var(--grey);
 
 }
 
-/* TERMINAL */
+#clock{
 
-#terminal{
-
-  height:220px;
-
-  overflow:auto;
-
-  font-size:12px;
-
-  line-height:1.7;
+  color:var(--white);
 
 }
 
-.system{
+/* VIEW */
 
-  color:var(--muted);
+.viewport{
+
+  position:relative;
+
+  height:46vh;
+
+  min-height:360px;
+
+  overflow:hidden;
+
+  border-bottom:1px solid var(--line);
+
+  background:
+
+    linear-gradient(120deg,rgba(255,255,255,.025),transparent 40%),
+
+    radial-gradient(circle at center,rgba(100,130,130,.08),transparent 55%),
+
+    #080a0a;
 
 }
 
-.gio{
+.city{
 
-  color:var(--green);
+  position:absolute;
+
+  inset:0;
+
+  opacity:.34;
+
+  background:
+
+    linear-gradient(90deg,
+
+      transparent 0 8%,
+
+      rgba(255,255,255,.06) 8% 9%,
+
+      transparent 9% 23%,
+
+      rgba(255,255,255,.04) 23% 25%,
+
+      transparent 25% 55%,
+
+      rgba(255,255,255,.04) 55% 57%,
+
+      transparent 57% 78%,
+
+      rgba(255,255,255,.05) 78% 80%,
+
+      transparent 80%
+
+    ),
+
+    linear-gradient(0deg,#020303,transparent);
 
 }
 
-.user{
+camlabel{
 
-  color:white;
+  display:block;
 
 }
+
+.camlabel{
+
+  position:absolute;
+
+  left:15px;
+
+  top:14px;
+
+  font-size:10px;
+
+  line-height:1.5;
+
+}
+
+.camlabel span{
+
+  color:var(--grey);
+
+}
+
+.reticle{
+
+  position:absolute;
+
+  border:1px solid rgba(225,235,235,.72);
+
+  animation:float 5s ease-in-out infinite;
+
+}
+
+.reticle:before,
+
+.reticle:after{
+
+  content:"";
+
+  position:absolute;
+
+  width:8px;
+
+  height:8px;
+
+}
+
+.reticle:before{
+
+  left:-2px;
+
+  top:-2px;
+
+  border-left:2px solid white;
+
+  border-top:2px solid white;
+
+}
+
+.reticle:after{
+
+  right:-2px;
+
+  bottom:-2px;
+
+  border-right:2px solid white;
+
+  border-bottom:2px solid white;
+
+}
+
+.r1{
+
+  width:77px;
+
+  height:145px;
+
+  left:16%;
+
+  top:32%;
+
+}
+
+.r2{
+
+  width:64px;
+
+  height:120px;
+
+  left:61%;
+
+  top:20%;
+
+  border-color:var(--red);
+
+  animation-delay:-1.5s;
+
+}
+
+.r3{
+
+  width:58px;
+
+  height:96px;
+
+  right:8%;
+
+  top:49%;
+
+  border-color:var(--blue);
+
+  animation-delay:-3s;
+
+}
+
+.tag{
+
+  position:absolute;
+
+  bottom:-29px;
+
+  left:-1px;
+
+  white-space:nowrap;
+
+  font-size:8px;
+
+  line-height:1.35;
+
+  color:var(--white);
+
+}
+
+.tag b{
+
+  font-weight:normal;
+
+  color:var(--grey);
+
+}
+
+.r2 .tag{
+
+  color:var(--red);
+
+}
+
+.r3 .tag{
+
+  color:var(--blue);
+
+}
+
+@keyframes float{
+
+  0%,100%{transform:translateY(0)}
+
+  50%{transform:translateY(-4px)}
+
+}
+
+.scan{
+
+  position:absolute;
+
+  left:0;
+
+  right:0;
+
+  height:1px;
+
+  background:rgba(120,190,215,.5);
+
+  box-shadow:0 0 8px rgba(120,190,215,.5);
+
+  animation:scan 5s linear infinite;
+
+}
+
+@keyframes scan{
+
+  from{top:0}
+
+  to{top:100%}
+
+}
+
+.coordinates{
+
+  position:absolute;
+
+  right:14px;
+
+  top:14px;
+
+  text-align:right;
+
+  color:var(--grey);
+
+  font-size:8px;
+
+  line-height:1.6;
+
+}
+
+/* ANALYSIS */
+
+.analysis{
+
+  position:absolute;
+
+  left:14px;
+
+  right:14px;
+
+  bottom:15px;
+
+  padding:10px;
+
+  background:rgba(0,0,0,.72);
+
+  border-left:2px solid var(--white);
+
+  font-size:9px;
+
+  line-height:1.6;
+
+}
+
+.analysis .blue{color:var(--blue)}
+
+.analysis .red{color:var(--red)}
+
+/* FEED */
+
+.feed{
+
+  height:135px;
+
+  overflow:hidden;
+
+  padding:12px 17px;
+
+  border-bottom:1px solid var(--line);
+
+  font-size:9px;
+
+  line-height:1.65;
+
+}
+
+.feedline{
+
+  color:var(--grey);
+
+}
+
+.feedline strong{
+
+  color:var(--white);
+
+  font-weight:normal;
+
+}
+
+.feedline.blue strong{color:var(--blue)}
+
+.feedline.red strong{color:var(--red)}
+
+.feedline.green strong{color:var(--green)}
 
 /* COMMAND */
 
-.command{
+.commandArea{
 
-  margin-top:15px;
+  padding:14px;
+
+  border-bottom:1px solid var(--line);
+
+}
+
+.voice{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:9px;
+
+}
+
+.mic{
+
+  width:48px;
+
+  height:48px;
+
+  flex:none;
+
+  border:1px solid var(--blue);
+
+  border-radius:50%;
+
+  background:rgba(80,160,200,.07);
+
+  color:var(--blue);
+
+  font-size:20px;
+
+}
+
+.inputWrap{
+
+  flex:1;
 
   border:1px solid var(--line);
 
   display:flex;
 
-  background:#020403;
+  min-width:0;
 
 }
 
-.command input{
+#command{
 
-  flex:1;
+  width:100%;
+
+  min-width:0;
+
+  padding:13px;
 
   border:0;
 
@@ -246,105 +604,201 @@ main{
 
   color:white;
 
-  padding:15px;
-
   font-family:inherit;
-
-}
-
-button{
-
-  border:0;
-
-  border-left:1px solid var(--line);
-
-  background:#07150c;
-
-  color:var(--green);
-
-  padding:12px 16px;
-
-  cursor:pointer;
-
-}
-
-button:hover{
-
-  background:#0d2717;
-
-}
-
-/* ITEMS */
-
-.item{
-
-  border-left:2px solid var(--green2);
-
-  padding:8px 10px;
-
-  margin-bottom:8px;
-
-  background:#07100a;
-
-}
-
-.itemTime{
-
-  color:var(--green);
 
   font-size:11px;
 
 }
 
-.itemText{
+.exec{
 
-  color:white;
+  border:0;
 
-  margin-top:4px;
+  border-left:1px solid var(--line);
+
+  background:transparent;
+
+  color:var(--white);
+
+  padding:0 14px;
+
+  font-family:inherit;
 
 }
 
-/* ADD FORMS */
+/* MODULES */
 
-.form{
+.modules{
+
+  display:grid;
+
+  grid-template-columns:repeat(4,1fr);
+
+  padding:10px 8px calc(env(safe-area-inset-bottom) + 12px);
+
+}
+
+.module{
+
+  text-align:center;
+
+  color:var(--grey);
+
+  font-size:8px;
+
+  padding:9px 2px;
+
+}
+
+.module .icon{
+
+  color:var(--white);
+
+  font-size:19px;
+
+  margin-bottom:5px;
+
+}
+
+.module.active{
+
+  color:var(--blue);
+
+}
+
+/* MODAL */
+
+.overlay{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:100;
+
+  background:rgba(0,0,0,.94);
+
+  display:none;
+
+  padding:
+
+    calc(env(safe-area-inset-top) + 25px)
+
+    18px
+
+    calc(env(safe-area-inset-bottom) + 20px);
+
+}
+
+.overlay.show{
+
+  display:block;
+
+}
+
+.overlayHeader{
 
   display:flex;
 
-  gap:6px;
+  justify-content:space-between;
 
-  margin-top:10px;
+  border-bottom:1px solid var(--line);
+
+  padding-bottom:13px;
+
+  margin-bottom:15px;
+
+}
+
+.overlayTitle{
+
+  letter-spacing:2px;
+
+  font-size:12px;
+
+}
+
+.close{
+
+  background:none;
+
+  border:0;
+
+  color:white;
+
+  font-size:20px;
+
+}
+
+.item{
+
+  padding:12px;
+
+  border-left:2px solid var(--blue);
+
+  background:rgba(255,255,255,.025);
+
+  margin-bottom:8px;
+
+  font-size:11px;
+
+}
+
+.item small{
+
+  display:block;
+
+  color:var(--grey);
+
+  margin-bottom:5px;
+
+}
+
+.form{
+
+  display:grid;
+
+  gap:8px;
+
+  margin-top:18px;
 
 }
 
 .form input{
 
-  width:100%;
-
-  background:#030604;
+  padding:12px;
 
   border:1px solid var(--line);
 
+  background:#050606;
+
   color:white;
 
-  padding:8px;
+  font-family:inherit;
 
 }
 
-/* MOBILE */
+.form button{
 
-@media(max-width:700px){
+  padding:12px;
 
-  .grid{
+  border:1px solid var(--blue);
 
-    grid-template-columns:1fr;
+  color:var(--blue);
 
-  }
+  background:transparent;
 
-  #time{
+  font-family:inherit;
 
-    font-size:32px;
+}
 
-  }
+.empty{
+
+  color:var(--grey);
+
+  font-size:10px;
+
+  padding:10px 0;
 
 }
 
@@ -354,829 +808,935 @@ button:hover{
 
 <body>
 
-<header>
+<div class="machine">
 
-<div class="logo">
+<header class="top">
 
-GIO // MACHINE
+  <div class="system">
 
-</div>
+    MACHINE
 
-<div class="status">
+    <small>OBSERVATION SYSTEM // LOCAL NODE</small>
 
-● SYSTEM ONLINE
+  </div>
 
-</div>
+  <div class="online">
+
+    <span class="dot"></span>ONLINE
+
+  </div>
 
 </header>
 
-<main>
+<div class="clock">
 
-<section class="clock">
+  <span id="day">DAY 0001</span>
 
-<div id="time">
+  <span id="clock">00:00:00</span>
 
-00:00:00
-
-</div>
-
-<div id="date">
-
-INITIALIZING...
+  <span id="date">00.00.0000</span>
 
 </div>
+
+<section class="viewport">
+
+  <div class="city"></div>
+
+  <div class="scan"></div>
+
+  <div class="camlabel">
+
+    LIVE ANALYSIS<br>
+
+    <span>LOCAL INTERFACE / 01</span>
+
+  </div>
+
+  <div class="coordinates">
+
+    SYS 01<br>
+
+    NODE ACTIVE<br>
+
+    ANALYSIS 100%
+
+  </div>
+
+  <div class="reticle r1">
+
+    <div class="tag">
+
+      ID_0371<br>
+
+      <b>STATUS: OBSERVED</b>
+
+    </div>
+
+  </div>
+
+  <div class="reticle r2">
+
+    <div class="tag">
+
+      ID_9931<br>
+
+      ALERT
+
+    </div>
+
+  </div>
+
+  <div class="reticle r3">
+
+    <div class="tag">
+
+      EVENT_04<br>
+
+      ACTIVE
+
+    </div>
+
+  </div>
+
+  <div class="analysis">
+
+    <span class="blue">SYSTEM //</span>
+
+    ENVIRONMENTAL ANALYSIS ACTIVE<br>
+
+    <span id="analysisText">
+
+      NO ACTIVE COMMAND
+
+    </span>
+
+  </div>
 
 </section>
 
-<div class="grid">
+<section id="feed" class="feed"></section>
 
-<!-- TERMINAL -->
+<section class="commandArea">
 
-<section class="panel">
+  <div class="voice">
 
-<div class="panelTitle">
+    <button class="mic" onclick="voiceCommand()">◉</button>
 
-ANALYSIS TERMINAL
+    <div class="inputWrap">
 
-</div>
+      <input
 
-<div class="content">
+        id="command"
 
-<div id="terminal"></div>
+        autocomplete="off"
 
-<div class="command">
+        placeholder="ENTER COMMAND..."
 
-<input
+      >
 
-id="commandInput"
+      <button class="exec" onclick="executeCommand()">
 
-placeholder="ENTRER UNE INSTRUCTION..."
+        EXEC
 
->
+      </button>
 
-<button onclick="voiceCommand()">
+    </div>
 
-🎙
-
-</button>
-
-<button onclick="sendCommand()">
-
-EXEC
-
-</button>
-
-</div>
-
-</div>
+  </div>
 
 </section>
+
+<nav class="modules">
+
+  <div class="module active">
+
+    <div class="icon">⌖</div>
+
+    SYSTEM
+
+  </div>
+
+  <div class="module" onclick="openAgenda()">
+
+    <div class="icon">□</div>
+
+    AGENDA
+
+  </div>
+
+  <div class="module" onclick="openTasks()">
+
+    <div class="icon">☷</div>
+
+    TASKS
+
+  </div>
+
+  <div class="module" onclick="openMemory()">
+
+    <div class="icon">◇</div>
+
+    MEMORY
+
+  </div>
+
+</nav>
+
+</div>
 
 <!-- AGENDA -->
 
-<section class="panel">
+<div id="agendaOverlay" class="overlay">
 
-<div class="panelTitle">
+  <div class="overlayHeader">
 
-AGENDA
+    <div class="overlayTitle">AGENDA // EVENTS</div>
 
-</div>
+    <button class="close" onclick="closeOverlay()">×</button>
 
-<div class="content">
+  </div>
 
-<div id="agenda"></div>
+  <div id="agendaList"></div>
 
-<div class="form">
+  <div class="form">
 
-<input
+    <input type="datetime-local" id="eventDate">
 
-type="datetime-local"
+    <input id="eventName" placeholder="EVENT DESCRIPTION">
 
-id="eventDate">
+    <button onclick="addEvent()">
 
-<input
+      ADD EVENT
 
-id="eventText"
+    </button>
 
-placeholder="Événement">
-
-<button onclick="addEvent()">
-
-+
-
-</button>
+  </div>
 
 </div>
-
-</div>
-
-</section>
 
 <!-- TASKS -->
 
-<section class="panel">
+<div id="tasksOverlay" class="overlay">
 
-<div class="panelTitle">
+  <div class="overlayHeader">
 
-TASKS
+    <div class="overlayTitle">TASK DATABASE</div>
 
-</div>
+    <button class="close" onclick="closeOverlay()">×</button>
 
-<div class="content">
+  </div>
 
-<div id="tasks"></div>
+  <div id="taskList"></div>
 
-<div class="form">
+  <div class="form">
 
-<input
+    <input id="taskName" placeholder="NEW TASK">
 
-id="taskInput"
+    <button onclick="addTask()">
 
-placeholder="Nouvelle tâche">
+      ADD TASK
 
-<button onclick="addTask()">
+    </button>
 
-+
-
-</button>
+  </div>
 
 </div>
 
-</div>
+<!-- MEMORY -->
 
-</section>
+<div id="memoryOverlay" class="overlay">
 
-<!-- ALERTS -->
+  <div class="overlayHeader">
 
-<section class="panel">
+    <div class="overlayTitle">LOCAL MEMORY</div>
 
-<div class="panelTitle">
+    <button class="close" onclick="closeOverlay()">×</button>
 
-SYSTEM ALERTS
+  </div>
 
-</div>
+  <div id="memoryList"></div>
 
-<div class="content">
+  <div class="form">
 
-<div id="alerts">
+    <input id="memoryName" placeholder="INFORMATION TO REMEMBER">
 
-<div class="item">
+    <button onclick="addMemory()">
 
-<div class="itemTime">
+      STORE INFORMATION
 
-SYSTEM
+    </button>
 
-</div>
-
-<div class="itemText">
-
-Aucune anomalie détectée.
+  </div>
 
 </div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-</div>
-
-</main>
 
 <script>
 
-/* ===============================
+/* =========================
 
-CLOCK
+DATABASE
 
-================================ */
+========================= */
 
-function updateClock(){
+let events =
 
-const now=new Date();
+JSON.parse(localStorage.getItem("machine_events") || "[]");
 
-document.getElementById("time").textContent=
+let tasks =
 
-now.toLocaleTimeString("fr-BE");
+JSON.parse(localStorage.getItem("machine_tasks") || "[]");
 
-document.getElementById("date").textContent=
+let memories =
 
-now.toLocaleDateString(
-
-"fr-BE",
-
-{
-
-weekday:"long",
-
-day:"numeric",
-
-month:"long",
-
-year:"numeric"
-
-}
-
-).toUpperCase();
-
-}
-
-setInterval(updateClock,1000);
-
-updateClock();
-
-/* ===============================
-
-STORAGE
-
-================================ */
-
-let events=
-
-JSON.parse(localStorage.getItem("gio_events")||"[]");
-
-let tasks=
-
-JSON.parse(localStorage.getItem("gio_tasks")||"[]");
+JSON.parse(localStorage.getItem("machine_memory") || "[]");
 
 function save(){
 
-localStorage.setItem(
+  localStorage.setItem("machine_events",JSON.stringify(events));
 
-"gio_events",
+  localStorage.setItem("machine_tasks",JSON.stringify(tasks));
 
-JSON.stringify(events)
-
-);
-
-localStorage.setItem(
-
-"gio_tasks",
-
-JSON.stringify(tasks)
-
-);
+  localStorage.setItem("machine_memory",JSON.stringify(memories));
 
 }
 
-/* ===============================
+/* =========================
 
-TERMINAL
+CLOCK
 
-================================ */
+========================= */
 
-function terminal(text,type="system"){
+const systemBirth = new Date();
 
-const el=document.getElementById("terminal");
+function updateClock(){
 
-const line=document.createElement("div");
+  const now = new Date();
 
-line.className=type;
+  document.getElementById("clock").textContent =
 
-line.textContent=text;
+    now.toLocaleTimeString("fr-BE");
 
-el.appendChild(line);
+  document.getElementById("date").textContent =
 
-el.scrollTop=el.scrollHeight;
+    now.toLocaleDateString("fr-BE");
 
-}
+  const diff =
 
-/* STARTUP */
+    Math.floor((now-systemBirth)/86400000)+1;
 
-function startup(){
+  document.getElementById("day").textContent =
 
-const lines=[
-
-"SYSTEM INITIALIZING...",
-
-"LOCAL DATABASE........ OK",
-
-"AGENDA MODULE......... ONLINE",
-
-"TASK MODULE........... ONLINE",
-
-"VOICE INTERFACE....... STANDBY",
-
-"ANALYSIS ENGINE....... ONLINE",
-
-"GIO CORE.............. ACTIVE"
-
-];
-
-let i=0;
-
-const interval=setInterval(()=>{
-
-terminal(
-
-"> "+lines[i],
-
-"system"
-
-);
-
-i++;
-
-if(i>=lines.length){
-
-clearInterval(interval);
-
-setTimeout(()=>{
-
-terminal(
-
-"GIO: Bonjour. Système opérationnel.",
-
-"gio"
-
-);
-
-},400);
+    "DAY "+String(diff).padStart(4,"0");
 
 }
 
-},250);
+updateClock();
+
+setInterval(updateClock,1000);
+
+/* =========================
+
+SYSTEM FEED
+
+========================= */
+
+function feed(text,type=""){
+
+  const box=document.getElementById("feed");
+
+  const line=document.createElement("div");
+
+  line.className="feedline "+type;
+
+  const time=
+
+    new Date().toLocaleTimeString("fr-BE");
+
+  line.innerHTML=
+
+    "["+time+"] &gt; <strong>"+
+
+    escapeHTML(text)+
+
+    "</strong>";
+
+  box.appendChild(line);
+
+  while(box.children.length>7){
+
+    box.removeChild(box.firstChild);
+
+  }
+
+  box.scrollTop=box.scrollHeight;
 
 }
 
-startup();
+function boot(){
 
-/* ===============================
+  const lines=[
 
-COMMANDS
+    ["BOOT SEQUENCE INITIALIZED",""],
 
-================================ */
+    ["LOCAL DATABASE CONNECTED",""],
 
-function sendCommand(){
+    ["EVENT MODULE ONLINE","blue"],
 
-const input=
+    ["VOICE INTERFACE STANDBY",""],
 
-document.getElementById("commandInput");
+    ["MEMORY NODE ACTIVE","green"],
 
-const command=
+    ["SYSTEM OPERATIONAL","blue"]
 
-input.value.trim();
+  ];
 
-if(!command)return;
+  lines.forEach((x,i)=>{
 
-terminal(
+    setTimeout(()=>feed(x[0],x[1]),i*230);
 
-"USER: "+command,
-
-"user"
-
-);
-
-input.value="";
-
-analyseCommand(command);
+  });
 
 }
+
+boot();
+
+/* =========================
+
+COMMAND ENGINE
+
+========================= */
 
 document
 
-.getElementById("commandInput")
+.getElementById("command")
 
-.addEventListener(
+.addEventListener("keydown",e=>{
 
-"keydown",
-
-e=>{
-
-if(e.key==="Enter")
-
-sendCommand();
+  if(e.key==="Enter") executeCommand();
 
 });
 
-function analyseCommand(text){
+function executeCommand(){
 
-const t=text.toLowerCase();
+  const input=document.getElementById("command");
 
-setTimeout(()=>{
+  const raw=input.value.trim();
 
-if(
+  if(!raw)return;
 
-t.includes("bonjour") ||
+  feed('COMMAND RECEIVED: "'+raw+'"',"blue");
 
-t.includes("salut")
+  document.getElementById("analysisText").textContent =
 
-){
+    "PARSING COMMAND...";
 
-terminal(
+  input.value="";
 
-"GIO: Bonjour. Je suis opérationnel.",
-
-"gio"
-
-);
+  setTimeout(()=>analyse(raw),350);
 
 }
 
-else if(
+function analyse(raw){
 
-t.includes("heure")
+  const text=raw.toLowerCase();
 
-){
+  if(text.includes("agenda")){
 
-terminal(
+    document.getElementById("analysisText").textContent =
 
-"GIO: "+new Date()
+      events.length+" EVENT(S) IDENTIFIED";
 
-.toLocaleTimeString("fr-BE"),
+    feed(
 
-"gio"
+      "AGENDA DATABASE: "+events.length+" EVENT(S)",
 
-);
+      "green"
+
+    );
+
+    return;
+
+  }
+
+  if(
+
+    text.includes("tâche") ||
+
+    text.includes("tache")
+
+  ){
+
+    document.getElementById("analysisText").textContent =
+
+      tasks.length+" ACTIVE TASK(S)";
+
+    feed(
+
+      "TASK DATABASE: "+tasks.length+" ACTIVE",
+
+      "green"
+
+    );
+
+    return;
+
+  }
+
+  if(
+
+    text.includes("heure")
+
+  ){
+
+    const time=
+
+      new Date().toLocaleTimeString("fr-BE");
+
+    document.getElementById("analysisText").textContent =
+
+      "LOCAL TIME "+time;
+
+    feed("LOCAL TIME: "+time,"blue");
+
+    return;
+
+  }
+
+  if(
+
+    text.startsWith("souviens-toi") ||
+
+    text.startsWith("souviens toi") ||
+
+    text.startsWith("mémorise") ||
+
+    text.startsWith("memorise")
+
+  ){
+
+    memories.push({
+
+      id:Date.now(),
+
+      text:raw
+
+    });
+
+    save();
+
+    document.getElementById("analysisText").textContent =
+
+      "INFORMATION STORED";
+
+    feed("MEMORY DATABASE UPDATED","green");
+
+    return;
+
+  }
+
+  document.getElementById("analysisText").textContent =
+
+    "COMMAND LOGGED";
+
+  feed(
+
+    "COMMAND STORED // INTELLIGENCE MODULE NOT CONNECTED",
+
+    ""
+
+  );
 
 }
 
-else if(
+/* =========================
 
-t.includes("agenda")
+VOICE
 
-){
+========================= */
 
-if(events.length===0){
+function voiceCommand(){
 
-terminal(
+  const Recognition =
 
-"GIO: Aucun événement enregistré.",
+    window.SpeechRecognition ||
 
-"gio"
+    window.webkitSpeechRecognition;
 
-);
+  if(!Recognition){
 
-}else{
+    feed(
 
-terminal(
+      "VOICE RECOGNITION UNAVAILABLE",
 
-"GIO: "+events.length+
+      "red"
 
-" événement(s) identifié(s).",
+    );
 
-"gio"
+    return;
 
-);
+  }
 
-}
+  const recognition=new Recognition();
 
-}
+  recognition.lang="fr-BE";
 
-else if(
+  feed("VOICE INPUT ACTIVE","blue");
 
-t.includes("tâche") ||
+  document.getElementById("analysisText").textContent =
 
-t.includes("tache")
+    "LISTENING...";
 
-){
+  recognition.start();
 
-terminal(
+  recognition.onresult=e=>{
 
-"GIO: "+tasks.length+
+    const text=
 
-" tâche(s) active(s).",
+      e.results[0][0].transcript;
 
-"gio"
+    document.getElementById("command").value=text;
 
-);
+    executeCommand();
 
-}
+  };
 
-else{
+  recognition.onerror=()=>{
 
-terminal(
+    feed("VOICE INPUT ERROR","red");
 
-"GIO: Instruction enregistrée. Le moteur d'analyse intelligent sera connecté dans une prochaine version.",
-
-"gio"
-
-);
+  };
 
 }
 
-},350);
+/* =========================
+
+OVERLAYS
+
+========================= */
+
+function closeOverlay(){
+
+  document
+
+    .querySelectorAll(".overlay")
+
+    .forEach(x=>x.classList.remove("show"));
 
 }
 
-/* ===============================
+function openAgenda(){
+
+  renderAgenda();
+
+  document
+
+    .getElementById("agendaOverlay")
+
+    .classList.add("show");
+
+}
+
+function openTasks(){
+
+  renderTasks();
+
+  document
+
+    .getElementById("tasksOverlay")
+
+    .classList.add("show");
+
+}
+
+function openMemory(){
+
+  renderMemory();
+
+  document
+
+    .getElementById("memoryOverlay")
+
+    .classList.add("show");
+
+}
+
+/* =========================
 
 AGENDA
 
-================================ */
+========================= */
 
 function addEvent(){
 
-const date=
+  const date=
 
-document.getElementById("eventDate").value;
+    document.getElementById("eventDate").value;
 
-const text=
+  const name=
 
-document.getElementById("eventText").value.trim();
+    document.getElementById("eventName").value.trim();
 
-if(!date || !text)
+  if(!date || !name)return;
 
-return;
+  events.push({
 
-events.push({
+    id:Date.now(),
 
-id:Date.now(),
+    date,
 
-date,
+    name
 
-text
+  });
 
-});
+  events.sort(
 
-events.sort(
+    (a,b)=>new Date(a.date)-new Date(b.date)
 
-(a,b)=>
+  );
 
-new Date(a.date)-new Date(b.date)
+  save();
 
-);
+  renderAgenda();
 
-save();
+  document.getElementById("eventName").value="";
 
-renderEvents();
-
-terminal(
-
-"GIO: Événement enregistré.",
-
-"gio"
-
-);
-
-document.getElementById("eventText").value="";
+  feed("NEW EVENT STORED","green");
 
 }
 
-function renderEvents(){
+function renderAgenda(){
 
-const container=
+  const box=
 
-document.getElementById("agenda");
+    document.getElementById("agendaList");
 
-container.innerHTML="";
+  box.innerHTML="";
 
-if(events.length===0){
+  if(!events.length){
 
-container.innerHTML=
+    box.innerHTML=
 
-'<div class="system">AUCUN ÉVÉNEMENT</div>';
+      '<div class="empty">NO EVENT DATA</div>';
 
-return;
+    return;
 
-}
+  }
 
-events.forEach(event=>{
+  events.forEach(e=>{
 
-const item=
+    const div=document.createElement("div");
 
-document.createElement("div");
+    div.className="item";
 
-item.className="item";
+    div.innerHTML=
 
-const date=
+      "<small>"+
 
-new Date(event.date);
+      new Date(e.date).toLocaleString("fr-BE")+
 
-item.innerHTML=
+      "</small>"+
 
-'<div class="itemTime">'+
+      escapeHTML(e.name);
 
-date.toLocaleString("fr-BE")+
+    div.onclick=()=>{
 
-'</div>'+
+      if(confirm("Supprimer cet événement ?")){
 
-'<div class="itemText">'+
+        events=
 
-escapeHTML(event.text)+
+          events.filter(x=>x.id!==e.id);
 
-'</div>';
+        save();
 
-item.onclick=()=>{
+        renderAgenda();
 
-if(confirm("Supprimer cet événement ?")){
+      }
 
-events=
+    };
 
-events.filter(
+    box.appendChild(div);
 
-e=>e.id!==event.id
-
-);
-
-save();
-
-renderEvents();
+  });
 
 }
 
-};
-
-container.appendChild(item);
-
-});
-
-}
-
-/* ===============================
+/* =========================
 
 TASKS
 
-================================ */
+========================= */
 
 function addTask(){
 
-const input=
+  const input=
 
-document.getElementById("taskInput");
+    document.getElementById("taskName");
 
-const text=
+  const name=input.value.trim();
 
-input.value.trim();
+  if(!name)return;
 
-if(!text)return;
+  tasks.push({
 
-tasks.push({
+    id:Date.now(),
 
-id:Date.now(),
+    name
 
-text
+  });
 
-});
+  save();
 
-save();
+  renderTasks();
 
-renderTasks();
+  input.value="";
 
-input.value="";
-
-terminal(
-
-"GIO: Nouvelle tâche enregistrée.",
-
-"gio"
-
-);
+  feed("TASK CREATED","green");
 
 }
 
 function renderTasks(){
 
-const container=
+  const box=
 
-document.getElementById("tasks");
+    document.getElementById("taskList");
 
-container.innerHTML="";
+  box.innerHTML="";
 
-if(tasks.length===0){
+  if(!tasks.length){
 
-container.innerHTML=
+    box.innerHTML=
 
-'<div class="system">AUCUNE TÂCHE</div>';
+      '<div class="empty">NO ACTIVE TASKS</div>';
 
-return;
+    return;
 
-}
+  }
 
-tasks.forEach(task=>{
+  tasks.forEach(t=>{
 
-const item=
+    const div=document.createElement("div");
 
-document.createElement("div");
+    div.className="item";
 
-item.className="item";
+    div.textContent=t.name;
 
-item.innerHTML=
+    div.onclick=()=>{
 
-'<div class="itemText">'+
+      tasks=
 
-escapeHTML(task.text)+
+        tasks.filter(x=>x.id!==t.id);
 
-'</div>';
+      save();
 
-item.onclick=()=>{
+      renderTasks();
 
-tasks=
+      feed("TASK COMPLETED","green");
 
-tasks.filter(
+    };
 
-t=>t.id!==task.id
+    box.appendChild(div);
 
-);
-
-save();
-
-renderTasks();
-
-terminal(
-
-"GIO: Tâche terminée.",
-
-"gio"
-
-);
-
-};
-
-container.appendChild(item);
-
-});
+  });
 
 }
 
-/* ===============================
+/* =========================
 
-VOICE
+MEMORY
 
-================================ */
+========================= */
 
-function voiceCommand(){
+function addMemory(){
 
-const SpeechRecognition=
+  const input=
 
-window.SpeechRecognition ||
+    document.getElementById("memoryName");
 
-window.webkitSpeechRecognition;
+  const text=input.value.trim();
 
-if(!SpeechRecognition){
+  if(!text)return;
 
-terminal(
+  memories.push({
 
-"GIO: Reconnaissance vocale indisponible sur ce navigateur.",
+    id:Date.now(),
 
-"gio"
+    text
 
-);
+  });
 
-return;
+  save();
 
-}
+  renderMemory();
 
-const recognition=
+  input.value="";
 
-new SpeechRecognition();
-
-recognition.lang="fr-BE";
-
-recognition.start();
-
-terminal(
-
-"> VOICE INPUT ACTIVE",
-
-"system"
-
-);
-
-recognition.onresult=function(event){
-
-const text=
-
-event.results[0][0].transcript;
-
-document.getElementById(
-
-"commandInput"
-
-).value=text;
-
-sendCommand();
-
-};
+  feed("MEMORY STORED","green");
 
 }
 
-/* ===============================
+function renderMemory(){
+
+  const box=
+
+    document.getElementById("memoryList");
+
+  box.innerHTML="";
+
+  if(!memories.length){
+
+    box.innerHTML=
+
+      '<div class="empty">MEMORY DATABASE EMPTY</div>';
+
+    return;
+
+  }
+
+  memories.forEach(m=>{
+
+    const div=document.createElement("div");
+
+    div.className="item";
+
+    div.textContent=m.text;
+
+    div.onclick=()=>{
+
+      if(confirm("Supprimer cette information ?")){
+
+        memories=
+
+          memories.filter(x=>x.id!==m.id);
+
+        save();
+
+        renderMemory();
+
+      }
+
+    };
+
+    box.appendChild(div);
+
+  });
+
+}
+
+/* =========================
 
 SECURITY
 
-================================ */
+========================= */
 
 function escapeHTML(text){
 
-const div=
+  const div=document.createElement("div");
 
-document.createElement("div");
+  div.textContent=text;
 
-div.textContent=text;
-
-return div.innerHTML;
+  return div.innerHTML;
 
 }
-
-/* INITIAL RENDER */
-
-renderEvents();
-
-renderTasks();
 
 </script>
 
