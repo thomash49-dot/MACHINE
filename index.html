@@ -6,15 +6,11 @@
 
 <meta charset="UTF-8">
 
-<meta
+<meta name="viewport"
 
-  name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 
-  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-
->
-
-<meta name="theme-color" content="#050606">
+<meta name="theme-color" content="#020404">
 
 <title>MACHINE</title>
 
@@ -24,23 +20,31 @@
 
 <link rel="icon" type="image/png" href="./icon.png">
 
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<meta name="apple-mobile-web-app-title" content="MACHINE">
+
 <style>
 
 :root{
 
-  --white:#e9eeee;
+  --bg:#020404;
 
-  --grey:#7c8587;
+  --panel:#050808;
 
-  --dark:#050606;
+  --white:#d9dddd;
 
-  --line:rgba(220,235,235,.24);
+  --muted:#657070;
 
-  --blue:#70b8d6;
+  --cyan:#61c9ef;
 
-  --red:#d95555;
+  --green:#78c9a4;
 
-  --green:#73b69a;
+  --red:#ef5151;
+
+  --line:#253131;
 
 }
 
@@ -50,183 +54,69 @@
 
 }
 
-html,
-
-body{
+html,body{
 
   margin:0;
 
-  min-height:100%;
-
-  background:#020303;
+  background:var(--bg);
 
   color:var(--white);
 
   font-family:"Courier New",monospace;
 
-  -webkit-text-size-adjust:100%;
+  min-height:100%;
 
 }
 
 body{
 
-  overflow-x:hidden;
+  padding-top:env(safe-area-inset-top);
+
+  padding-bottom:calc(100px + env(safe-area-inset-bottom));
+
+  background-image:
+
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+
+  background-size:32px 32px;
 
 }
 
-button,
+/* HEADER */
 
-input{
+.header{
 
-  font:inherit;
-
-}
-
-button{
-
-  cursor:pointer;
-
-}
-
-/* =========================
-
-   MACHINE
-
-========================= */
-
-.machine{
-
-  min-height:100vh;
-
-  position:relative;
-
-  background:
-
-    radial-gradient(
-
-      circle at 60% 25%,
-
-      rgba(80,100,100,.12),
-
-      transparent 32%
-
-    ),
-
-    linear-gradient(
-
-      rgba(255,255,255,.018) 1px,
-
-      transparent 1px
-
-    ),
-
-    linear-gradient(
-
-      90deg,
-
-      rgba(255,255,255,.018) 1px,
-
-      transparent 1px
-
-    ),
-
-    #050606;
-
-  background-size:
-
-    auto,
-
-    32px 32px,
-
-    32px 32px;
-
-}
-
-/* Scanlines */
-
-.machine::after{
-
-  content:"";
-
-  pointer-events:none;
-
-  position:fixed;
-
-  inset:0;
-
-  z-index:50;
-
-  background:
-
-    repeating-linear-gradient(
-
-      0deg,
-
-      rgba(255,255,255,.015),
-
-      rgba(255,255,255,.015) 1px,
-
-      transparent 1px,
-
-      transparent 4px
-
-    );
-
-}
-
-/* =========================
-
-   HEADER
-
-========================= */
-
-.top{
-
-  padding:
-
-    calc(env(safe-area-inset-top) + 18px)
-
-    18px
-
-    14px;
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:flex-start;
+  padding:28px 36px 24px;
 
   border-bottom:1px solid var(--line);
 
 }
 
-.system{
+.headerTop{
 
-  font-size:13px;
+  display:flex;
 
-  letter-spacing:2px;
+  justify-content:space-between;
+
+  align-items:center;
 
 }
 
-.system small{
+.logo{
 
-  display:block;
+  letter-spacing:6px;
 
-  color:var(--grey);
-
-  font-size:9px;
-
-  margin-top:5px;
+  font-size:19px;
 
 }
 
 .online{
 
-  color:var(--blue);
+  color:var(--cyan);
 
-  font-size:10px;
-
-  letter-spacing:1px;
+  letter-spacing:2px;
 
 }
 
@@ -234,349 +124,131 @@ button{
 
   display:inline-block;
 
-  width:7px;
+  width:14px;
 
-  height:7px;
+  height:14px;
+
+  background:var(--cyan);
 
   border-radius:50%;
 
-  background:var(--blue);
+  box-shadow:0 0 15px var(--cyan);
 
-  box-shadow:
-
-    0 0 10px var(--blue);
-
-  margin-right:6px;
+  margin-right:12px;
 
 }
 
-/* =========================
+.subtitle{
 
-   CLOCK
+  margin-top:14px;
 
-========================= */
+  color:var(--muted);
 
-.clock{
+  letter-spacing:5px;
 
-  padding:15px 18px;
+  font-size:13px;
+
+}
+
+/* CLOCK */
+
+.clockbar{
+
+  height:88px;
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr 1fr;
+
+  align-items:center;
 
   border-bottom:1px solid var(--line);
 
-  display:flex;
+  padding:0 36px;
 
-  justify-content:space-between;
+  color:#9aa1a1;
 
-  gap:15px;
-
-  font-size:11px;
-
-  color:var(--grey);
+  letter-spacing:2px;
 
 }
 
-#clock{
+.clockbar div:nth-child(2){
 
-  color:var(--white);
+  text-align:center;
 
-}
+  color:white;
 
-/* =========================
-
-   SURVEILLANCE VIEW
-
-========================= */
-
-.viewport{
-
-  position:relative;
-
-  height:46vh;
-
-  min-height:360px;
-
-  overflow:hidden;
-
-  border-bottom:1px solid var(--line);
-
-  background:
-
-    linear-gradient(
-
-      120deg,
-
-      rgba(255,255,255,.025),
-
-      transparent 40%
-
-    ),
-
-    radial-gradient(
-
-      circle at center,
-
-      rgba(100,130,130,.08),
-
-      transparent 55%
-
-    ),
-
-    #080a0a;
+  font-size:18px;
 
 }
 
-.city{
-
-  position:absolute;
-
-  inset:0;
-
-  opacity:.34;
-
-  background:
-
-    linear-gradient(
-
-      90deg,
-
-      transparent 0 8%,
-
-      rgba(255,255,255,.06) 8% 9%,
-
-      transparent 9% 23%,
-
-      rgba(255,255,255,.04) 23% 25%,
-
-      transparent 25% 55%,
-
-      rgba(255,255,255,.04) 55% 57%,
-
-      transparent 57% 78%,
-
-      rgba(255,255,255,.05) 78% 80%,
-
-      transparent 80%
-
-    ),
-
-    linear-gradient(
-
-      0deg,
-
-      #020303,
-
-      transparent
-
-    );
-
-}
-
-/* Camera info */
-
-.camlabel{
-
-  position:absolute;
-
-  left:15px;
-
-  top:14px;
-
-  font-size:10px;
-
-  line-height:1.5;
-
-}
-
-.camlabel span{
-
-  color:var(--grey);
-
-}
-
-.coordinates{
-
-  position:absolute;
-
-  right:14px;
-
-  top:14px;
+.clockbar div:last-child{
 
   text-align:right;
 
-  color:var(--grey);
+}
 
-  font-size:8px;
+/* PAGES */
 
-  line-height:1.6;
+.page{
+
+  display:none;
+
+  animation:fade .25s ease;
 
 }
 
-/* =========================
+.page.active{
 
-   TRACKING BOXES
-
-========================= */
-
-.reticle{
-
-  position:absolute;
-
-  border:
-
-    1px solid
-
-    rgba(225,235,235,.72);
-
-  animation:
-
-    float 5s ease-in-out infinite;
+  display:block;
 
 }
 
-.reticle::before,
+@keyframes fade{
 
-.reticle::after{
+  from{opacity:0}
 
-  content:"";
-
-  position:absolute;
-
-  width:8px;
-
-  height:8px;
+  to{opacity:1}
 
 }
 
-.reticle::before{
+/* SYSTEM */
 
-  left:-2px;
+.systemHeader{
 
-  top:-2px;
-
-  border-left:2px solid white;
-
-  border-top:2px solid white;
+  padding:32px 30px 10px;
 
 }
 
-.reticle::after{
+.sectionTitle{
 
-  right:-2px;
+  font-size:17px;
 
-  bottom:-2px;
-
-  border-right:2px solid white;
-
-  border-bottom:2px solid white;
+  letter-spacing:1px;
 
 }
 
-.r1{
+.sectionSub{
 
-  width:77px;
+  color:var(--muted);
 
-  height:145px;
-
-  left:16%;
-
-  top:32%;
+  margin-top:10px;
 
 }
 
-.r2{
+.analysis{
 
-  width:64px;
+  position:relative;
 
-  height:120px;
+  height:520px;
 
-  left:61%;
+  border-bottom:1px solid var(--line);
 
-  top:20%;
-
-  border-color:var(--red);
-
-  animation-delay:-1.5s;
+  overflow:hidden;
 
 }
 
-.r3{
-
-  width:58px;
-
-  height:96px;
-
-  right:8%;
-
-  top:49%;
-
-  border-color:var(--blue);
-
-  animation-delay:-3s;
-
-}
-
-.tag{
-
-  position:absolute;
-
-  bottom:-29px;
-
-  left:-1px;
-
-  white-space:nowrap;
-
-  font-size:8px;
-
-  line-height:1.35;
-
-  color:var(--white);
-
-}
-
-.tag b{
-
-  font-weight:normal;
-
-  color:var(--grey);
-
-}
-
-.r2 .tag{
-
-  color:var(--red);
-
-}
-
-.r3 .tag{
-
-  color:var(--blue);
-
-}
-
-@keyframes float{
-
-  0%,
-
-  100%{
-
-    transform:translateY(0);
-
-  }
-
-  50%{
-
-    transform:translateY(-4px);
-
-  }
-
-}
-
-/* =========================
-
-   SCANNER
-
-========================= */
-
-.scan{
+.scanline{
 
   position:absolute;
 
@@ -586,521 +258,571 @@ button{
 
   height:1px;
 
-  background:
+  background:var(--cyan);
 
-    rgba(120,190,215,.5);
+  opacity:.65;
 
-  box-shadow:
-
-    0 0 8px
-
-    rgba(120,190,215,.5);
-
-  animation:
-
-    scan 5s linear infinite;
+  animation:scan 7s linear infinite;
 
 }
 
 @keyframes scan{
 
-  from{
+  0%{top:10%}
 
-    top:0;
+  50%{top:90%}
 
-  }
-
-  to{
-
-    top:100%;
-
-  }
+  100%{top:10%}
 
 }
 
-/* =========================
-
-   ANALYSIS
-
-========================= */
-
-.analysis{
+.box{
 
   position:absolute;
 
-  left:14px;
-
-  right:14px;
-
-  bottom:15px;
-
-  padding:10px;
-
-  background:
-
-    rgba(0,0,0,.72);
-
-  border-left:
-
-    2px solid var(--white);
-
-  font-size:9px;
-
-  line-height:1.6;
+  border:2px solid;
 
 }
 
-.analysis .blue{
+.box:before,
 
-  color:var(--blue);
+.box:after{
+
+  content:"";
+
+  position:absolute;
+
+  width:17px;
+
+  height:17px;
+
+  border-color:white;
 
 }
 
-.analysis .red{
+.box:before{
+
+  top:-4px;
+
+  left:-4px;
+
+  border-left:4px solid white;
+
+  border-top:4px solid white;
+
+}
+
+.box:after{
+
+  bottom:-4px;
+
+  right:-4px;
+
+  border-right:4px solid white;
+
+  border-bottom:4px solid white;
+
+}
+
+.box1{
+
+  width:155px;
+
+  height:290px;
+
+  left:16%;
+
+  top:120px;
+
+  border-color:#aab0b0;
+
+}
+
+.box2{
+
+  width:128px;
+
+  height:240px;
+
+  right:22%;
+
+  top:25px;
+
+  border-color:var(--red);
+
+}
+
+.box3{
+
+  width:116px;
+
+  height:194px;
+
+  right:8%;
+
+  bottom:65px;
+
+  border-color:var(--cyan);
+
+}
+
+.boxLabel{
+
+  position:absolute;
+
+  top:calc(100% + 15px);
+
+  left:0;
+
+  font-size:13px;
+
+  color:#8c9494;
+
+}
+
+.box2 .boxLabel{
 
   color:var(--red);
 
 }
 
-/* =========================
+.box3 .boxLabel{
 
-   SYSTEM FEED
-
-========================= */
-
-.feed{
-
-  height:135px;
-
-  overflow:hidden;
-
-  padding:
-
-    12px 17px;
-
-  border-bottom:
-
-    1px solid var(--line);
-
-  font-size:9px;
-
-  line-height:1.65;
+  color:var(--cyan);
 
 }
 
-.feedline{
+/* STATUS */
 
-  color:var(--grey);
+.statusBox{
 
-}
+  position:absolute;
 
-.feedline strong{
+  bottom:25px;
 
-  color:var(--white);
+  left:28px;
 
-  font-weight:normal;
+  right:28px;
 
-}
+  border-left:4px solid white;
 
-.feedline.blue strong{
+  background:rgba(0,0,0,.72);
 
-  color:var(--blue);
-
-}
-
-.feedline.red strong{
-
-  color:var(--red);
+  padding:20px;
 
 }
 
-.feedline.green strong{
+.cyan{
+
+  color:var(--cyan);
+
+}
+
+.green{
 
   color:var(--green);
 
 }
 
-/* =========================
+.red{
 
-   COMMAND
+  color:var(--red);
 
-========================= */
+}
+
+/* LOG */
+
+.log{
+
+  padding:27px 36px;
+
+  min-height:270px;
+
+  border-bottom:1px solid var(--line);
+
+  line-height:28px;
+
+  color:#aeb5b5;
+
+  font-size:14px;
+
+}
+
+/* COMMAND */
 
 .commandArea{
 
-  padding:14px;
+  padding:30px 28px;
 
-  border-bottom:
+}
 
-    1px solid var(--line);
+.commandRow{
+
+  display:flex;
+
+  gap:16px;
+
+  align-items:center;
 
 }
 
 .voice{
 
-  display:flex;
+  width:96px;
 
-  align-items:center;
+  height:96px;
 
-  gap:9px;
+  min-width:96px;
 
-}
-
-.mic{
-
-  width:48px;
-
-  height:48px;
-
-  flex:none;
-
-  border:
-
-    1px solid var(--blue);
+  border:2px solid var(--cyan);
 
   border-radius:50%;
 
-  background:
+  background:transparent;
 
-    rgba(80,160,200,.07);
+  color:var(--cyan);
 
-  color:var(--blue);
-
-  font-size:20px;
+  font-size:30px;
 
 }
 
-.mic.listening{
-
-  box-shadow:
-
-    0 0 18px
-
-    rgba(112,184,214,.7);
-
-}
-
-.inputWrap{
+.commandInput{
 
   flex:1;
 
+  height:84px;
+
   display:flex;
 
-  min-width:0;
-
-  border:
-
-    1px solid var(--line);
+  border:2px solid #364040;
 
 }
 
-#command{
+.commandInput input{
 
-  width:100%;
+  flex:1;
 
   min-width:0;
-
-  padding:13px;
 
   border:0;
 
   outline:0;
 
-  background:transparent;
+  background:#020404;
 
   color:white;
 
+  padding:0 25px;
+
   font-family:inherit;
 
-  font-size:11px;
+  font-size:17px;
 
 }
 
-#command::placeholder{
+.commandInput button{
 
-  color:#646b6d;
+  width:135px;
 
-}
+  background:#020404;
 
-.exec{
+  color:white;
 
   border:0;
 
-  border-left:
-
-    1px solid var(--line);
-
-  background:transparent;
-
-  color:var(--white);
-
-  padding:
-
-    0 14px;
+  border-left:1px solid #394343;
 
   font-family:inherit;
 
-}
-
-/* =========================
-
-   MODULES
-
-========================= */
-
-.modules{
-
-  display:grid;
-
-  grid-template-columns:
-
-    repeat(4,1fr);
-
-  padding:
-
-    10px 8px
-
-    calc(
-
-      env(safe-area-inset-bottom)
-
-      + 12px
-
-    );
+  font-size:21px;
 
 }
+
+/* OTHER MODULES */
 
 .module{
 
-  text-align:center;
-
-  color:var(--grey);
-
-  font-size:8px;
-
-  padding:9px 2px;
-
-  user-select:none;
+  padding:30px;
 
 }
 
-.module .icon{
+.moduleHead{
 
-  color:var(--white);
-
-  font-size:19px;
-
-  margin-bottom:5px;
+  margin-bottom:30px;
 
 }
 
-.module.active{
+.moduleHead h2{
 
-  color:var(--blue);
+  margin:0;
 
-}
+  font-weight:normal;
 
-/* =========================
-
-   OVERLAYS
-
-========================= */
-
-.overlay{
-
-  position:fixed;
-
-  inset:0;
-
-  z-index:100;
-
-  background:
-
-    rgba(0,0,0,.96);
-
-  display:none;
-
-  overflow-y:auto;
-
-  padding:
-
-    calc(
-
-      env(safe-area-inset-top)
-
-      + 25px
-
-    )
-
-    18px
-
-    calc(
-
-      env(safe-area-inset-bottom)
-
-      + 20px
-
-    );
+  letter-spacing:4px;
 
 }
 
-.overlay.show{
+.moduleHead p{
 
-  display:block;
+  color:var(--muted);
 
 }
 
-.overlayHeader{
+.card{
+
+  border:1px solid #344141;
+
+  background:rgba(3,8,8,.75);
+
+  padding:20px;
+
+  margin-bottom:18px;
+
+}
+
+.cardTitle{
+
+  font-size:17px;
+
+  margin-bottom:9px;
+
+}
+
+.cardMeta{
+
+  color:var(--cyan);
+
+  font-size:13px;
+
+  margin-bottom:10px;
+
+}
+
+.cardText{
+
+  color:#adb4b4;
+
+  line-height:1.5;
+
+  white-space:pre-wrap;
+
+}
+
+.actions{
 
   display:flex;
 
-  justify-content:
+  gap:10px;
 
-    space-between;
-
-  align-items:center;
-
-  border-bottom:
-
-    1px solid var(--line);
-
-  padding-bottom:13px;
-
-  margin-bottom:15px;
+  margin-top:16px;
 
 }
 
-.overlayTitle{
-
-  letter-spacing:2px;
-
-  font-size:12px;
-
-}
-
-.close{
-
-  background:none;
-
-  border:0;
-
-  color:white;
-
-  font-size:24px;
-
-}
-
-/* =========================
-
-   DATABASE ITEMS
-
-========================= */
-
-.item{
-
-  padding:12px;
-
-  border-left:
-
-    2px solid var(--blue);
-
-  background:
-
-    rgba(255,255,255,.025);
-
-  margin-bottom:8px;
-
-  font-size:11px;
-
-}
-
-.item small{
-
-  display:block;
-
-  color:var(--grey);
-
-  margin-bottom:5px;
-
-}
-
-.form{
-
-  display:grid;
-
-  gap:8px;
-
-  margin-top:18px;
-
-}
-
-.form input{
-
-  padding:12px;
-
-  border:
-
-    1px solid var(--line);
-
-  background:#050606;
-
-  color:white;
-
-  font-family:inherit;
-
-  border-radius:0;
-
-}
-
-.form button{
-
-  padding:12px;
-
-  border:
-
-    1px solid var(--blue);
-
-  color:var(--blue);
+.smallBtn{
 
   background:transparent;
 
+  border:1px solid #3c4949;
+
+  color:#bfc6c6;
+
+  padding:10px 13px;
+
   font-family:inherit;
+
+}
+
+.deleteBtn{
+
+  border-color:#633838;
+
+  color:#ef7070;
+
+}
+
+.done{
+
+  opacity:.45;
+
+}
+
+.done .cardTitle{
+
+  text-decoration:line-through;
+
+}
+
+/* FORM */
+
+.form{
+
+  border:1px solid #354242;
+
+  padding:20px;
+
+  margin-bottom:30px;
+
+}
+
+.form input,
+
+.form textarea{
+
+  width:100%;
+
+  margin-bottom:12px;
+
+  padding:15px;
+
+  background:#020404;
+
+  border:1px solid #344141;
+
+  color:white;
+
+  outline:0;
+
+  font-family:inherit;
+
+  font-size:16px;
+
+}
+
+.form textarea{
+
+  min-height:110px;
+
+  resize:vertical;
+
+}
+
+.addBtn{
+
+  width:100%;
+
+  padding:16px;
+
+  background:#061313;
+
+  border:1px solid var(--cyan);
+
+  color:var(--cyan);
+
+  font-family:inherit;
+
+  letter-spacing:2px;
+
+  font-size:15px;
 
 }
 
 .empty{
 
-  color:var(--grey);
+  padding:30px 0;
 
-  font-size:10px;
+  color:#5e6969;
 
-  padding:10px 0;
+  letter-spacing:2px;
 
 }
 
-/* =========================
+/* NAV */
 
-   MOBILE
+.nav{
 
-========================= */
+  position:fixed;
 
-@media(max-width:500px){
+  left:0;
 
-  .system{
+  right:0;
 
-    font-size:12px;
+  bottom:0;
+
+  height:100px;
+
+  padding-bottom:env(safe-area-inset-bottom);
+
+  background:rgba(2,4,4,.96);
+
+  border-top:1px solid #334040;
+
+  display:grid;
+
+  grid-template-columns:repeat(4,1fr);
+
+  z-index:100;
+
+}
+
+.navBtn{
+
+  background:transparent;
+
+  border:0;
+
+  color:#697272;
+
+  font-family:inherit;
+
+  font-size:11px;
+
+}
+
+.navIcon{
+
+  display:block;
+
+  font-size:26px;
+
+  color:#d9dddd;
+
+  margin-bottom:9px;
+
+}
+
+.navBtn.active{
+
+  color:var(--cyan);
+
+}
+
+.navBtn.active .navIcon{
+
+  color:var(--cyan);
+
+  text-shadow:0 0 12px rgba(97,201,239,.5);
+
+}
+
+/* RESPONSIVE */
+
+@media(max-width:600px){
+
+  .header{
+
+    padding-left:30px;
+
+    padding-right:30px;
 
   }
 
-  .clock{
+  .clockbar{
 
-    font-size:10px;
+    padding:0 30px;
+
+    font-size:13px;
 
   }
 
-  .viewport{
+  .analysis{
 
-    min-height:350px;
+    height:520px;
+
+  }
+
+  .commandInput button{
+
+    width:100px;
 
   }
 
@@ -1112,531 +834,371 @@ button{
 
 <body>
 
-<div class="machine">
+<header class="header">
 
-<!-- =====================
+  <div class="headerTop">
 
-     HEADER
+    <div class="logo">MACHINE</div>
 
-===================== -->
+    <div class="online">
 
-<header class="top">
+      <span class="dot"></span>
 
-  <div class="system">
+      ONLINE
 
-    MACHINE
-
-    <small>
-
-      OBSERVATION SYSTEM // LOCAL NODE
-
-    </small>
+    </div>
 
   </div>
 
-  <div class="online">
+  <div class="subtitle">
 
-    <span class="dot"></span>
-
-    ONLINE
+    OBSERVATION SYSTEM // LOCAL NODE
 
   </div>
 
 </header>
 
-<!-- =====================
+<div class="clockbar">
 
-     TIME
+  <div>DAY 0001</div>
 
-===================== -->
+  <div id="clock">--:--:--</div>
 
-<div class="clock">
-
-  <span id="day">
-
-    DAY 0001
-
-  </span>
-
-  <span id="clock">
-
-    00:00:00
-
-  </span>
-
-  <span id="date">
-
-    00.00.0000
-
-  </span>
+  <div id="date">--/--/----</div>
 
 </div>
 
-<!-- =====================
+<!-- ================= SYSTEM ================= -->
 
-     MACHINE VIEW
+<section id="systemPage" class="page active">
 
-===================== -->
+  <div class="systemHeader">
 
-<section class="viewport">
+    <div class="sectionTitle">LIVE ANALYSIS</div>
 
-  <div class="city"></div>
-
-  <div class="scan"></div>
-
-  <div class="camlabel">
-
-    LIVE ANALYSIS
-
-    <br>
-
-    <span>
-
-      LOCAL INTERFACE / 01
-
-    </span>
+    <div class="sectionSub">LOCAL INTERFACE / 01</div>
 
   </div>
-
-  <div class="coordinates">
-
-    SYS 01
-
-    <br>
-
-    NODE ACTIVE
-
-    <br>
-
-    ANALYSIS 100%
-
-  </div>
-
-  <!-- TARGET 1 -->
-
-  <div class="reticle r1">
-
-    <div class="tag">
-
-      ID_0371
-
-      <br>
-
-      <b>
-
-        STATUS: OBSERVED
-
-      </b>
-
-    </div>
-
-  </div>
-
-  <!-- TARGET 2 -->
-
-  <div class="reticle r2">
-
-    <div class="tag">
-
-      ID_9931
-
-      <br>
-
-      ALERT
-
-    </div>
-
-  </div>
-
-  <!-- TARGET 3 -->
-
-  <div class="reticle r3">
-
-    <div class="tag">
-
-      EVENT_04
-
-      <br>
-
-      ACTIVE
-
-    </div>
-
-  </div>
-
-  <!-- ANALYSIS -->
 
   <div class="analysis">
 
-    <span class="blue">
+    <div class="scanline"></div>
 
-      SYSTEM //
+    <div class="box box1">
 
-    </span>
+      <div class="boxLabel">
 
-    ENVIRONMENTAL ANALYSIS ACTIVE
+        ID_0371<br>
 
-    <br>
+        STATUS: OBSERVED
 
-    <span id="analysisText">
+      </div>
 
-      NO ACTIVE COMMAND
+    </div>
 
-    </span>
+    <div class="box box2">
+
+      <div class="boxLabel">
+
+        ID_9931<br>
+
+        ALERT
+
+      </div>
+
+    </div>
+
+    <div class="box box3">
+
+      <div class="boxLabel">
+
+        EVENT_04<br>
+
+        ACTIVE
+
+      </div>
+
+    </div>
+
+    <div class="statusBox">
+
+      <span class="cyan">SYSTEM //</span>
+
+      ENVIRONMENTAL ANALYSIS ACTIVE
+
+      <br><br>
+
+      <span id="systemStatus">NO ACTIVE COMMAND</span>
+
+    </div>
+
+  </div>
+
+  <div class="log" id="systemLog"></div>
+
+  <div class="commandArea">
+
+    <div class="commandRow">
+
+      <button class="voice" id="voiceBtn">◎</button>
+
+      <div class="commandInput">
+
+        <input
+
+          id="command"
+
+          placeholder="ENTER COMMAND..."
+
+          autocomplete="off">
+
+        <button id="execBtn">EXEC</button>
+
+      </div>
+
+    </div>
 
   </div>
 
 </section>
 
-<!-- =====================
+<!-- ================= AGENDA ================= -->
 
-     SYSTEM LOG
+<section id="agendaPage" class="page">
 
-===================== -->
+  <div class="module">
 
-<section
+    <div class="moduleHead">
 
-  id="feed"
+      <h2>AGENDA</h2>
 
-  class="feed">
+      <p>EVENT DATABASE // LOCAL</p>
 
-</section>
+    </div>
 
-<!-- =====================
-
-     COMMAND INTERFACE
-
-===================== -->
-
-<section class="commandArea">
-
-  <div class="voice">
-
-    <button
-
-      id="micButton"
-
-      class="mic"
-
-      onclick="voiceCommand()">
-
-      ◉
-
-    </button>
-
-    <div class="inputWrap">
+    <div class="form">
 
       <input
 
-        id="command"
+        id="eventTitle"
 
-        autocomplete="off"
+        placeholder="ÉVÉNEMENT">
 
-        placeholder="ENTER COMMAND..."
+      <input
 
-      >
+        id="eventDate"
 
-      <button
+        type="date">
 
-        class="exec"
+      <input
 
-        onclick="executeCommand()">
+        id="eventTime"
 
-        EXEC
+        type="time">
+
+      <textarea
+
+        id="eventNote"
+
+        placeholder="NOTE / INFORMATION"></textarea>
+
+      <button class="addBtn" onclick="addEvent()">
+
+        + ADD EVENT
 
       </button>
 
     </div>
 
+    <div id="eventList"></div>
+
   </div>
 
 </section>
 
-<!-- =====================
+<!-- ================= TASKS ================= -->
 
-     MODULES
+<section id="tasksPage" class="page">
 
-===================== -->
+  <div class="module">
 
-<nav class="modules">
+    <div class="moduleHead">
 
-  <div class="module active">
+      <h2>TASKS</h2>
 
-    <div class="icon">
-
-      ⌖
+      <p>ACTIVE OPERATIONS</p>
 
     </div>
+
+    <div class="form">
+
+      <input
+
+        id="taskTitle"
+
+        placeholder="NOUVELLE TÂCHE">
+
+      <textarea
+
+        id="taskNote"
+
+        placeholder="INFORMATION OPTIONNELLE"></textarea>
+
+      <button class="addBtn" onclick="addTask()">
+
+        + ADD TASK
+
+      </button>
+
+    </div>
+
+    <div id="taskList"></div>
+
+  </div>
+
+</section>
+
+<!-- ================= MEMORY ================= -->
+
+<section id="memoryPage" class="page">
+
+  <div class="module">
+
+    <div class="moduleHead">
+
+      <h2>MEMORY</h2>
+
+      <p>LOCAL MEMORY NODE</p>
+
+    </div>
+
+    <div class="form">
+
+      <input
+
+        id="memoryTitle"
+
+        placeholder="IDENTIFIANT">
+
+      <textarea
+
+        id="memoryText"
+
+        placeholder="INFORMATION À CONSERVER"></textarea>
+
+      <button class="addBtn" onclick="addMemory()">
+
+        + STORE MEMORY
+
+      </button>
+
+    </div>
+
+    <div id="memoryList"></div>
+
+  </div>
+
+</section>
+
+<!-- ================= NAVIGATION ================= -->
+
+<nav class="nav">
+
+  <button class="navBtn active"
+
+          data-page="systemPage">
+
+    <span class="navIcon">⌖</span>
 
     SYSTEM
 
-  </div>
+  </button>
 
-  <div
+  <button class="navBtn"
 
-    class="module"
+          data-page="agendaPage">
 
-    onclick="openAgenda()">
-
-    <div class="icon">
-
-      □
-
-    </div>
+    <span class="navIcon">□</span>
 
     AGENDA
 
-  </div>
+  </button>
 
-  <div
+  <button class="navBtn"
 
-    class="module"
+          data-page="tasksPage">
 
-    onclick="openTasks()">
-
-    <div class="icon">
-
-      ☷
-
-    </div>
+    <span class="navIcon">☷</span>
 
     TASKS
 
-  </div>
+  </button>
 
-  <div
+  <button class="navBtn"
 
-    class="module"
+          data-page="memoryPage">
 
-    onclick="openMemory()">
-
-    <div class="icon">
-
-      ◇
-
-    </div>
+    <span class="navIcon">◇</span>
 
     MEMORY
 
-  </div>
+  </button>
 
 </nav>
 
-</div>
-
-<!-- =====================
-
-     AGENDA
-
-===================== -->
-
-<div
-
-  id="agendaOverlay"
-
-  class="overlay">
-
-  <div class="overlayHeader">
-
-    <div class="overlayTitle">
-
-      AGENDA // EVENTS
-
-    </div>
-
-    <button
-
-      class="close"
-
-      onclick="closeOverlay()">
-
-      ×
-
-    </button>
-
-  </div>
-
-  <div id="agendaList"></div>
-
-  <div class="form">
-
-    <input
-
-      type="datetime-local"
-
-      id="eventDate"
-
-    >
-
-    <input
-
-      id="eventName"
-
-      placeholder="EVENT DESCRIPTION"
-
-    >
-
-    <button onclick="addEvent()">
-
-      ADD EVENT
-
-    </button>
-
-  </div>
-
-</div>
-
-<!-- =====================
-
-     TASKS
-
-===================== -->
-
-<div
-
-  id="tasksOverlay"
-
-  class="overlay">
-
-  <div class="overlayHeader">
-
-    <div class="overlayTitle">
-
-      TASK DATABASE
-
-    </div>
-
-    <button
-
-      class="close"
-
-      onclick="closeOverlay()">
-
-      ×
-
-    </button>
-
-  </div>
-
-  <div id="taskList"></div>
-
-  <div class="form">
-
-    <input
-
-      id="taskName"
-
-      placeholder="NEW TASK"
-
-    >
-
-    <button onclick="addTask()">
-
-      ADD TASK
-
-    </button>
-
-  </div>
-
-</div>
-
-<!-- =====================
-
-     MEMORY
-
-===================== -->
-
-<div
-
-  id="memoryOverlay"
-
-  class="overlay">
-
-  <div class="overlayHeader">
-
-    <div class="overlayTitle">
-
-      LOCAL MEMORY
-
-    </div>
-
-    <button
-
-      class="close"
-
-      onclick="closeOverlay()">
-
-      ×
-
-    </button>
-
-  </div>
-
-  <div id="memoryList"></div>
-
-  <div class="form">
-
-    <input
-
-      id="memoryName"
-
-      placeholder="INFORMATION TO REMEMBER"
-
-    >
-
-    <button onclick="addMemory()">
-
-      STORE INFORMATION
-
-    </button>
-
-  </div>
-
-</div>
-
 <script>
 
-/* ========================================
+/* ==========================================
 
-   DATABASE
+   CLOCK
 
-======================================== */
+========================================== */
 
-let events =
+function updateClock(){
 
-JSON.parse(
+  const now=new Date();
 
-  localStorage.getItem("machine_events")
+  document.getElementById("clock").textContent=
 
-  || "[]"
+    now.toLocaleTimeString("fr-BE",{
 
-);
+      hour12:false
 
-let tasks =
+    });
 
-JSON.parse(
+  document.getElementById("date").textContent=
 
-  localStorage.getItem("machine_tasks")
+    now.toLocaleDateString("fr-BE");
 
-  || "[]"
+}
 
-);
+updateClock();
 
-let memories =
+setInterval(updateClock,1000);
 
-JSON.parse(
+/* ==========================================
 
-  localStorage.getItem("machine_memory")
+   STORAGE
 
-  || "[]"
+========================================== */
 
-);
+let events=
 
-function save(){
+JSON.parse(localStorage.getItem("machineEvents") || "[]");
+
+let tasks=
+
+JSON.parse(localStorage.getItem("machineTasks") || "[]");
+
+let memories=
+
+JSON.parse(localStorage.getItem("machineMemories") || "[]");
+
+function saveAll(){
 
   localStorage.setItem(
 
-    "machine_events",
+    "machineEvents",
 
     JSON.stringify(events)
 
@@ -1644,7 +1206,7 @@ function save(){
 
   localStorage.setItem(
 
-    "machine_tasks",
+    "machineTasks",
 
     JSON.stringify(tasks)
 
@@ -1652,7 +1214,7 @@ function save(){
 
   localStorage.setItem(
 
-    "machine_memory",
+    "machineMemories",
 
     JSON.stringify(memories)
 
@@ -1660,901 +1222,69 @@ function save(){
 
 }
 
-/* ========================================
+/* ==========================================
 
-   CLOCK
+   NAVIGATION
 
-======================================== */
+========================================== */
 
-const systemBirth =
+document.querySelectorAll(".navBtn").forEach(btn=>{
 
-  new Date("2026-09-25T00:00:00");
+  btn.addEventListener("click",()=>{
 
-function updateClock(){
+    document.querySelectorAll(".page")
 
-  const now =
+      .forEach(page=>page.classList.remove("active"));
 
-    new Date();
+    document.querySelectorAll(".navBtn")
 
-  document
-
-    .getElementById("clock")
-
-    .textContent =
-
-    now.toLocaleTimeString("fr-BE");
-
-  document
-
-    .getElementById("date")
-
-    .textContent =
-
-    now.toLocaleDateString("fr-BE");
-
-  const diff =
-
-    Math.max(
-
-      1,
-
-      Math.floor(
-
-        (now - systemBirth)
-
-        / 86400000
-
-      ) + 1
-
-    );
-
-  document
-
-    .getElementById("day")
-
-    .textContent =
-
-    "DAY "
-
-    + String(diff).padStart(4,"0");
-
-}
-
-updateClock();
-
-setInterval(
-
-  updateClock,
-
-  1000
-
-);
-
-/* ========================================
-
-   SYSTEM FEED
-
-======================================== */
-
-function feed(text,type=""){
-
-  const box =
-
-    document.getElementById("feed");
-
-  const line =
-
-    document.createElement("div");
-
-  line.className =
-
-    "feedline " + type;
-
-  const time =
-
-    new Date()
-
-    .toLocaleTimeString("fr-BE");
-
-  line.innerHTML =
-
-    "["
-
-    + time
-
-    + "] &gt; <strong>"
-
-    + escapeHTML(text)
-
-    + "</strong>";
-
-  box.appendChild(line);
-
-  while(
-
-    box.children.length > 7
-
-  ){
-
-    box.removeChild(
-
-      box.firstChild
-
-    );
-
-  }
-
-  box.scrollTop =
-
-    box.scrollHeight;
-
-}
-
-/* ========================================
-
-   BOOT SEQUENCE
-
-======================================== */
-
-function boot(){
-
-  const lines = [
-
-    [
-
-      "BOOT SEQUENCE INITIALIZED",
-
-      ""
-
-    ],
-
-    [
-
-      "LOCAL DATABASE CONNECTED",
-
-      ""
-
-    ],
-
-    [
-
-      "EVENT MODULE ONLINE",
-
-      "blue"
-
-    ],
-
-    [
-
-      "VOICE INTERFACE STANDBY",
-
-      ""
-
-    ],
-
-    [
-
-      "MEMORY NODE ACTIVE",
-
-      "green"
-
-    ],
-
-    [
-
-      "GIO CORE ACTIVE",
-
-      "green"
-
-    ],
-
-    [
-
-      "SYSTEM OPERATIONAL",
-
-      "blue"
-
-    ]
-
-  ];
-
-  lines.forEach(
-
-    (x,i)=>{
-
-      setTimeout(
-
-        ()=>{
-
-          feed(
-
-            x[0],
-
-            x[1]
-
-          );
-
-        },
-
-        i * 230
-
-      );
-
-    }
-
-  );
-
-}
-
-boot();
-
-/* ========================================
-
-   COMMAND INPUT
-
-======================================== */
-
-document
-
-.getElementById("command")
-
-.addEventListener(
-
-  "keydown",
-
-  event=>{
-
-    if(
-
-      event.key === "Enter"
-
-    ){
-
-      executeCommand();
-
-    }
-
-  }
-
-);
-
-function executeCommand(){
-
-  const input =
-
-    document.getElementById("command");
-
-  const raw =
-
-    input.value.trim();
-
-  if(!raw){
-
-    return;
-
-  }
-
-  feed(
-
-    'COMMAND RECEIVED: "'
-
-    + raw
-
-    + '"',
-
-    "blue"
-
-  );
-
-  document
-
-    .getElementById("analysisText")
-
-    .textContent =
-
-    "PARSING COMMAND...";
-
-  input.value = "";
-
-  setTimeout(
-
-    ()=>{
-
-      analyse(raw);
-
-    },
-
-    350
-
-  );
-
-}
-
-/* ========================================
-
-   LOCAL COMMAND ENGINE
-
-======================================== */
-
-function analyse(raw){
-
-  const text =
-
-    raw.toLowerCase();
-
-  /* AGENDA */
-
-  if(
-
-    text.includes("agenda")
-
-    ||
-
-    text.includes("événement")
-
-    ||
-
-    text.includes("evenement")
-
-  ){
+      .forEach(b=>b.classList.remove("active"));
 
     document
 
-      .getElementById("analysisText")
+      .getElementById(btn.dataset.page)
 
-      .textContent =
+      .classList.add("active");
 
-      events.length
+    btn.classList.add("active");
 
-      + " EVENT(S) IDENTIFIED";
+    window.scrollTo({
 
-    feed(
+      top:0,
 
-      "AGENDA DATABASE: "
-
-      + events.length
-
-      + " EVENT(S)",
-
-      "green"
-
-    );
-
-    return;
-
-  }
-
-  /* TASKS */
-
-  if(
-
-    text.includes("tâche")
-
-    ||
-
-    text.includes("tache")
-
-    ||
-
-    text.includes("task")
-
-  ){
-
-    document
-
-      .getElementById("analysisText")
-
-      .textContent =
-
-      tasks.length
-
-      + " ACTIVE TASK(S)";
-
-    feed(
-
-      "TASK DATABASE: "
-
-      + tasks.length
-
-      + " ACTIVE",
-
-      "green"
-
-    );
-
-    return;
-
-  }
-
-  /* TIME */
-
-  if(
-
-    text.includes("heure")
-
-  ){
-
-    const time =
-
-      new Date()
-
-      .toLocaleTimeString("fr-BE");
-
-    document
-
-      .getElementById("analysisText")
-
-      .textContent =
-
-      "LOCAL TIME "
-
-      + time;
-
-    feed(
-
-      "LOCAL TIME: "
-
-      + time,
-
-      "blue"
-
-    );
-
-    return;
-
-  }
-
-  /* DATE */
-
-  if(
-
-    text.includes("date")
-
-    ||
-
-    text.includes("quel jour")
-
-  ){
-
-    const date =
-
-      new Date()
-
-      .toLocaleDateString(
-
-        "fr-BE",
-
-        {
-
-          weekday:"long",
-
-          day:"numeric",
-
-          month:"long",
-
-          year:"numeric"
-
-        }
-
-      );
-
-    document
-
-      .getElementById("analysisText")
-
-      .textContent =
-
-      date.toUpperCase();
-
-    feed(
-
-      "DATE: "
-
-      + date,
-
-      "blue"
-
-    );
-
-    return;
-
-  }
-
-  /* MEMORY */
-
-  if(
-
-    text.startsWith("souviens-toi")
-
-    ||
-
-    text.startsWith("souviens toi")
-
-    ||
-
-    text.startsWith("mémorise")
-
-    ||
-
-    text.startsWith("memorise")
-
-  ){
-
-    memories.push({
-
-      id:
-
-        Date.now(),
-
-      text:
-
-        raw
+      behavior:"smooth"
 
     });
 
-    save();
+  });
 
-    document
+});
 
-      .getElementById("analysisText")
-
-      .textContent =
-
-      "INFORMATION STORED";
-
-    feed(
-
-      "MEMORY DATABASE UPDATED",
-
-      "green"
-
-    );
-
-    return;
-
-  }
-
-  /* GREETING */
-
-  if(
-
-    text.includes("bonjour")
-
-    ||
-
-    text.includes("salut gio")
-
-    ||
-
-    text === "gio"
-
-  ){
-
-    document
-
-      .getElementById("analysisText")
-
-      .textContent =
-
-      "GIO CORE RESPONDING";
-
-    feed(
-
-      "Bonjour. MACHINE opérationnelle.",
-
-      "green"
-
-    );
-
-    return;
-
-  }
-
-  /* UNKNOWN */
-
-  document
-
-    .getElementById("analysisText")
-
-    .textContent =
-
-    "COMMAND LOGGED";
-
-  feed(
-
-    "COMMAND STORED // EXTERNAL INTELLIGENCE NOT CONNECTED",
-
-    ""
-
-  );
-
-}
-
-/* ========================================
-
-   VOICE
-
-======================================== */
-
-function voiceCommand(){
-
-  const Recognition =
-
-    window.SpeechRecognition
-
-    ||
-
-    window.webkitSpeechRecognition;
-
-  if(!Recognition){
-
-    feed(
-
-      "VOICE RECOGNITION UNAVAILABLE",
-
-      "red"
-
-    );
-
-    document
-
-      .getElementById("analysisText")
-
-      .textContent =
-
-      "VOICE MODULE UNAVAILABLE";
-
-    return;
-
-  }
-
-  const recognition =
-
-    new Recognition();
-
-  recognition.lang =
-
-    "fr-BE";
-
-  recognition.interimResults =
-
-    false;
-
-  recognition.maxAlternatives =
-
-    1;
-
-  const mic =
-
-    document.getElementById(
-
-      "micButton"
-
-    );
-
-  mic.classList.add(
-
-    "listening"
-
-  );
-
-  feed(
-
-    "VOICE INPUT ACTIVE",
-
-    "blue"
-
-  );
-
-  document
-
-    .getElementById("analysisText")
-
-    .textContent =
-
-    "LISTENING...";
-
-  recognition.start();
-
-  recognition.onresult =
-
-    event=>{
-
-      const text =
-
-        event.results[0][0]
-
-        .transcript;
-
-      document
-
-        .getElementById("command")
-
-        .value =
-
-        text;
-
-      mic.classList.remove(
-
-        "listening"
-
-      );
-
-      executeCommand();
-
-    };
-
-  recognition.onerror =
-
-    ()=>{
-
-      mic.classList.remove(
-
-        "listening"
-
-      );
-
-      feed(
-
-        "VOICE INPUT ERROR",
-
-        "red"
-
-      );
-
-      document
-
-        .getElementById("analysisText")
-
-        .textContent =
-
-        "VOICE ERROR";
-
-    };
-
-  recognition.onend =
-
-    ()=>{
-
-      mic.classList.remove(
-
-        "listening"
-
-      );
-
-    };
-
-}
-
-/* ========================================
-
-   OVERLAYS
-
-======================================== */
-
-function closeOverlay(){
-
-  document
-
-    .querySelectorAll(
-
-      ".overlay"
-
-    )
-
-    .forEach(
-
-      overlay=>{
-
-        overlay
-
-          .classList
-
-          .remove("show");
-
-      }
-
-    );
-
-}
-
-function openAgenda(){
-
-  renderAgenda();
-
-  document
-
-    .getElementById(
-
-      "agendaOverlay"
-
-    )
-
-    .classList
-
-    .add("show");
-
-}
-
-function openTasks(){
-
-  renderTasks();
-
-  document
-
-    .getElementById(
-
-      "tasksOverlay"
-
-    )
-
-    .classList
-
-    .add("show");
-
-}
-
-function openMemory(){
-
-  renderMemory();
-
-  document
-
-    .getElementById(
-
-      "memoryOverlay"
-
-    )
-
-    .classList
-
-    .add("show");
-
-}
-
-/* ========================================
+/* ==========================================
 
    AGENDA
 
-======================================== */
+========================================== */
 
 function addEvent(){
 
-  const date =
+  const title=
 
-    document
+    document.getElementById("eventTitle").value.trim();
 
-      .getElementById(
+  const date=
 
-        "eventDate"
+    document.getElementById("eventDate").value;
 
-      )
+  const time=
 
-      .value;
+    document.getElementById("eventTime").value;
 
-  const name =
+  const note=
 
-    document
+    document.getElementById("eventNote").value.trim();
 
-      .getElementById(
-
-        "eventName"
-
-      )
-
-      .value
-
-      .trim();
-
-  if(
-
-    !date
-
-    ||
-
-    !name
-
-  ){
+  if(!title){
 
     return;
 
@@ -2562,533 +1292,745 @@ function addEvent(){
 
   events.push({
 
-    id:
+    id:Date.now(),
 
-      Date.now(),
+    title,
 
-    date:
+    date,
 
-      date,
+    time,
 
-    name:
-
-      name
+    note
 
   });
 
-  events.sort(
+  saveAll();
 
-    (a,b)=>
+  document.getElementById("eventTitle").value="";
 
-      new Date(a.date)
+  document.getElementById("eventDate").value="";
 
-      -
+  document.getElementById("eventTime").value="";
 
-      new Date(b.date)
+  document.getElementById("eventNote").value="";
 
-  );
+  renderEvents();
 
-  save();
-
-  renderAgenda();
-
-  document
-
-    .getElementById(
-
-      "eventName"
-
-    )
-
-    .value = "";
-
-  feed(
-
-    "NEW EVENT STORED",
-
-    "green"
-
-  );
+  addLog("EVENT REGISTERED");
 
 }
 
-/* Render agenda */
+function deleteEvent(id){
 
-function renderAgenda(){
+  events=events.filter(e=>e.id!==id);
 
-  const box =
+  saveAll();
 
-    document.getElementById(
+  renderEvents();
 
-      "agendaList"
+  addLog("EVENT REMOVED");
 
-    );
+}
 
-  box.innerHTML = "";
+function renderEvents(){
 
-  if(
+  const container=
 
-    !events.length
+    document.getElementById("eventList");
 
-  ){
+  if(events.length===0){
 
-    box.innerHTML =
+    container.innerHTML=
 
-      '<div class="empty">'
-
-      +
-
-      'NO EVENT DATA'
-
-      +
-
-      '</div>';
+      '<div class="empty">NO EVENT DATA</div>';
 
     return;
 
   }
 
-  events.forEach(
+  const sorted=[...events].sort((a,b)=>{
 
-    event=>{
+    const da=
 
-      const div =
+      new Date(`${a.date || "9999-12-31"}T${a.time || "23:59"}`);
 
-        document.createElement(
+    const db=
 
-          "div"
+      new Date(`${b.date || "9999-12-31"}T${b.time || "23:59"}`);
 
-        );
+    return da-db;
 
-      div.className =
+  });
 
-        "item";
+  container.innerHTML=
 
-      div.innerHTML =
+  sorted.map(e=>`
 
-        "<small>"
+    <div class="card">
 
-        +
+      <div class="cardTitle">
 
-        new Date(
+        ${escapeHTML(e.title)}
 
-          event.date
+      </div>
 
-        )
+      <div class="cardMeta">
 
-        .toLocaleString(
+        ${e.date || "DATE UNKNOWN"}
 
-          "fr-BE"
+        ${e.time ? " // "+e.time : ""}
 
-        )
+      </div>
 
-        +
+      ${
 
-        "</small>"
+        e.note
 
-        +
+        ?
 
-        escapeHTML(
+        `<div class="cardText">
 
-          event.name
+          ${escapeHTML(e.note)}
 
-        );
+        </div>`
 
-      div.onclick =
+        :
 
-        ()=>{
+        ""
 
-          if(
+      }
 
-            confirm(
+      <div class="actions">
 
-              "Supprimer cet événement ?"
+        <button
 
-            )
+          class="smallBtn deleteBtn"
 
-          ){
+          onclick="deleteEvent(${e.id})">
 
-            events =
+          DELETE
 
-              events.filter(
+        </button>
 
-                item=>
+      </div>
 
-                  item.id
+    </div>
 
-                  !==
-
-                  event.id
-
-              );
-
-            save();
-
-            renderAgenda();
-
-            feed(
-
-              "EVENT REMOVED",
-
-              "red"
-
-            );
-
-          }
-
-        };
-
-      box.appendChild(
-
-        div
-
-      );
-
-    }
-
-  );
+  `).join("");
 
 }
 
-/* ========================================
+/* ==========================================
 
    TASKS
 
-======================================== */
+========================================== */
 
 function addTask(){
 
-  const input =
+  const title=
 
-    document.getElementById(
+    document.getElementById("taskTitle").value.trim();
 
-      "taskName"
+  const note=
 
-    );
+    document.getElementById("taskNote").value.trim();
 
-  const name =
-
-    input.value.trim();
-
-  if(!name){
+  if(!title){
 
     return;
 
   }
 
-  tasks.push({
+  tasks.unshift({
 
-    id:
+    id:Date.now(),
 
-      Date.now(),
+    title,
 
-    name:
+    note,
 
-      name
+    done:false
 
   });
 
-  save();
+  saveAll();
+
+  document.getElementById("taskTitle").value="";
+
+  document.getElementById("taskNote").value="";
 
   renderTasks();
 
-  input.value = "";
+  addLog("TASK REGISTERED");
 
-  feed(
+}
 
-    "TASK CREATED",
+function toggleTask(id){
 
-    "green"
+  const task=
 
-  );
+    tasks.find(t=>t.id===id);
+
+  if(!task){
+
+    return;
+
+  }
+
+  task.done=!task.done;
+
+  saveAll();
+
+  renderTasks();
+
+}
+
+function deleteTask(id){
+
+  tasks=tasks.filter(t=>t.id!==id);
+
+  saveAll();
+
+  renderTasks();
 
 }
 
 function renderTasks(){
 
-  const box =
+  const container=
 
-    document.getElementById(
+    document.getElementById("taskList");
 
-      "taskList"
+  if(tasks.length===0){
 
-    );
+    container.innerHTML=
 
-  box.innerHTML = "";
-
-  if(
-
-    !tasks.length
-
-  ){
-
-    box.innerHTML =
-
-      '<div class="empty">'
-
-      +
-
-      'NO ACTIVE TASKS'
-
-      +
-
-      '</div>';
+      '<div class="empty">NO ACTIVE TASK</div>';
 
     return;
 
   }
 
-  tasks.forEach(
+  container.innerHTML=
 
-    task=>{
+  tasks.map(t=>`
 
-      const div =
+    <div class="card ${t.done ? "done" : ""}">
 
-        document.createElement(
+      <div class="cardTitle">
 
-          "div"
+        ${escapeHTML(t.title)}
 
-        );
+      </div>
 
-      div.className =
+      ${
 
-        "item";
+        t.note
 
-      div.textContent =
+        ?
 
-        task.name;
+        `<div class="cardText">
 
-      div.onclick =
+          ${escapeHTML(t.note)}
 
-        ()=>{
+        </div>`
 
-          tasks =
+        :
 
-            tasks.filter(
+        ""
 
-              item=>
+      }
 
-                item.id
+      <div class="actions">
 
-                !==
+        <button
 
-                task.id
+          class="smallBtn"
 
-            );
+          onclick="toggleTask(${t.id})">
 
-          save();
+          ${t.done ? "REOPEN" : "COMPLETE"}
 
-          renderTasks();
+        </button>
 
-          feed(
+        <button
 
-            "TASK COMPLETED",
+          class="smallBtn deleteBtn"
 
-            "green"
+          onclick="deleteTask(${t.id})">
 
-          );
+          DELETE
 
-        };
+        </button>
 
-      box.appendChild(
+      </div>
 
-        div
+    </div>
 
-      );
-
-    }
-
-  );
+  `).join("");
 
 }
 
-/* ========================================
+/* ==========================================
 
    MEMORY
 
-======================================== */
+========================================== */
 
 function addMemory(){
 
-  const input =
+  const title=
 
-    document.getElementById(
+    document.getElementById("memoryTitle").value.trim();
 
-      "memoryName"
+  const text=
 
-    );
+    document.getElementById("memoryText").value.trim();
 
-  const text =
-
-    input.value.trim();
-
-  if(!text){
+  if(!title || !text){
 
     return;
 
   }
 
-  memories.push({
+  memories.unshift({
 
-    id:
+    id:Date.now(),
 
-      Date.now(),
+    title,
 
-    text:
-
-      text
+    text
 
   });
 
-  save();
+  saveAll();
 
-  renderMemory();
+  document.getElementById("memoryTitle").value="";
 
-  input.value = "";
+  document.getElementById("memoryText").value="";
 
-  feed(
+  renderMemories();
 
-    "MEMORY STORED",
-
-    "green"
-
-  );
+  addLog("MEMORY STORED");
 
 }
 
-function renderMemory(){
+function deleteMemory(id){
 
-  const box =
+  memories=
 
-    document.getElementById(
+    memories.filter(m=>m.id!==id);
 
-      "memoryList"
+  saveAll();
 
-    );
+  renderMemories();
 
-  box.innerHTML = "";
+}
 
-  if(
+function renderMemories(){
 
-    !memories.length
+  const container=
 
-  ){
+    document.getElementById("memoryList");
 
-    box.innerHTML =
+  if(memories.length===0){
 
-      '<div class="empty">'
+    container.innerHTML=
 
-      +
-
-      'MEMORY DATABASE EMPTY'
-
-      +
-
-      '</div>';
+      '<div class="empty">MEMORY NODE EMPTY</div>';
 
     return;
 
   }
 
-  memories.forEach(
+  container.innerHTML=
 
-    memory=>{
+  memories.map(m=>`
 
-      const div =
+    <div class="card">
 
-        document.createElement(
+      <div class="cardMeta">
 
-          "div"
+        MEMORY NODE
 
-        );
+      </div>
 
-      div.className =
+      <div class="cardTitle">
 
-        "item";
+        ${escapeHTML(m.title)}
 
-      div.textContent =
+      </div>
 
-        memory.text;
+      <div class="cardText">
 
-      div.onclick =
+        ${escapeHTML(m.text)}
 
-        ()=>{
+      </div>
 
-          if(
+      <div class="actions">
 
-            confirm(
+        <button
 
-              "Supprimer cette information ?"
+          class="smallBtn deleteBtn"
 
-            )
+          onclick="deleteMemory(${m.id})">
 
-          ){
+          DELETE
 
-            memories =
+        </button>
 
-              memories.filter(
+      </div>
 
-                item=>
+    </div>
 
-                  item.id
-
-                  !==
-
-                  memory.id
-
-              );
-
-            save();
-
-            renderMemory();
-
-            feed(
-
-              "MEMORY REMOVED",
-
-              "red"
-
-            );
-
-          }
-
-        };
-
-      box.appendChild(
-
-        div
-
-      );
-
-    }
-
-  );
+  `).join("");
 
 }
 
-/* ========================================
+/* ==========================================
 
-   SECURITY
+   SYSTEM LOG
 
-======================================== */
+========================================== */
 
-function escapeHTML(text){
+const log=
 
-  const div =
+document.getElementById("systemLog");
 
-    document.createElement(
+function timestamp(){
 
-      "div"
+  return new Date()
+
+    .toLocaleTimeString("fr-BE",{
+
+      hour12:false
+
+    });
+
+}
+
+function addLog(message,color=""){
+
+  const line=
+
+    document.createElement("div");
+
+  line.innerHTML=
+
+    `[${timestamp()}] > `+
+
+    `<span class="${color}">
+
+      ${escapeHTML(message)}
+
+    </span>`;
+
+  log.appendChild(line);
+
+}
+
+function boot(){
+
+  const bootLines=[
+
+    ["BOOT SEQUENCE INITIALIZED",""],
+
+    ["LOCAL DATABASE CONNECTED",""],
+
+    ["EVENT MODULE ONLINE","cyan"],
+
+    ["VOICE INTERFACE STANDBY",""],
+
+    ["MEMORY NODE ACTIVE","green"],
+
+    ["GIO CORE ACTIVE","green"],
+
+    ["SYSTEM OPERATIONAL","cyan"]
+
+  ];
+
+  bootLines.forEach((item,index)=>{
+
+    setTimeout(()=>{
+
+      addLog(item[0],item[1]);
+
+    },index*170);
+
+  });
+
+}
+
+/* ==========================================
+
+   COMMAND SYSTEM
+
+========================================== */
+
+const command=
+
+document.getElementById("command");
+
+const systemStatus=
+
+document.getElementById("systemStatus");
+
+function executeCommand(){
+
+  const value=
+
+    command.value.trim();
+
+  if(!value){
+
+    return;
+
+  }
+
+  addLog("USER: "+value);
+
+  systemStatus.textContent=
+
+    "PROCESSING COMMAND...";
+
+  const lower=value.toLowerCase();
+
+  setTimeout(()=>{
+
+    let response="COMMAND RECEIVED.";
+
+    if(
+
+      lower.includes("bonjour") ||
+
+      lower.includes("salut")
+
+    ){
+
+      response=
+
+        "Bonjour. MACHINE est opérationnelle.";
+
+    }
+
+    else if(
+
+      lower.includes("heure")
+
+    ){
+
+      response=
+
+        "Il est "+timestamp()+".";
+
+    }
+
+    else if(
+
+      lower.includes("agenda")
+
+    ){
+
+      response=
+
+        events.length
+
+        ? `${events.length} événement(s) enregistré(s).`
+
+        : "Aucun événement enregistré.";
+
+    }
+
+    else if(
+
+      lower.includes("tâche") ||
+
+      lower.includes("tache")
+
+    ){
+
+      const remaining=
+
+        tasks.filter(t=>!t.done).length;
+
+      response=
+
+        remaining
+
+        ? `${remaining} tâche(s) active(s).`
+
+        : "Aucune tâche active.";
+
+    }
+
+    else if(
+
+      lower.includes("mémoire") ||
+
+      lower.includes("memoire")
+
+    ){
+
+      response=
+
+        `${memories.length} entrée(s) mémoire enregistrée(s).`;
+
+    }
+
+    else if(
+
+      lower.includes("statut") ||
+
+      lower.includes("status")
+
+    ){
+
+      response=
+
+        "Tous les systèmes locaux sont opérationnels.";
+
+    }
+
+    addLog("GIO: "+response,"green");
+
+    systemStatus.textContent=response;
+
+    command.value="";
+
+  },350);
+
+}
+
+document
+
+.getElementById("execBtn")
+
+.addEventListener("click",executeCommand);
+
+command.addEventListener("keydown",e=>{
+
+  if(e.key==="Enter"){
+
+    executeCommand();
+
+  }
+
+});
+
+/* ==========================================
+
+   VOICE
+
+========================================== */
+
+const voiceBtn=
+
+document.getElementById("voiceBtn");
+
+voiceBtn.addEventListener("click",()=>{
+
+  const Recognition=
+
+    window.SpeechRecognition ||
+
+    window.webkitSpeechRecognition;
+
+  if(!Recognition){
+
+    addLog(
+
+      "VOICE RECOGNITION UNAVAILABLE",
+
+      "red"
 
     );
 
-  div.textContent =
+    return;
 
-    text;
+  }
+
+  const recognition=
+
+    new Recognition();
+
+  recognition.lang="fr-FR";
+
+  recognition.interimResults=false;
+
+  recognition.continuous=false;
+
+  systemStatus.textContent=
+
+    "VOICE INPUT ACTIVE...";
+
+  voiceBtn.textContent="◉";
+
+  recognition.start();
+
+  recognition.onresult=e=>{
+
+    const transcript=
+
+      e.results[0][0].transcript;
+
+    command.value=transcript;
+
+    voiceBtn.textContent="◎";
+
+    executeCommand();
+
+  };
+
+  recognition.onerror=()=>{
+
+    voiceBtn.textContent="◎";
+
+    systemStatus.textContent=
+
+      "VOICE INPUT ERROR";
+
+  };
+
+  recognition.onend=()=>{
+
+    voiceBtn.textContent="◎";
+
+  };
+
+});
+
+/* ==========================================
+
+   SECURITY
+
+========================================== */
+
+function escapeHTML(text){
+
+  const div=
+
+    document.createElement("div");
+
+  div.textContent=text;
 
   return div.innerHTML;
 
 }
+
+/* ==========================================
+
+   INITIALIZATION
+
+========================================== */
+
+renderEvents();
+
+renderTasks();
+
+renderMemories();
+
+boot();
 
 </script>
 
