@@ -1,0 +1,49 @@
+{
+
+  "name": "MACHINE",
+
+  "short_name": "MACHINE",
+
+  "description": "MACHINE // Personal Intelligence System",
+
+  "start_url": "./",
+
+  "scope": "./",
+
+  "display": "standalone",
+
+  "orientation": "portrait",
+
+  "background_color": "#020303",
+
+  "theme_color": "#020303",
+
+  "icons": [
+
+    {
+
+      "src": "./icon.PNG",
+
+      "sizes": "512x512",
+
+      "type": "image/png",
+
+      "purpose": "any"
+
+    },
+
+    {
+
+      "src": "./icon.PNG",
+
+      "sizes": "512x512",
+
+      "type": "image/png",
+
+      "purpose": "maskable"
+
+    }
+
+  ]
+
+}
